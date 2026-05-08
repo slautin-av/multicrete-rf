@@ -7,3 +7,8 @@ Thumbs.db
 
 # Зависимости (если появятся)
 node_modules/
+
+# Секреты
+.env
+.env.local
+.env.*.local
