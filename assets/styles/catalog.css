@@ -1,0 +1,236 @@
+/* ─── Hero ────────────────────────────────────────────────────── */
+
+.catalog-hero {
+  background: linear-gradient(135deg, var(--color-dark) 0%, #252540 100%);
+  color: #fff;
+  padding: 4rem 1.5rem 3.5rem;
+}
+
+.catalog-hero__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.catalog-hero__usp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.9rem;
+  border-radius: 2rem;
+  margin-bottom: 1.25rem;
+}
+
+.catalog-hero h1 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.catalog-hero p {
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 580px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+}
+
+.catalog-hero__code-legend {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.catalog-hero__code-legend strong {
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #fff;
+}
+
+.catalog-hero__code-legend ul {
+  list-style: none;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.catalog-hero__code-legend li::before {
+  content: '·  ';
+}
+
+/* ─── Catalog Section ─────────────────────────────────────────── */
+
+.catalog-section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 1rem;
+}
+
+/* ─── Series Block ────────────────────────────────────────────── */
+
+.series-block {
+  border: 1px solid var(--color-border);
+  border-left-width: 4px;
+  border-left-color: var(--color-accent);
+  border-radius: var(--radius);
+  margin-bottom: 1.75rem;
+  overflow: hidden;
+}
+
+.series-block--wear      { border-left-color: #D4580A; }
+.series-block--chem      { border-left-color: #1A8C4E; }
+.series-block--concrete  { border-left-color: #6B7280; }
+.series-block--metal     { border-left-color: #1A4F8A; }
+.series-block--protect   { border-left-color: #6D28D9; }
+.series-block--emergency { border-left-color: #C8192A; }
+
+.series-header {
+  padding: 1.1rem 1.5rem;
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.series-header h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  margin: 0;
+}
+
+.series-header h2 small {
+  font-weight: 400;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+/* ─── Task Badges ─────────────────────────────────────────────── */
+
+.task-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2rem;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.task-badge--wear      { background: #D4580A; }
+.task-badge--chem      { background: #1A8C4E; }
+.task-badge--concrete  { background: #6B7280; }
+.task-badge--metal     { background: #1A4F8A; }
+.task-badge--protect   { background: #6D28D9; }
+.task-badge--emergency { background: #C8192A; }
+
+/* ─── Materials Table ─────────────────────────────────────────── */
+
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.materials-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.materials-table th {
+  background: #fff;
+  text-align: left;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.materials-table td {
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.materials-table tr:last-child td {
+  border-bottom: none;
+}
+
+.materials-table tr:hover td {
+  background: #fafafa;
+}
+
+.mat-code {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--color-dark);
+  white-space: nowrap;
+}
+
+.mat-tbd {
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+.analogue-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: #EFF6FF;
+  color: var(--color-accent);
+  border: 1px solid #BFDBFE;
+  padding: 0.1rem 0.5rem;
+  border-radius: 3px;
+  margin-left: 0.5rem;
+  white-space: nowrap;
+}
+
+.btn-detail {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  transition: gap 0.15s;
+}
+
+.btn-detail:hover { gap: 0.5rem; }
+
+/* ─── Series Note ─────────────────────────────────────────────── */
+
+.series-note {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  padding: 0.6rem 1.5rem 0.8rem;
+  background: #fff;
+  border-top: 1px dashed var(--color-border);
+}
+
+.series-note strong { color: var(--color-accent); }
+
+/* ─── Aux note ────────────────────────────────────────────────── */
+
+.catalog-aux-note {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
