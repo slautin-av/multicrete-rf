@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Self-contained build: child component embedded + support.js inlined; works fully offline -->
+<script>
+  window.__MK_CHILD = "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<script src=\"./support.js\"><\/script>\n</head>\n<body>\n<x-dc>\n<helmet>\n\n</helmet>\n<div style=\"position:relative;height:100%;min-height:500px;display:flex;flex-direction:column;box-sizing:border-box;font-family:'Manrope',system-ui,'Segoe UI',sans-serif,sans-serif;background:linear-gradient(158deg,#EEF0F3 0%,#E8EBEF 52%,#E1E5EA 100%);border-radius:14px;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.92),0 18px 32px -12px rgba(26,35,50,.32),0 4px 10px -4px rgba(26,35,50,.18);\">\n\n  <div style=\"position:absolute;inset:0;z-index:1;opacity:.07;mix-blend-mode:multiply;pointer-events:none;background-image:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http://www.w3.org/2000/svg%27%20width%3D%27140%27%20height%3D%27140%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.9%27%20numOctaves%3D%272%27%20stitchTiles%3D%27stitch%27/%3E%3CfeColorMatrix%20type%3D%27saturate%27%20values%3D%270%27/%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23n%29%27%20opacity%3D%270.55%27/%3E%3C/svg%3E);background-size:140px 140px;\"></div>\n  <div style=\"position:absolute;top:0;left:0;right:0;height:2px;z-index:4;background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent);pointer-events:none;\"></div>\n\n  <sc-if value=\"{{ hasStatus }}\" hint-placeholder-val=\"{{ false }}\">\n    <div style=\"position:absolute;top:14px;right:14px;z-index:6;display:flex;align-items:center;gap:7px;background:rgba(244,246,250,.94);border-radius:6px;padding:5px 11px 5px 9px;box-shadow:0 2px 6px rgba(26,35,50,.20),inset 0 0 0 1px rgba(26,35,50,.07),inset 0 1px 0 rgba(255,255,255,.8);\">\n      <span style=\"width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff8dbb,#EB4D8C 70%);box-shadow:0 0 8px 1px rgba(235,77,140,.85),inset 0 1px 1px rgba(255,255,255,.5);\"></span>\n      <span style=\"font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#1A2332;\">{{ status }}</span>\n    </div>\n  </sc-if>\n\n  <div style=\"position:relative;z-index:2;\">\n    <sc-if value=\"{{ hasPhoto }}\" hint-placeholder-val=\"{{ true }}\">\n      <div style=\"height:168px;background:repeating-linear-gradient(135deg,#dfe3e9 0 13px,#d4d9e0 13px 26px);display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(26,35,50,.10);\">\n        <span style=\"font-family:ui-monospace,'SFMono-Regular',Menlo,monospace;font-size:11px;letter-spacing:.18em;color:#8a93a1;text-transform:uppercase;padding:5px 13px;border:1px dashed #aab2bd;border-radius:4px;background:rgba(244,246,250,.55);\">фото объекта</span>\n      </div>\n    </sc-if>\n    <sc-if value=\"{{ noPhoto }}\" hint-placeholder-val=\"{{ false }}\">\n      <div style=\"height:168px;background-color:#E3E7ED;background-image:radial-gradient(circle,rgba(61,77,98,.30) 1.4px,transparent 1.7px);background-size:15px 15px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(26,35,50,.10);\">\n        <div style=\"display:flex;flex-direction:column;align-items:center;gap:9px;background:rgba(227,231,237,.55);padding:13px 22px;border-radius:8px;\">\n          <svg width=\"54\" height=\"60\" viewBox=\"0 0 58 64\" fill=\"none\" stroke=\"#3D4D62\" stroke-width=\"2\" stroke-linejoin=\"round\"><path d=\"M29 3 L55 18 L55 46 L29 61 L3 46 L3 18 Z\"/></svg>\n          <span style=\"font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:15px;letter-spacing:.14em;color:#1A2332;\">{{ code }}</span>\n        </div>\n      </div>\n    </sc-if>\n  </div>\n\n  <div style=\"position:absolute;left:22px;top:134px;width:64px;height:72px;z-index:3;filter:drop-shadow(0 5px 6px rgba(26,35,50,.34));\">\n    <div style=\"position:absolute;inset:0;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:{{ badgeColor }};box-shadow:inset 0 2px 3px rgba(255,255,255,.30),inset 0 -3px 7px rgba(0,0,0,.24);display:flex;align-items:center;justify-content:center;\">\n      <sc-if value=\"{{ isConcrete }}\" hint-placeholder-val=\"{{ true }}\"><svg width=\"30\" height=\"30\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" stroke-linejoin=\"round\"><path d=\"M16 4 L27 10 L16 16 L5 10 Z\"/><path d=\"M5 10 L5 22 L16 28 L16 16\"/><path d=\"M27 10 L27 22 L16 28\"/></svg></sc-if>\n      <sc-if value=\"{{ isMetal }}\" hint-placeholder-val=\"{{ false }}\"><svg width=\"30\" height=\"30\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" stroke-linejoin=\"round\"><path d=\"M16 3 L26.4 9 L26.4 23 L16 29 L5.6 23 L5.6 9 Z\"/><circle cx=\"16\" cy=\"16\" r=\"5.2\"/></svg></sc-if>\n      <sc-if value=\"{{ isChem }}\" hint-placeholder-val=\"{{ false }}\"><svg width=\"28\" height=\"28\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><path d=\"M13 5 H19\"/><path d=\"M14.5 5 V12 L8 24.5 Q8 28 11.5 28 H20.5 Q24 28 24 24.5 L17.5 12 V5\"/><path d=\"M10.5 21 H21.5\"/></svg></sc-if>\n      <sc-if value=\"{{ isHydro }}\" hint-placeholder-val=\"{{ false }}\"><svg width=\"28\" height=\"28\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" stroke-linejoin=\"round\"><path d=\"M16 4 C16 4 7 14.5 7 21 A9 9 0 0 0 25 21 C25 14.5 16 4 16 4 Z\"/><path d=\"M11.5 20.5 A4.5 4.5 0 0 0 16 25\"/></svg></sc-if>\n    </div>\n  </div>\n\n  <div style=\"position:relative;z-index:2;display:flex;flex-direction:column;flex:1 1 auto;padding:46px 22px 22px;gap:10px;\">\n    <span style=\"font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:{{ badgeColor }};\">{{ badgeLabel }}</span>\n    <h3 style=\"margin:0;font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:25px;line-height:1.05;letter-spacing:.005em;text-transform:uppercase;color:#1A2332;min-height:53px;\">{{ series }}</h3>\n    <p style=\"margin:0;font-family:'Manrope',system-ui,'Segoe UI',sans-serif;font-weight:400;font-size:13.5px;line-height:1.42;color:#3D4D62;min-height:38px;\">{{ description }}</p>\n\n    <div style=\"display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px;\">\n      <sc-for list=\"{{ specs }}\" as=\"spec\" hint-placeholder-count=\"4\">\n        <div style=\"background:#F4F6FA;border-radius:6px;padding:9px 11px;display:flex;flex-direction:column;gap:3px;box-shadow:inset 0 2px 5px rgba(26,35,50,.15),inset 0 -1px 0 rgba(255,255,255,.85),0 1px 0 rgba(255,255,255,.6);\">\n          <span style=\"font-family:'Manrope',system-ui,'Segoe UI',sans-serif;font-weight:500;font-size:9.5px;letter-spacing:.10em;text-transform:uppercase;color:#7a838f;\">{{ spec.label }}</span>\n          <span style=\"font-family:'Manrope',system-ui,'Segoe UI',sans-serif;font-weight:600;font-size:18px;line-height:1;color:#1A2332;font-feature-settings:'tnum';text-shadow:0 0 9px rgba(47,102,165,.18);\">{{ spec.value }} <span style=\"font-size:11px;font-weight:500;color:#3D4D62;\">{{ spec.unit }}</span></span>\n        </div>\n      </sc-for>\n    </div>\n\n    <div style=\"flex:1 1 auto;min-height:8px;\"></div>\n\n    <sc-if value=\"{{ inStock }}\" hint-placeholder-val=\"{{ true }}\">\n      <button style=\"appearance:none;border:none;width:100%;cursor:pointer;font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:14px;letter-spacing:.13em;text-transform:uppercase;color:#fff;padding:13px 16px;border-radius:9px;background:linear-gradient(180deg,#f56ba3 0%,#EB4D8C 58%,#d8417e 100%);box-shadow:0 4px 0 #9c2a5a,0 0 20px rgba(235,77,140,.42),0 7px 13px -4px rgba(235,77,140,.30),inset 0 1px 0 rgba(255,255,255,.42);transition:transform .06s ease,box-shadow .06s ease;\" style-hover=\"background:linear-gradient(180deg,#f87cb0 0%,#ef589a 58%,#df4a86 100%);box-shadow:0 4px 0 #9c2a5a,0 0 28px rgba(235,77,140,.58),0 7px 13px -4px rgba(235,77,140,.34),inset 0 1px 0 rgba(255,255,255,.46);\" style-active=\"transform:translateY(3px);box-shadow:0 1px 0 #9c2a5a,0 0 16px rgba(235,77,140,.4),0 3px 6px -2px rgba(235,77,140,.3),inset 0 1px 0 rgba(255,255,255,.35);\">Подробнее&nbsp;&rarr;</button>\n    </sc-if>\n    <sc-if value=\"{{ outOfStock }}\" hint-placeholder-val=\"{{ false }}\">\n      <button style=\"appearance:none;width:100%;cursor:pointer;font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:13px;letter-spacing:.10em;text-transform:uppercase;color:#EB4D8C;padding:12px 16px;border-radius:9px;background:transparent;border:2px solid #EB4D8C;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 0 13px rgba(235,77,140,.18);\">Узнать о поступлении</button>\n    </sc-if>\n  </div>\n\n  <sc-if value=\"{{ outOfStock }}\" hint-placeholder-val=\"{{ false }}\">\n    <div style=\"position:absolute;inset:0;z-index:5;background:rgba(223,227,233,.44);pointer-events:none;\"></div>\n    <div style=\"position:absolute;top:21px;right:-46px;transform:rotate(45deg);z-index:6;background:linear-gradient(180deg,#26313f,#1A2332);color:#c4ccd6;font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:11px;letter-spacing:.16em;padding:6px 54px;box-shadow:0 3px 7px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.08);\">нет в наличии</div>\n  </sc-if>\n\n  <sc-if value=\"{{ heroGlow }}\" hint-placeholder-val=\"{{ false }}\">\n    <div style=\"position:absolute;left:16px;right:16px;bottom:0;height:2px;z-index:4;background:linear-gradient(90deg,transparent 4%,rgba(235,77,140,.85) 50%,transparent 96%);box-shadow:0 0 16px 2px rgba(235,77,140,.45);pointer-events:none;\"></div>\n  </sc-if>\n</div>\n</x-dc>\n<script type=\"text/x-dc\" data-dc-script data-props=\"{&quot;$preview&quot;:{&quot;width&quot;:380,&quot;height&quot;:540},&quot;series&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;МК-160 ЭЛАСТОМЕР&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;task&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;concrete&quot;,&quot;metal&quot;,&quot;chem&quot;,&quot;hydro&quot;],&quot;default&quot;:&quot;concrete&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;description&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Эластичная защита бетона от трещин и динамических нагрузок.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;hasPhoto&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;inStock&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;specs&quot;:{&quot;editor&quot;:null,&quot;default&quot;:[{&quot;label&quot;:&quot;Адгезия&quot;,&quot;value&quot;:&quot;1,8&quot;,&quot;unit&quot;:&quot;МПа&quot;},{&quot;label&quot;:&quot;Температура&quot;,&quot;value&quot;:&quot;−40…+90&quot;,&quot;unit&quot;:&quot;°C&quot;},{&quot;label&quot;:&quot;Срок службы&quot;,&quot;value&quot;:&quot;25&quot;,&quot;unit&quot;:&quot;лет&quot;},{&quot;label&quot;:&quot;Толщина слоя&quot;,&quot;value&quot;:&quot;2–4&quot;,&quot;unit&quot;:&quot;мм&quot;}],&quot;tsType&quot;:&quot;Array&lt;{label:string,value:string,unit:string}&gt;&quot;}}\">\nclass Component extends DCLogic {\n  renderVals() {\n    const p = this.props || {};\n    const task = p.task || 'concrete';\n    const map = {\n      concrete: { color: '#6B7280', label: 'Бетон' },\n      metal:    { color: '#4A6580', label: 'Металл' },\n      chem:     { color: '#2F66A5', label: 'Химзащита' },\n      hydro:    { color: '#1E5973', label: 'Гидро' },\n    };\n    const t = map[task] || map.concrete;\n    const series = p.series || 'МК-160 ЭЛАСТОМЕР';\n    const code = series.split(' ')[0];\n    const defSpecs = [\n      { label: 'Адгезия', value: '1,8', unit: 'МПа' },\n      { label: 'Температура', value: '−40…+90', unit: '°C' },\n      { label: 'Срок службы', value: '25', unit: 'лет' },\n      { label: 'Толщина слоя', value: '2–4', unit: 'мм' },\n    ];\n    const specs = Array.isArray(p.specs) && p.specs.length ? p.specs : defSpecs;\n    const hasPhoto = p.hasPhoto !== false;\n    const inStock = p.inStock !== false;\n    const status = (p.status || '').trim();\n    return {\n      status,\n      hasStatus: !!status && inStock,\n      heroGlow: p.heroGlow === true,\n      series, code,\n      description: p.description || 'Эластичная защита бетона от трещин и динамических нагрузок.',\n      badgeColor: t.color,\n      badgeLabel: t.label,\n      isConcrete: task === 'concrete',\n      isMetal: task === 'metal',\n      isChem: task === 'chem',\n      isHydro: task === 'hydro',\n      specs,\n      hasPhoto,\n      noPhoto: !hasPhoto,\n      inStock,\n      outOfStock: !inStock,\n    };\n  }\n}\n<\/script>\n</body>\n</html>\n";
+  (function () {
+    var orig = window.fetch ? window.fetch.bind(window) : null;
+    function txt(body){ return Promise.resolve(new Response(body, { status: 200, headers: { "Content-Type": "text/html" } })); }
+    window.fetch = function (input, init) {
+      try {
+        var url = typeof input === "string" ? input : (input && input.url) || "";
+        // Block the runtime's live-reload self-fetch — offline it returns this bundled
+        // file (with inlined support.js) and would corrupt the root template.
+        if (url === location.href || url === location.pathname || url === "" ) {
+          return txt("");
+        }
+        if (url.indexOf("MaterialCard.dc.html") !== -1 && window.__MK_CHILD != null) {
+          return txt(window.__MK_CHILD);
+        }
+      } catch (e) {}
+      if (orig) return orig(input, init);
+      return Promise.reject(new Error("offline"));
+    };
+  })();
+</script>
+<script>
+// GENERATED from dc-runtime/src/*.ts — do not edit. Rebuild with `cd dc-runtime && bun run build`.
+"use strict";
+(() => {
+  var __defProp = Object.defineProperty;
+  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+  var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+
+  // src/react.ts
+  function getReact() {
+    const R = window.React;
+    if (!R) throw new Error("dc-runtime: window.React is not available yet");
+    return R;
+  }
+  function getReactDOM() {
+    const RD = window.ReactDOM;
+    if (!RD) throw new Error("dc-runtime: window.ReactDOM is not available yet");
+    return RD;
+  }
+  var h = ((...args) => getReact().createElement(
+    ...args
+  ));
+
+  // src/parse.ts
+  function parseDcDocument(doc) {
+    const dc = doc.querySelector("x-dc");
+    if (!dc) return null;
+    const scriptEl = doc.querySelector("script[data-dc-script]");
+    const { props, preview } = parseDataProps(
+      scriptEl?.getAttribute("data-props") ?? null
+    );
+    return {
+      template: dc.innerHTML,
+      js: scriptEl ? scriptEl.textContent || "" : "",
+      props,
+      preview
+    };
+  }
+  function parseDcText(src) {
+    const openMatch = /<x-dc(?:\s[^>]*)?>/.exec(src);
+    if (!openMatch) return null;
+    const close = src.lastIndexOf("</x-dc>");
+    if (close === -1 || close < openMatch.index) return null;
+    const template = src.slice(openMatch.index + openMatch[0].length, close);
+    const doc = new DOMParser().parseFromString(src, "text/html");
+    const scriptEl = doc.querySelector("script[data-dc-script]");
+    const { props, preview } = parseDataProps(
+      scriptEl?.getAttribute("data-props") ?? null
+    );
+    return {
+      template,
+      js: scriptEl ? scriptEl.textContent || "" : "",
+      props,
+      preview
+    };
+  }
+  function parseDataProps(raw) {
+    if (!raw) return { props: null, preview: null };
+    let parsed;
+    try {
+      parsed = JSON.parse(raw);
+    } catch {
+      return { props: null, preview: null };
+    }
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return { props: null, preview: null };
+    }
+    const obj = parsed;
+    const preview = obj.$preview && typeof obj.$preview === "object" ? obj.$preview : null;
+    const rest = {};
+    for (const k of Object.keys(obj)) {
+      if (k[0] !== "$") rest[k] = obj[k];
+    }
+    return { props: Object.keys(rest).length ? rest : null, preview };
+  }
+  function dcNameFromPath(pathname) {
+    let p = pathname || "";
+    try {
+      p = decodeURIComponent(p);
+    } catch {
+    }
+    const base = p.split("/").pop() || "Root";
+    return base.replace(/\.dc\.html$/, "").replace(/\.html?$/, "") || "Root";
+  }
+
+  // src/boot.ts
+  var BASE_CSS = `
+    .sc-placeholder{background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    @keyframes sc-veil-pulse{0%,100%{opacity:.4}50%{opacity:1}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine .73s ease infinite}
+    html.sc-dc-streaming::after{content:'';position:fixed;inset:0;
+      z-index:2147483646;pointer-events:none;
+      box-shadow:inset 0 0 90px rgba(217,119,87,.16),inset 0 0 22px rgba(217,119,87,.1);
+      animation:sc-veil-pulse 1.36s ease-in-out infinite}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:rgba(0,0,0,.7);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:rgba(0,0,0,.5);background:rgba(0,0,0,.05);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts \u2014 keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      html, body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      section, article, figure, table { break-inside: avoid; }
+      *, *::before, *::after {
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  `;
+  var FULL_PAGE_CSS = "html,body{height:100%;margin:0}#dc-root,#dc-root>.sc-host{height:100%}";
+  function rootNameForDocument(doc, loc) {
+    let bootPath = loc.pathname || "";
+    if (!/\.dc\.html?$/i.test(safeDecode(bootPath))) {
+      try {
+        bootPath = new URL(doc.baseURI || "/").pathname;
+      } catch {
+      }
+    }
+    return dcNameFromPath(bootPath);
+  }
+  function safeDecode(s) {
+    try {
+      return decodeURIComponent(s);
+    } catch {
+      return s;
+    }
+  }
+  function boot(runtime, doc = document) {
+    const parsed = parseDcDocument(doc);
+    if (!parsed) return null;
+    const React = getReact();
+    const rootName = rootNameForDocument(doc, location);
+    runtime.markFetched(rootName);
+    runtime.adoptParsed(rootName, parsed);
+    fetch(location.href).then((res) => res.ok ? res.text() : "").then((t) => {
+      const raw = t ? parseDcText(t) : null;
+      if (raw?.template) runtime.updateHtml(rootName, raw.template);
+    }).catch(() => {
+    });
+    const dc = doc.querySelector("x-dc");
+    const hostEl = doc.createElement("div");
+    hostEl.id = "dc-root";
+    dc.replaceWith(hostEl);
+    if (!parsed.preview) {
+      const s = doc.createElement("style");
+      s.textContent = FULL_PAGE_CSS;
+      doc.head.appendChild(s);
+    }
+    const Root = runtime.getDC(rootName);
+    const entry = runtime.registry.get(rootName);
+    function StandaloneRoot() {
+      const [, setTick] = React.useState(0);
+      React.useEffect(() => {
+        const sub = () => setTick((n) => n + 1);
+        entry.subs.add(sub);
+        return () => {
+          entry.subs.delete(sub);
+        };
+      }, []);
+      return h(Root, entry.propOverrides || null);
+    }
+    const ReactDOM = getReactDOM();
+    if (ReactDOM.createRoot)
+      ReactDOM.createRoot(hostEl).render(h(StandaloneRoot));
+    else ReactDOM.render(h(StandaloneRoot), hostEl);
+    return rootName;
+  }
+
+  // src/expr.ts
+  var IDENT_RE = /^[A-Za-z_$][A-Za-z0-9_$]*/;
+  var NUMBER_RE = /^-?\d+(\.\d+)?$/;
+  function resolve(vals, src) {
+    const expr = String(src).trim();
+    if (!expr) return void 0;
+    if (expr[0] === "(" && expr[expr.length - 1] === ")" && parensWrapWhole(expr)) {
+      return resolve(vals, expr.slice(1, -1));
+    }
+    const eq = findTopLevelEquality(expr);
+    if (eq) {
+      const lv = resolve(vals, expr.slice(0, eq.index));
+      const rv = resolve(vals, expr.slice(eq.index + eq.op.length));
+      switch (eq.op) {
+        case "===":
+          return lv === rv;
+        case "!==":
+          return lv !== rv;
+        case "==":
+          return lv == rv;
+        default:
+          return lv != rv;
+      }
+    }
+    if (expr[0] === "!") return !resolve(vals, expr.slice(1));
+    if (expr === "true") return true;
+    if (expr === "false") return false;
+    if (expr === "null") return null;
+    if (expr === "undefined") return void 0;
+    if (NUMBER_RE.test(expr)) return Number(expr);
+    if (expr.length >= 2 && (expr[0] === '"' || expr[0] === "'") && expr[expr.length - 1] === expr[0]) {
+      return expr.slice(1, -1);
+    }
+    return resolvePath(vals, expr);
+  }
+  function parensWrapWhole(expr) {
+    let depth = 0;
+    for (let i = 0; i < expr.length - 1; i++) {
+      if (expr[i] === "(") depth++;
+      else if (expr[i] === ")") {
+        depth--;
+        if (depth === 0) return false;
+      }
+    }
+    return true;
+  }
+  function findTopLevelEquality(expr) {
+    let depth = 0;
+    for (let i = 0; i < expr.length; i++) {
+      const c = expr[i];
+      if (c === "[" || c === "(") depth++;
+      else if (c === "]" || c === ")") depth--;
+      else if (depth === 0 && (c === "=" || c === "!") && expr[i + 1] === "=") {
+        if (i > 0 && (expr[i - 1] === "=" || expr[i - 1] === "!")) continue;
+        if (!expr.slice(0, i).trim()) continue;
+        const op = expr[i + 2] === "=" ? c + "==" : c + "=";
+        return { index: i, op };
+      }
+    }
+    return null;
+  }
+  function resolvePath(vals, expr) {
+    const head = expr.match(IDENT_RE);
+    if (!head) return void 0;
+    let cur = vals == null ? void 0 : vals[head[0]];
+    let i = head[0].length;
+    while (i < expr.length) {
+      if (expr[i] === ".") {
+        const m = expr.slice(i + 1).match(IDENT_RE) || expr.slice(i + 1).match(/^\d+/);
+        if (!m) return void 0;
+        cur = cur == null ? void 0 : cur[m[0]];
+        i += 1 + m[0].length;
+      } else if (expr[i] === "[") {
+        let depth = 1;
+        let j = i + 1;
+        while (j < expr.length && depth > 0) {
+          if (expr[j] === "[") depth++;
+          else if (expr[j] === "]") {
+            depth--;
+            if (depth === 0) break;
+          }
+          j++;
+        }
+        if (depth !== 0) return void 0;
+        const key = resolve(vals, expr.slice(i + 1, j));
+        cur = cur == null ? void 0 : cur[key];
+        i = j + 1;
+      } else {
+        return void 0;
+      }
+    }
+    return cur;
+  }
+
+  // src/encode.ts
+  var CAMEL_ATTR = "sc-camel-";
+  var RAW_WRAP = {
+    select: "sc-raw-select",
+    table: "sc-raw-table",
+    tbody: "sc-raw-tbody",
+    thead: "sc-raw-thead",
+    tfoot: "sc-raw-tfoot",
+    tr: "sc-raw-tr",
+    td: "sc-raw-td",
+    th: "sc-raw-th",
+    caption: "sc-raw-caption"
+  };
+  var RAW_UNWRAP = Object.fromEntries(
+    Object.entries(RAW_WRAP).map(([k, v]) => [v, k])
+  );
+  var EVENT_MAP = {
+    onclick: "onClick",
+    onchange: "onChange",
+    oninput: "onInput",
+    onsubmit: "onSubmit",
+    onkeydown: "onKeyDown",
+    onkeyup: "onKeyUp",
+    onkeypress: "onKeyPress",
+    onmousedown: "onMouseDown",
+    onmouseup: "onMouseUp",
+    onmouseenter: "onMouseEnter",
+    onmouseleave: "onMouseLeave",
+    onfocus: "onFocus",
+    onblur: "onBlur",
+    ondoubleclick: "onDoubleClick",
+    oncontextmenu: "onContextMenu"
+  };
+  var ATTRS = `(?:[^>"']|"[^"]*"|'[^']*')*`;
+  var IMPORT_SELF_CLOSE_RE = new RegExp(
+    "<(x-import|dc-import)(" + ATTRS + ")/>",
+    "gi"
+  );
+  var CAMEL_ATTR_RE = /(\s)([a-z]+[A-Z][A-Za-z0-9]*)(\s*=)/g;
+  function encodeCase(html) {
+    html = html.replace(
+      IMPORT_SELF_CLOSE_RE,
+      (_, t, a) => "<" + t + a + "></" + t + ">"
+    );
+    html = html.replace(/<helmet(\s|>)/gi, "<sc-helmet$1");
+    html = html.replace(/<\/helmet\s*>/gi, "</sc-helmet>");
+    html = html.replace(
+      CAMEL_ATTR_RE,
+      (_, sp, name, eq) => sp + CAMEL_ATTR + name.replace(/[A-Z]/g, (c) => "-" + c.toLowerCase()) + eq
+    );
+    for (const [real, alias] of Object.entries(RAW_WRAP)) {
+      html = html.replace(
+        new RegExp("(</?)" + real + "(?=[\\s>])", "gi"),
+        "$1" + alias
+      );
+    }
+    return html;
+  }
+  function kebabToCamel(s) {
+    return s.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+  }
+  function cssToObj(css) {
+    const o = {};
+    for (const decl of css.split(";")) {
+      const i = decl.indexOf(":");
+      if (i < 0) continue;
+      const prop = decl.slice(0, i).trim();
+      o[prop.startsWith("--") ? prop : kebabToCamel(prop)] = decl.slice(i + 1).trim();
+    }
+    return o;
+  }
+  function compileAttr(raw) {
+    const whole = raw.match(/^\s*\{\{([\s\S]+?)\}\}\s*$/);
+    if (whole) {
+      const path = whole[1];
+      return (vals) => resolve(vals, path);
+    }
+    if (raw.includes("{{")) {
+      const parts = raw.split(/\{\{([\s\S]+?)\}\}/g);
+      return (vals) => parts.map((s, i) => i & 1 ? resolve(vals, s) ?? "" : s).join("");
+    }
+    return () => raw;
+  }
+
+  // src/compile.ts
+  function collectProps(node, isComponent, host) {
+    const propGetters = [];
+    const pseudoClasses = [];
+    let hintSize = null;
+    for (const { name, value } of [...node.attributes]) {
+      if (name === "sc-name" || name === "data-dc-tpl") continue;
+      let key = name;
+      if (key.startsWith(CAMEL_ATTR))
+        key = kebabToCamel(key.slice(CAMEL_ATTR.length));
+      if (key === "hint-size") {
+        hintSize = value;
+        continue;
+      }
+      if (key.startsWith("style-")) {
+        pseudoClasses.push(host.pseudoClass(key.slice(6), value));
+        continue;
+      }
+      if (isComponent) {
+        if (key.includes("-")) key = kebabToCamel(key);
+      } else {
+        if (key === "class") key = "className";
+        else if (key === "for") key = "htmlFor";
+        else if (key.startsWith("on"))
+          key = EVENT_MAP[key] || "on" + key[2].toUpperCase() + key.slice(3);
+      }
+      propGetters.push([key, compileAttr(value)]);
+    }
+    return { propGetters, pseudoClasses, hintSize };
+  }
+  var HOST_STYLE_PROPS = /* @__PURE__ */ new Set([
+    "position",
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "inset",
+    "width",
+    "height",
+    "z-index",
+    "transform"
+  ]);
+  function hostPositionStyle(style) {
+    const all = typeof style === "string" ? cssToObj(style) : style != null && typeof style === "object" ? style : null;
+    if (!all) return void 0;
+    const out = {};
+    for (const [k, v] of Object.entries(all)) {
+      const kebab = k.replace(/[A-Z]/g, (c) => "-" + c.toLowerCase());
+      if (HOST_STYLE_PROPS.has(kebab)) out[k] = v;
+    }
+    return Object.keys(out).length ? out : void 0;
+  }
+  function compileTemplate(html, host) {
+    const tpl = document.createElement("template");
+    //! nosemgrep: direct-inner-html-assignment
+    tpl.innerHTML = encodeCase(html);
+    let tplN = 0;
+    (function stamp(node) {
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        node.setAttribute("data-dc-tpl", String(tplN++));
+      }
+      for (const c of node.childNodes) stamp(c);
+    })(tpl.content);
+    const builders = walkChildren(tpl.content, host);
+    const render = ((vals, ctx) => builders.map((b, i) => b(vals || {}, ctx, i)));
+    render.__annotated = tpl.innerHTML;
+    return render;
+  }
+  function walkChildren(node, host) {
+    return [...node.childNodes].map((c) => walk(c, host)).filter((b) => b != null);
+  }
+  function walk(node, host) {
+    if (node.nodeType === Node.TEXT_NODE) return walkText(node);
+    if (node.nodeType !== Node.ELEMENT_NODE) return null;
+    const el = node;
+    const tag = el.tagName.toLowerCase();
+    if (tag === "sc-for") return walkFor(el, host);
+    if (tag === "sc-if") return walkIf(el, host);
+    if (tag === "x-import") return walkXImport(el, host);
+    if (tag === "sc-helmet") return host.helmet(el);
+    if (tag === "dc-import") return walkComponent(el, host);
+    return walkElement(el, host);
+  }
+  var warnedHoles = /* @__PURE__ */ new Set();
+  function warnUnresolved(ctx, what) {
+    const key = (ctx?.__name || "?") + "\0" + what;
+    if (warnedHoles.has(key)) return;
+    warnedHoles.add(key);
+    console.warn("[dc-runtime] " + (ctx?.__name || "template") + ": " + what);
+  }
+  function walkText(node) {
+    const txt = node.nodeValue ?? "";
+    if (!txt.includes("{{")) {
+      if (!txt.trim() && !txt.includes(" ")) return null;
+      return () => txt;
+    }
+    const parts = txt.split(/\{\{([\s\S]+?)\}\}/g);
+    return (vals, ctx, key) => h(
+      getReact().Fragment,
+      { key },
+      ...parts.map((p, i) => {
+        if (!(i & 1)) return p;
+        const v = resolve(vals, p);
+        if (v === void 0) {
+          if (!ctx?.__streamingNow) {
+            if (document.body?.hasAttribute("data-dc-editor-on")) {
+              return h(
+                "span",
+                { key: i, className: "sc-interp sc-unresolved" },
+                "{{ " + p.trim() + " }}"
+              );
+            }
+            warnUnresolved(
+              ctx,
+              "{{ " + p.trim() + " }} never resolved \u2014 rendered as empty"
+            );
+            return null;
+          }
+          return h(
+            "span",
+            { key: i, className: "sc-interp sc-missing" },
+            p.trim()
+          );
+        }
+        if (getReact().isValidElement(v) || Array.isArray(v)) {
+          return h(getReact().Fragment, { key: i }, v);
+        }
+        if (v === null || typeof v === "boolean") return null;
+        return h("span", { key: i, className: "sc-interp" }, String(v));
+      })
+    );
+  }
+  function walkFor(el, host) {
+    const listGet = compileAttr(el.getAttribute("list") || "");
+    const asName = el.getAttribute("as") || "item";
+    const hintN = parseInt(el.getAttribute("hint-placeholder-count") || "0", 10);
+    const kids = walkChildren(el, host);
+    const listSrc = el.getAttribute("list") || "";
+    return (vals, ctx, key) => {
+      let list = listGet(vals);
+      if (!Array.isArray(list)) {
+        if (!ctx?.__streamingNow) {
+          if (list !== void 0 && list !== null) {
+            warnUnresolved(
+              ctx,
+              'sc-for list="' + listSrc + '" is not an array (' + typeof list + ")"
+            );
+          }
+          list = [];
+        } else {
+          list = hintN > 0 ? Array(hintN).fill(void 0) : [];
+        }
+      }
+      return h(
+        getReact().Fragment,
+        { key },
+        list.map((item, i) => {
+          const sub = { ...vals, [asName]: item, $index: i };
+          return h(
+            getReact().Fragment,
+            { key: i },
+            kids.map((b, j) => b(sub, ctx, j))
+          );
+        })
+      );
+    };
+  }
+  function walkIf(el, host) {
+    const valGet = compileAttr(el.getAttribute("value") || "");
+    const hintRaw = el.getAttribute("hint-placeholder-val");
+    const hintGet = hintRaw != null ? compileAttr(hintRaw) : null;
+    const kids = walkChildren(el, host);
+    return (vals, ctx, key) => {
+      let v = valGet(vals);
+      if (v === void 0 && hintGet && ctx?.__streamingNow) v = hintGet(vals);
+      return v ? h(
+        getReact().Fragment,
+        { key },
+        kids.map((b, j) => b(vals, ctx, j))
+      ) : null;
+    };
+  }
+  function walkComponent(el, host) {
+    const name = el.getAttribute("name") || el.getAttribute("component") || "";
+    el.removeAttribute("name");
+    el.removeAttribute("component");
+    const tplId = el.getAttribute("data-dc-tpl");
+    const styleRaw = el.getAttribute("style");
+    el.removeAttribute("style");
+    const styleGet = styleRaw != null ? compileAttr(styleRaw) : null;
+    const { propGetters, hintSize } = collectProps(el, true, host);
+    const kids = walkChildren(el, host);
+    return (vals, ctx, key) => {
+      const props = {
+        key,
+        __hintSize: hintSize,
+        __tplId: tplId,
+        __hostStyle: styleGet ? hostPositionStyle(styleGet(vals)) : void 0
+      };
+      for (const [k, g] of propGetters) props[k] = g(vals);
+      if (kids.length) props.children = kids.map((b, j) => b(vals, ctx, j));
+      return h(host.component(name), props);
+    };
+  }
+  function walkXImport(el, host) {
+    const globalNameGet = compileAttr(
+      el.getAttribute("component-from-global-scope") || ""
+    );
+    const exportNameGet = compileAttr(
+      el.getAttribute("component") || el.getAttribute("name") || ""
+    );
+    const url = el.getAttribute("from") || el.getAttribute("src") || el.getAttribute("import") || "";
+    const kind = /\.(jsx|tsx)(\?|#|$)/i.test(url) ? "jsx" : "js";
+    const tplId = el.getAttribute("data-dc-tpl");
+    const styleRaw = el.getAttribute("style");
+    el.removeAttribute("style");
+    const styleGet = styleRaw != null ? compileAttr(styleRaw) : null;
+    const wrap = tplId != null || styleGet != null;
+    const { propGetters, hintSize } = collectProps(el, true, host);
+    const hasContent = el.children.length > 0 || !!(el.textContent || "").trim();
+    const kids = hasContent ? walkChildren(el, host) : [];
+    const urlBindable = url.includes("{{");
+    if (url && !urlBindable) host.loadExternal(kind, url);
+    const evalName = (g, vals) => {
+      const v = g(vals);
+      const s = v == null ? "" : String(v);
+      return s.includes("{{") ? "" : s;
+    };
+    return (vals, ctx, key) => {
+      const globalName = evalName(globalNameGet, vals);
+      const name = globalName || evalName(exportNameGet, vals);
+      const C = !name || urlBindable ? null : globalName ? host.resolveExternalGlobal(url, globalName) : host.resolveExternal(url, name);
+      const hostStyle = styleGet ? hostPositionStyle(styleGet(vals)) : void 0;
+      const wrapper = wrap ? {
+        key,
+        className: "sc-host-x",
+        "data-dc-tpl": tplId,
+        style: hostStyle || { display: "contents" }
+      } : null;
+      if (!C) {
+        const error = urlBindable ? "x-import `from` cannot contain {{ \u2026 }} \u2014 module URLs are resolved at parse time; use a literal URL" : host.resolveExternalError(url, name);
+        const ph = host.placeholder({
+          key: wrapper ? void 0 : key,
+          name,
+          hintSize,
+          error
+        });
+        return wrapper ? h("div", wrapper, ph) : ph;
+      }
+      const props = wrapper ? {} : { key };
+      for (const [k, g] of propGetters) {
+        if (k === "component" || k === "componentFromGlobalScope" || k === "name" || k === "from" || k === "src" || k === "import") {
+          continue;
+        }
+        props[k] = g(vals);
+      }
+      if (kids.length) props.children = kids.map((b, j) => b(vals, ctx, j));
+      return wrapper ? h("div", wrapper, h(C, props)) : h(C, props);
+    };
+  }
+  function walkElement(el, host) {
+    const realTag = RAW_UNWRAP[el.localName] || el.localName;
+    const tplId = el.getAttribute("data-dc-tpl");
+    const { propGetters, pseudoClasses } = collectProps(el, false, host);
+    const kids = walkChildren(el, host);
+    return (vals, ctx, key) => {
+      const props = { key, "data-dc-tpl": tplId };
+      for (const [k, g] of propGetters) {
+        let v = g(vals);
+        if (k === "style" && typeof v === "string") v = cssToObj(v);
+        if ((k === "value" || k === "checked") && v === void 0) {
+          v = k === "checked" ? false : "";
+        }
+        props[k] = v;
+      }
+      if (pseudoClasses.length) {
+        props.className = [props.className, ...pseudoClasses].filter(Boolean).join(" ");
+      }
+      return h(realTag, props, ...kids.map((b, j) => b(vals, ctx, j)));
+    };
+  }
+
+  // src/logic.ts
+  var StreamableLogic = class {
+    constructor(props) {
+      __publicField(this, "props");
+      __publicField(this, "state", {});
+      /** Back-pointer to the wrapper component, installed after construction. */
+      __publicField(this, "__host");
+      this.props = props || {};
+    }
+    setState(update, cb) {
+      this.__host && this.__host.__setLogicState(update, cb);
+    }
+    forceUpdate() {
+      this.__host && this.__host.forceUpdate();
+    }
+    componentDidMount() {
+    }
+    componentDidUpdate(_prevProps) {
+    }
+    componentWillUnmount() {
+    }
+    /** The flat object the template renders against (merged over props). */
+    renderVals() {
+      return {};
+    }
+  };
+  function evalDcLogic(src) {
+    //! nosemgrep: eval-and-function-constructor
+    const fn = new Function(
+      "DCLogic",
+      "StreamableLogic",
+      "React",
+      src + '\n;return (typeof Component!=="undefined"&&Component)||undefined;'
+    );
+    return fn(StreamableLogic, StreamableLogic, getReact());
+  }
+
+  // src/component.ts
+  function Placeholder({
+    name,
+    hintSize,
+    streaming,
+    error
+  }) {
+    const [w, hgt] = (hintSize || "100%,60px").split(",");
+    return h(
+      "div",
+      {
+        className: "sc-placeholder" + (streaming ? " sc-streaming" : ""),
+        style: { width: w.trim(), height: hgt && hgt.trim() },
+        title: name
+      },
+      error ? h(
+        "div",
+        { className: "sc-placeholder-error" },
+        (name ? name + ": " : "") + error
+      ) : null
+    );
+  }
+  function hintToMin(hint) {
+    if (!hint) return void 0;
+    const [w, hgt] = hint.split(",");
+    return { minWidth: w.trim(), minHeight: hgt && hgt.trim() };
+  }
+  function createComponentFactory(registry, ensureFetched) {
+    const React = getReact();
+    const AncestorContext = React.createContext([]);
+    class StreamableComponent extends React.Component {
+      constructor(props) {
+        super(props);
+        __publicField(this, "__name");
+        __publicField(this, "__sub");
+        __publicField(this, "__needsDidMount", false);
+        /** Snapshot of the registry's streaming flags taken at render time —
+         *  builders read it off the RenderCtx (this) to pick placeholder vs
+         *  render-nothing for unresolved values. */
+        __publicField(this, "__streamingNow", false);
+        __publicField(this, "logic");
+        this.__name = props.__name;
+        this.state = { __v: 0, __err: null };
+        this.__sub = () => {
+          this.__reconcileLogic();
+          if (this.state.__err) this.setState({ __err: null });
+          this.forceUpdate();
+        };
+        this.__makeLogic(registry.get(this.__name).Logic, null);
+        ensureFetched(this.__name);
+      }
+      /** Error-boundary hook: a render crash anywhere in this DC's subtree
+       *  (its own template, an x-import'd component, a child DC without its
+       *  own deeper boundary) lands here instead of unmounting the page. */
+      static getDerivedStateFromError(e) {
+        return { __err: e instanceof Error && e.message ? e.message : String(e) };
+      }
+      componentDidCatch(e, info) {
+        console.error(
+          "[dc-runtime] render error in <" + this.__name + ">:",
+          e,
+          info?.componentStack || ""
+        );
+      }
+      /** Instantiate the logic class (or the no-op base) and adopt `prevState`
+       *  over its initial state — used both at mount and on hot-swap. */
+      __makeLogic(Logic, prevState) {
+        const L = Logic || StreamableLogic;
+        try {
+          this.logic = new L(this.__userProps());
+        } catch (e) {
+          console.error(e);
+          registry.get(this.__name).logicError = this.__name + ": " + (e instanceof Error && e.message ? e.message : String(e));
+          this.logic = new StreamableLogic(
+            this.__userProps()
+          );
+        }
+        this.logic.__host = this;
+        if (prevState)
+          this.logic.state = { ...this.logic.state || {}, ...prevState };
+      }
+      /** The props the author's logic + template see — internal __-prefixed
+       *  wiring stripped. */
+      __userProps() {
+        const { __name, __hintSize, __tplId, __hostStyle, ...rest } = this.props;
+        return rest;
+      }
+      __setLogicState(update, cb) {
+        const prev = this.logic.state;
+        const patch = typeof update === "function" ? update(prev) : update;
+        this.logic.state = { ...prev, ...patch };
+        this.setState((s) => ({ __v: s.__v + 1 }), cb);
+      }
+      /** Swap the logic instance when the registry's Logic class changed
+       *  (streaming completion, hot reload). State carries over; didMount
+       *  re-fires after the swap commits so refs exist. */
+      __reconcileLogic() {
+        const Next = registry.get(this.__name).Logic;
+        const Cur = this.logic.constructor;
+        if (Next === Cur || !Next && Cur === StreamableLogic)
+          return;
+        try {
+          this.logic.componentWillUnmount();
+        } catch (e) {
+          console.error(e);
+        }
+        this.__makeLogic(Next, this.logic.state);
+        this.__needsDidMount = true;
+      }
+      componentDidMount() {
+        registry.get(this.__name).subs.add(this.__sub);
+        try {
+          this.logic.componentDidMount();
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      componentDidUpdate(prevProps) {
+        this.logic.props = this.__userProps();
+        if (this.__needsDidMount) {
+          this.__needsDidMount = false;
+          try {
+            this.logic.componentDidMount();
+          } catch (e) {
+            console.error(e);
+          }
+        } else {
+          try {
+            this.logic.componentDidUpdate(prevProps);
+          } catch (e) {
+            console.error(e);
+          }
+        }
+      }
+      componentWillUnmount() {
+        registry.get(this.__name).subs.delete(this.__sub);
+        try {
+          this.logic.componentWillUnmount();
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      render() {
+        const r = registry.get(this.__name);
+        const cls = "sc-host" + (r.htmlStreaming ? " sc-streaming-html" : "") + (r.jsStreaming ? " sc-streaming-js" : "");
+        const hintStyle = r.htmlStreaming ? hintToMin(this.props.__hintSize) : void 0;
+        const hostStyle = this.props.__hostStyle || hintStyle ? { ...hintStyle || {}, ...this.props.__hostStyle || {} } : void 0;
+        const hostBase = {
+          className: cls,
+          style: hostStyle,
+          "data-sc-name": this.__name,
+          "data-dc-tpl": this.props.__tplId
+        };
+        const chain = Array.isArray(this.context) ? this.context : [];
+        if (chain.includes(this.__name)) {
+          const cycle = [
+            ...chain.slice(chain.indexOf(this.__name)),
+            this.__name
+          ].join(" \u2192 ");
+          return h(
+            "div",
+            { ...hostBase, className: cls + " sc-has-error" },
+            h(Placeholder, {
+              name: this.__name,
+              hintSize: this.props.__hintSize,
+              error: "circular import: " + cycle
+            })
+          );
+        }
+        if (this.state.__err) {
+          return h(
+            "div",
+            { ...hostBase, className: cls + " sc-has-error" },
+            h(
+              "div",
+              { className: "sc-logic-error" },
+              this.__name + ": " + this.state.__err
+            ),
+            h(Placeholder, {
+              name: this.__name,
+              hintSize: this.props.__hintSize,
+              error: this.state.__err
+            })
+          );
+        }
+        if (!r.tpl) {
+          return h(
+            "div",
+            hostBase,
+            h(Placeholder, { name: this.__name, hintSize: this.props.__hintSize })
+          );
+        }
+        const userProps = this.__userProps();
+        this.logic.props = userProps;
+        let vals = userProps;
+        let renderErr = r.logicError;
+        try {
+          vals = { ...userProps, ...this.logic.renderVals() || {} };
+        } catch (e) {
+          console.error(e);
+          renderErr = this.__name + ".renderVals(): " + (e instanceof Error && e.message ? e.message : String(e));
+        }
+        this.__streamingNow = !!(r.htmlStreaming || r.jsStreaming);
+        return h(
+          "div",
+          { ...hostBase, className: cls + (renderErr ? " sc-has-error" : "") },
+          renderErr && h("div", { className: "sc-logic-error" }, renderErr),
+          h(
+            AncestorContext.Provider,
+            { value: [...chain, this.__name] },
+            r.tpl(vals, this)
+          )
+        );
+      }
+    }
+    __publicField(StreamableComponent, "contextType", AncestorContext);
+    const named = /* @__PURE__ */ new Map();
+    function getDC(name) {
+      const hit = named.get(name);
+      if (hit) return hit;
+      function Dispatcher(p) {
+        const [, setTick] = React.useState(0);
+        React.useEffect(() => {
+          const sub = () => setTick((n) => n + 1);
+          registry.get(name).subs.add(sub);
+          return () => {
+            registry.get(name).subs.delete(sub);
+          };
+        }, []);
+        ensureFetched(name);
+        return h(StreamableComponent, { ...p, __name: name });
+      }
+      Dispatcher.displayName = name;
+      named.set(name, Dispatcher);
+      return Dispatcher;
+    }
+    return {
+      getDC,
+      StreamableComponent
+    };
+  }
+
+  // src/external.ts
+  var isCustomElementName = (n) => !n.includes(".") && n.includes("-");
+  function isRenderableType(g) {
+    if (typeof g === "function") return !isElementClass(g);
+    return typeof g === "object" && g !== null && typeof g.$$typeof === "symbol";
+  }
+  function resolveDottedPath(root, name) {
+    let cur = root;
+    for (const seg of name.split(".")) {
+      if (cur == null) return void 0;
+      cur = cur[seg];
+    }
+    return cur;
+  }
+  var BABEL_URL = "https://unpkg.com/@babel/standalone@7.26.4/babel.min.js";
+  var GLOBAL_POLL_INTERVAL_MS = 50;
+  var GLOBAL_POLL_TIMEOUT_MS = 3e4;
+  function createExternalModules(onResolved) {
+    const cache = /* @__PURE__ */ new Map();
+    let babelLoading = null;
+    const reportedMissing = /* @__PURE__ */ new Map();
+    const polling = /* @__PURE__ */ new Set();
+    function ensureBabel() {
+      if (window.Babel) return Promise.resolve();
+      if (babelLoading) return babelLoading;
+      babelLoading = new Promise((res, rej) => {
+        const s = document.createElement("script");
+        s.src = BABEL_URL;
+        s.crossOrigin = "anonymous";
+        s.onload = () => res();
+        s.onerror = rej;
+        document.head.appendChild(s);
+      });
+      return babelLoading;
+    }
+    function load(kind, url) {
+      if (cache.has(url)) return;
+      cache.set(url, null);
+      console.info("[dc-runtime] x-import: loading", url, "(" + kind + ")");
+      const ready = kind === "jsx" ? ensureBabel() : Promise.resolve();
+      ready.then(() => fetch(url)).then((r) => {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.text();
+      }).then((src) => {
+        const code = kind === "jsx" ? window.Babel.transform(src, {
+          filename: url,
+          presets: ["react", "typescript"]
+        }).code : src;
+        const module = { exports: {} };
+        const before = new Set(Object.keys(window));
+        //! nosemgrep: eval-and-function-constructor
+        new Function("React", "module", "exports", "require", code)(
+          getReact(),
+          module,
+          module.exports,
+          () => ({})
+        );
+        const globals = {};
+        for (const k of Object.keys(window)) {
+          if (!before.has(k) && typeof window[k] === "function") {
+            globals[k] = window[k];
+          }
+        }
+        cache.set(url, { mod: module.exports, globals });
+        console.info(
+          "[dc-runtime] x-import: loaded",
+          url,
+          "\u2014 exports:",
+          Object.keys(module.exports),
+          "window globals:",
+          Object.keys(globals)
+        );
+        onResolved();
+      }).catch((e) => {
+        cache.set(url, {
+          mod: {},
+          globals: {},
+          error: "failed to load: " + (e instanceof Error && e.message ? e.message : String(e))
+        });
+        console.error(
+          "[dc-runtime] x-import: FAILED to load",
+          url,
+          "(" + kind + ")",
+          e
+        );
+        onResolved();
+      });
+    }
+    function resolve2(url, name) {
+      const entry = cache.get(url);
+      if (!entry) return null;
+      const { mod, globals } = entry;
+      const C = mod && mod[name] || globals && globals[name] || typeof window !== "undefined" && window[name] || mod && mod.default;
+      if (typeof C === "function") return C;
+      const key = url + "\0" + name;
+      if (!reportedMissing.has(key)) {
+        reportedMissing.set(
+          key,
+          entry.error || 'no export named "' + name + '" (has: ' + Object.keys(mod).join(", ") + ")"
+        );
+        console.error(
+          "[dc-runtime] x-import: module",
+          url,
+          "loaded but has no component named",
+          JSON.stringify(name),
+          "\u2014 available exports:",
+          Object.keys(mod),
+          "window globals:",
+          Object.keys(globals),
+          ". The module must `module.exports = {" + name + "}` or set `window." + name + "`."
+        );
+      }
+      return null;
+    }
+    function waitForGlobal(name) {
+      if (polling.has(name)) return;
+      polling.add(name);
+      const started = Date.now();
+      const isCE = isCustomElementName(name);
+      const tick = () => {
+        const found = isCE ? customElements.get(name) : isRenderableType(resolveDottedPath(window, name));
+        if (found) {
+          polling.delete(name);
+          onResolved();
+          return;
+        }
+        if (Date.now() - started >= GLOBAL_POLL_TIMEOUT_MS) {
+          console.warn(
+            "[dc-runtime] x-import: global",
+            JSON.stringify(name),
+            "never appeared on window after " + GLOBAL_POLL_TIMEOUT_MS + "ms"
+          );
+          return;
+        }
+        setTimeout(tick, GLOBAL_POLL_INTERVAL_MS);
+      };
+      setTimeout(tick, GLOBAL_POLL_INTERVAL_MS);
+    }
+    function resolveGlobal(url, name) {
+      const isCE = isCustomElementName(name);
+      if (!url) {
+        if (isCE) {
+          if (customElements.get(name)) return name;
+          waitForGlobal(name);
+          return null;
+        }
+        const g2 = resolveDottedPath(window, name);
+        if (isRenderableType(g2)) return g2;
+        waitForGlobal(name);
+        return null;
+      }
+      const entry = cache.get(url);
+      if (!entry) return null;
+      if (isCE && customElements.get(name)) return name;
+      const g = entry.globals[name] ?? resolveDottedPath(window, name);
+      if (isRenderableType(g)) return g;
+      if (name.includes(".")) return null;
+      const key = url + "\0global\0" + name;
+      if (!reportedMissing.has(key)) {
+        reportedMissing.set(key, null);
+        if (isCE && !customElements.get(name)) {
+          console.warn(
+            "[dc-runtime] x-import:",
+            url,
+            "loaded but no custom element",
+            JSON.stringify(name),
+            "is registered and window." + name + " is not a function \u2014 rendering <" + name + "> as an unknown element."
+          );
+        }
+      }
+      return name;
+    }
+    function getError(url, name) {
+      const entry = cache.get(url);
+      if (entry?.error) return entry.error;
+      return reportedMissing.get(url + "\0" + name) || null;
+    }
+    return { load, resolve: resolve2, resolveGlobal, getError };
+  }
+  function isElementClass(g) {
+    try {
+      return typeof g === "function" && typeof HTMLElement !== "undefined" && g.prototype instanceof HTMLElement;
+    } catch {
+      return false;
+    }
+  }
+
+  // src/helmet.ts
+  function createHelmetManager(doc, isStreaming) {
+    const mounted = /* @__PURE__ */ new Set();
+    const live = /* @__PURE__ */ new Map();
+    function compile(node) {
+      const raw = [...node.children];
+      const helmetClosed = node.nextSibling != null || node.parentNode?.nextSibling != null;
+      return (_vals, ctx) => {
+        const name = ctx && ctx.__name || "";
+        const streaming = !!(name && isStreaming(name));
+        for (let i = 0; i < raw.length; i++) {
+          const child = raw[i];
+          const tag = child.tagName;
+          const mayBePartial = streaming && !helmetClosed && i === raw.length - 1;
+          if (tag === "SCRIPT") {
+            if (mayBePartial) continue;
+            const key = "SCRIPT|" + (child.getAttribute("src") || child.textContent || "");
+            if (mounted.has(key)) continue;
+            mounted.add(key);
+            const el = doc.createElement("script");
+            for (const { name: an, value } of [...child.attributes])
+              el.setAttribute(an, value);
+            if (child.textContent) el.textContent = child.textContent;
+            doc.head.appendChild(el);
+          } else if (tag === "LINK" || tag === "META") {
+            if (mayBePartial) continue;
+            const key = tag + "|" + (child.getAttribute("href") || child.getAttribute("src") || child.outerHTML);
+            if (mounted.has(key)) continue;
+            mounted.add(key);
+            doc.head.appendChild(child.cloneNode(true));
+          } else {
+            const key = name + "|" + i;
+            let el = live.get(key);
+            if (!el || el.tagName !== tag) {
+              if (el) el.remove();
+              el = doc.createElement(tag.toLowerCase());
+              live.set(key, el);
+              doc.head.appendChild(el);
+            }
+            for (const { name: an, value } of [...child.attributes]) {
+              if (el.getAttribute(an) !== value) el.setAttribute(an, value);
+            }
+            if (el.textContent !== child.textContent)
+              el.textContent = child.textContent;
+          }
+        }
+        return null;
+      };
+    }
+    return { compile };
+  }
+
+  // src/pseudo.ts
+  function createPseudoSheet(doc) {
+    let el = null;
+    const cache = /* @__PURE__ */ new Map();
+    let n = 0;
+    return (pseudo, css) => {
+      const k = pseudo + "|" + css;
+      const hit = cache.get(k);
+      if (hit) return hit;
+      if (!el) {
+        el = doc.createElement("style");
+        doc.head.appendChild(el);
+      }
+      const cls = "scp" + (n++).toString(36);
+      const sel = pseudo === "before" || pseudo === "after" ? "." + cls + "::" + pseudo : "." + cls + ":" + pseudo;
+      el.sheet.insertRule(sel + "{" + css + "}", el.sheet.cssRules.length);
+      cache.set(k, cls);
+      return cls;
+    };
+  }
+
+  // src/registry.ts
+  function createRegistry() {
+    const entries = /* @__PURE__ */ Object.create(null);
+    function get(name) {
+      return entries[name] || (entries[name] = {
+        html: "",
+        tpl: null,
+        Logic: null,
+        jsStreaming: false,
+        htmlStreaming: false,
+        ver: 0,
+        subs: /* @__PURE__ */ new Set(),
+        fetched: false
+      });
+    }
+    function bump(name) {
+      const r = get(name);
+      r.ver++;
+      for (const fn of r.subs) fn();
+    }
+    return {
+      entries,
+      get,
+      bump,
+      bumpAll() {
+        for (const n in entries) bump(n);
+      }
+    };
+  }
+
+  // src/runtime.ts
+  var COMPONENT_DIR = ".";
+  function createRuntime(doc = document) {
+    const registry = createRegistry();
+    const pseudoClass = createPseudoSheet(doc);
+    const helmet = createHelmetManager(
+      doc,
+      (name) => registry.get(name).htmlStreaming
+    );
+    const external = createExternalModules(() => registry.bumpAll());
+    const factory = createComponentFactory(registry, ensureFetched);
+    const host = {
+      component: (name) => factory.getDC(name),
+      placeholder: (props) => h(Placeholder, props),
+      helmet: (node) => helmet.compile(node),
+      loadExternal: (kind, url) => external.load(kind, url),
+      resolveExternal: (url, name) => external.resolve(url, name),
+      resolveExternalGlobal: (url, name) => external.resolveGlobal(url, name),
+      resolveExternalError: (url, name) => external.getError(url, name),
+      pseudoClass
+    };
+    function ensureFetched(name) {
+      const r = registry.get(name);
+      if (r.fetched) return;
+      r.fetched = true;
+      const url = COMPONENT_DIR + "/" + name + ".dc.html";
+      fetch(url).then((res) => {
+        if (!res.ok) {
+          console.error(
+            "[dc-runtime] sibling fetch for <" + name + "/> failed:",
+            url,
+            "returned",
+            res.status,
+            "\u2014 the reference renders as an empty placeholder."
+          );
+          return "";
+        }
+        return res.text();
+      }).then((t) => {
+        if (!t) return;
+        const parsed = parseDcText(t);
+        if (!parsed) {
+          console.error(
+            "[dc-runtime] sibling fetch for <" + name + "/>:",
+            url,
+            "has no <x-dc> block \u2014 not a Design Component."
+          );
+          return;
+        }
+        if (parsed.props) r.propsMeta = parsed.props;
+        if (parsed.preview) r.preview = parsed.preview;
+        if (parsed.template && !r.html) updateHtml(name, parsed.template);
+        if (parsed.js && !r.Logic) updateJs(name, parsed.js);
+      }).catch(
+        (e) => console.error(
+          "[dc-runtime] sibling fetch for <" + name + "/> threw:",
+          url,
+          e
+        )
+      );
+    }
+    function updateHtml(name, html) {
+      const r = registry.get(name);
+      r.html = html;
+      try {
+        r.tpl = compileTemplate(html, host);
+      } catch (e) {
+        console.error("[dc-runtime] template compile FAILED for", name, e);
+      }
+      registry.bump(name);
+    }
+    function updateJs(name, src) {
+      const r = registry.get(name);
+      const seq = r.jsSeq = (r.jsSeq || 0) + 1;
+      try {
+        const Cls = evalDcLogic(src);
+        if (r.jsSeq !== seq) return;
+        if (typeof Cls !== "function") {
+          r.logicError = name + ".dc.html: <script data-dc-script> must define `class Component extends DCLogic`";
+        } else {
+          r.logicError = null;
+          r.Logic = Cls;
+        }
+      } catch (e) {
+        if (r.jsSeq !== seq) return;
+        console.error(
+          "[dc-runtime] logic class eval FAILED for",
+          name,
+          "\u2014 the template renders with props only.",
+          e
+        );
+        r.logicError = name + ": " + (e instanceof Error && e.message ? e.message : String(e));
+      }
+      registry.bump(name);
+    }
+    function setStreaming(name, kind, on) {
+      const r = registry.get(name);
+      if (kind === "html") r.htmlStreaming = !!on;
+      else r.jsStreaming = !!on;
+      let any = false;
+      for (const n in registry.entries) {
+        const e = registry.entries[n];
+        if (e && (e.htmlStreaming || e.jsStreaming)) {
+          any = true;
+          break;
+        }
+      }
+      doc.documentElement.classList.toggle("sc-dc-streaming", any);
+      registry.bump(name);
+    }
+    function dcUpdate(name, kind, content, streaming) {
+      if (streaming) registry.get(name).fetched = true;
+      if (kind === "html") {
+        setStreaming(name, "html", !!streaming);
+        updateHtml(name, content);
+      } else if (kind === "js") {
+        setStreaming(name, "js", !!streaming);
+        if (!streaming) updateJs(name, content);
+      } else if (kind === "props") {
+        const { props, preview } = parseDataProps(content);
+        const r = registry.get(name);
+        r.propsMeta = props ?? void 0;
+        r.preview = preview;
+        registry.bump(name);
+      }
+    }
+    function setProps(name, overrides) {
+      registry.get(name).propOverrides = overrides && typeof overrides === "object" ? { ...overrides } : null;
+      registry.bump(name);
+    }
+    function adoptParsed(name, parsed) {
+      if (!parsed) return;
+      const r = registry.get(name);
+      if (parsed.props) r.propsMeta = parsed.props;
+      if (parsed.preview) r.preview = parsed.preview;
+      if (parsed.template) updateHtml(name, parsed.template);
+      if (parsed.js) updateJs(name, parsed.js);
+    }
+    return {
+      registry,
+      getDC: factory.getDC,
+      updateHtml,
+      updateJs,
+      dcUpdate,
+      setProps,
+      adoptParsed,
+      markFetched: (name) => {
+        registry.get(name).fetched = true;
+      },
+      annotatedTemplate: (name) => {
+        const r = registry.get(name);
+        return r.tpl && r.tpl.__annotated || null;
+      },
+      templateSource: (name) => registry.get(name).html || null,
+      StreamableLogic
+    };
+  }
+
+  // src/index.ts
+  var REACT_URL = "https://unpkg.com/react@18.3.1/umd/react.production.min.js";
+  var REACT_SRI = "sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z";
+  var REACT_DOM_URL = "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js";
+  var REACT_DOM_SRI = "sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1";
+  function hideRawTemplate() {
+    const s = document.createElement("style");
+    s.textContent = "x-dc{display:none!important}";
+    document.head.appendChild(s);
+  }
+  function loadScript(src, integrity) {
+    return new Promise((resolve2, reject) => {
+      //! nosemgrep: create-script-element
+      const s = document.createElement("script");
+      s.src = src;
+      s.integrity = integrity;
+      s.crossOrigin = "anonymous";
+      s.async = false;
+      s.onload = () => resolve2();
+      s.onerror = () => reject(new Error(`failed to load ${src}`));
+      document.head.appendChild(s);
+    });
+  }
+  function loadReactUmd() {
+    const w = window;
+    if (w.React && w.ReactDOM) return Promise.resolve();
+    return Promise.all([
+      loadScript(REACT_URL, REACT_SRI),
+      loadScript(REACT_DOM_URL, REACT_DOM_SRI)
+    ]).then(() => void 0);
+  }
+  function init() {
+    const runtime = createRuntime(document);
+    let rootName = "Root";
+    const baseCss = document.createElement("style");
+    baseCss.textContent = BASE_CSS;
+    document.head.prepend(baseCss);
+    const notifyHost = () => {
+      if (window.parent === window) return;
+      const r = runtime.registry.entries[rootName];
+      try {
+        window.parent.postMessage(
+          {
+            type: "__dc_booted",
+            rootName,
+            propsMeta: r && r.propsMeta || null,
+            preview: r && r.preview || null
+          },
+          "*"
+        );
+      } catch {
+      }
+    };
+    const api = {
+      __dcUpdate: (name, kind, content, streaming) => {
+        runtime.dcUpdate(name, kind, content, streaming);
+        if (name === rootName && !streaming && kind === "props") notifyHost();
+      },
+      __dcSetProps: (name, overrides) => runtime.setProps(name, overrides),
+      /** Name of the component currently mounted as the page root — DC tools
+       *  push their template-stream here when targeting "the open page". */
+      __dcRootName: () => rootName,
+      /** Editor bridge — the encoded, `data-dc-tpl`-annotated template source.
+       *  The host editor parses this into its own template DOM so it can map a
+       *  rendered node (carrying the same `data-dc-tpl`) back to the source
+       *  node that emitted it. Returns the encoded form (`<sc-comp>`,
+       *  `sc-camel-*` attrs); the editor decodes on serialize. */
+      __dcAnnotatedTemplate: (name) => runtime.annotatedTemplate(name),
+      /** Editor bridge — the *original* (decoded) template source. */
+      __dcTemplateSource: (name) => runtime.templateSource(name),
+      __dcBoot: () => {
+        rootName = boot(runtime, document) ?? rootName;
+        notifyHost();
+      },
+      __dcRegistry: runtime.registry.entries,
+      getDC: (name) => runtime.getDC(name),
+      // `DCLogic` is the documented base class name; `StreamableLogic` is the
+      // implementation alias kept for any project that already references it.
+      DCLogic: runtime.StreamableLogic,
+      StreamableLogic: runtime.StreamableLogic
+    };
+    Object.assign(window, api);
+    if (document.readyState !== "loading") api.__dcBoot();
+    else document.addEventListener("DOMContentLoaded", () => api.__dcBoot());
+  }
+  hideRawTemplate();
+  loadReactUmd().then(init).catch((err) => {
+    console.error("[dc] failed to load React or boot:", err);
+    throw err;
+  });
+})();
+
+</script>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#CED3DB">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#CED3DB"/>
+    <rect x="370" y="120" width="460" height="600" rx="24" fill="#E8EBEF" stroke="#C3C9D2" stroke-width="2"/>
+    <rect x="370" y="120" width="460" height="210" rx="24" fill="#DBDFE6"/>
+    <rect x="370" y="318" width="460" height="12" fill="#D2D7DE"/>
+    <polygon points="430,300 480,328 480,384 430,412 380,384 380,328" fill="#2F66A5"/>
+    <rect x="404" y="356" width="2" height="0" fill="#fff"/>
+    <rect x="404" y="356" width="52" height="52" fill="none"/>
+    <rect x="410" y="450" width="300" height="34" rx="6" fill="#1A2332"/>
+    <rect x="410" y="510" width="180" height="74" rx="8" fill="#F4F6FA" stroke="#D5DAE2" stroke-width="2"/>
+    <rect x="610" y="510" width="180" height="74" rx="8" fill="#F4F6FA" stroke="#D5DAE2" stroke-width="2"/>
+    <rect x="410" y="630" width="380" height="56" rx="10" fill="#EB4D8C"/>
+    <rect x="410" y="678" width="380" height="8" rx="4" fill="#9c2a5a"/>
+  </svg>
+</template>
+<x-dc>
+<helmet>
+
+<style>
+  html,body{margin:0;padding:0;background:#D2D7DE;}
+</style>
+</helmet>
+<div data-screen-label="Sheet" style="box-sizing:border-box;min-height:100vh;width:100%;padding:52px 56px 72px;font-family:'Manrope',system-ui,'Segoe UI',sans-serif,sans-serif;background:linear-gradient(170deg,#D9DDE3 0%,#CED3DB 60%,#C7CCD4 100%);color:#1A2332;">
+
+  <!-- HEADER -->
+  <div style="max-width:1280px;margin:0 auto 46px;">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;border-bottom:1px solid rgba(26,35,50,.18);padding-bottom:22px;">
+      <div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px;">
+          <div style="width:30px;height:34px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:linear-gradient(160deg,#3f7ab9,#2F66A5);box-shadow:0 2px 4px rgba(26,35,50,.3),inset 0 1px 1px rgba(255,255,255,.3);"></div>
+          <span style="font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:15px;letter-spacing:.30em;text-transform:uppercase;color:#2F66A5;">МультиКрит</span>
+        </div>
+        <h1 style="margin:0;font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:38px;line-height:1.02;letter-spacing:.01em;text-transform:uppercase;color:#1A2332;">Карточка материала каталога</h1>
+        <p style="margin:9px 0 0;font-family:'Manrope',system-ui,'Segoe UI',sans-serif;font-size:15px;color:#3D4D62;max-width:680px;line-height:1.45;">Эстетика «Стальной&nbsp;Vega» — скевоморфизм советской приборной аппаратуры 1970-х в холодной стальной палитре синего металлика.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:9px;">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#7a838f;">Палитра</span>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;max-width:430px;">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:38px;height:38px;border-radius:7px;background:#ECEEF1;box-shadow:inset 0 0 0 1px rgba(26,35,50,.12),0 2px 4px rgba(26,35,50,.14);"></div><span style="font-family:ui-monospace,Menlo,monospace;font-size:8.5px;color:#7a838f;">ECEEF1</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:38px;height:38px;border-radius:7px;background:#2F66A5;box-shadow:0 2px 4px rgba(26,35,50,.2);"></div><span style="font-family:ui-monospace,Menlo,monospace;font-size:8.5px;color:#7a838f;">2F66A5</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:38px;height:38px;border-radius:7px;background:#1A2332;box-shadow:0 2px 4px rgba(26,35,50,.2);"></div><span style="font-family:ui-monospace,Menlo,monospace;font-size:8.5px;color:#7a838f;">1A2332</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:38px;height:38px;border-radius:7px;background:#F4F6FA;box-shadow:inset 0 0 0 1px rgba(26,35,50,.12),0 2px 4px rgba(26,35,50,.14);"></div><span style="font-family:ui-monospace,Menlo,monospace;font-size:8.5px;color:#7a838f;">F4F6FA</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:38px;height:38px;border-radius:7px;background:#3D4D62;box-shadow:0 2px 4px rgba(26,35,50,.2);"></div><span style="font-family:ui-monospace,Menlo,monospace;font-size:8.5px;color:#7a838f;">3D4D62</span></div>
+        </div>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:2px;">
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:14px;border-radius:3px;background:#6B7280;"></div><span style="font-family:'Manrope',system-ui,'Segoe UI',sans-serif;font-size:10px;color:#3D4D62;">Бетон</span></div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:14px;border-radius:3px;background:#4A6580;"></div><span style="font-family:'Manrope',system-ui,'Segoe UI',sans-serif;font-size:10px;color:#3D4D62;">Металл</span></div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:14px;border-radius:3px;background:#2F66A5;"></div><span style="font-family:'Manrope',system-ui,'Segoe UI',sans-serif;font-size:10px;color:#3D4D62;">Химзащита</span></div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:14px;border-radius:3px;background:#1E5973;"></div><span style="font-family:'Manrope',system-ui,'Segoe UI',sans-serif;font-size:10px;color:#3D4D62;">Гидро</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 01 -->
+  <div style="max-width:1280px;margin:0 auto 60px;">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:30px;">
+      <span style="font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:13px;letter-spacing:.18em;color:#2F66A5;">01</span>
+      <span style="font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:15px;letter-spacing:.13em;text-transform:uppercase;color:#1A2332;">Базовая карточка</span>
+      <div style="flex:1;height:1px;background:rgba(26,35,50,.16);"></div>
+      <span style="font-family:'Manrope',system-ui,'Segoe UI',sans-serif;font-size:12px;color:#6B7280;">МК-160 Эластомер · Бетон · <span style="color:#2F66A5;font-weight:600;">синий = материал</span> · <span style="color:#EB4D8C;font-weight:600;">розовый неон = действие и статус</span></span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 380px 1fr;align-items:stretch;gap:18px;">
+      <!-- LEFT NOTES -->
+      <div style="display:flex;flex-direction:column;justify-content:space-around;padding:18px 0;">
+        <div style="display:flex;align-items:center;gap:12px;justify-content:flex-end;">
+          <div style="text-align:right;max-width:230px;"><div style="font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:#1A2332;">Матовый стальной корпус</div><div style="font-family:'Manrope',system-ui,'Segoe UI',sans-serif;font-size:12px;line-height:1.4;color:#3D4D62;margin-top:3px;">Мягкая падающая тень и верхняя фаска-блик — карточка лежит на странице как физический объект.</div></div>
+          <div style="flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid #2F66A5;background:#F4F6FA;display:flex;align-items:center;justify-content:center;font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:13px;color:#2F66A5;">1</div>
+          <div style="flex:none;width:30px;border-top:1.5px dashed #8590a0;"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;justify-content:flex-end;">
+          <div style="text-align:right;max-width:230px;"><div style="font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:#1A2332;">Гексагон-стикер</div><div style="font-family:'Manrope',system-ui,'Segoe UI',sans-serif;font-size:12px;line-height:1.4;color:#3D4D62;margin-top:3px;">Пиктограмма типа задачи приклеена на стык фото и текста, отбрасывает собственную тень.</div></div>
+          <div style="flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid #2F66A5;background:#F4F6FA;display:flex;align-items:center;justify-content:center;font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:13px;color:#2F66A5;">2</div>
+          <div style="flex:none;width:30px;border-top:1.5px dashed #8590a0;"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;justify-content:flex-end;">
+          <div style="text-align:right;max-width:230px;"><div style="font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:#1A2332;">Утопленные шкалы 2×2</div><div style="font-family:'Manrope',system-ui,'Segoe UI',sans-serif;font-size:12px;line-height:1.4;color:#3D4D62;margin-top:3px;">Внутренняя тень и подсвеченные табличные цифры — как окна на корпусе ретро-аппаратуры.</div></div>
+          <div style="flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid #2F66A5;background:#F4F6FA;display:flex;align-items:center;justify-content:center;font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:13px;color:#2F66A5;">3</div>
+          <div style="flex:none;width:30px;border-top:1.5px dashed #8590a0;"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;justify-content:flex-end;">
+          <div style="text-align:right;max-width:230px;"><div style="font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:#EB4D8C;">Подсветка панели</div><div style="font-family:'Manrope',system-ui,'Segoe UI',sans-serif;font-size:12px;line-height:1.4;color:#3D4D62;margin-top:3px;">Тонкая розовая линия-свечение по нижней грани — как лампа приборного пульта снизу. Только на карточке-герое.</div></div>
+          <div style="flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid #EB4D8C;background:#F4F6FA;display:flex;align-items:center;justify-content:center;font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:13px;color:#EB4D8C;">6</div>
+          <div style="flex:none;width:30px;border-top:1.5px dashed #d57aa3;"></div>
+        </div>
+      </div>
+
+      <!-- CARD -->
+      <dc-import name="MaterialCard" series="МК-160 ЭЛАСТОМЕР" task="concrete" description="Эластичная защита бетона от трещин и динамических нагрузок основания." specs="{{ baseSpecs }}" hasPhoto="{{ true }}" inStock="{{ true }}" status="Бестселлер" heroGlow="{{ true }}" hint-size="380px,540px" style="display:block;width:380px;"></dc-import>
+
+      <!-- RIGHT NOTES -->
+      <div style="display:flex;flex-direction:column;justify-content:space-around;padding:24px 0;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="flex:none;width:30px;border-top:1.5px dashed #8590a0;"></div>
+          <div style="flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid #2F66A5;background:#F4F6FA;display:flex;align-items:center;justify-content:center;font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:13px;color:#2F66A5;">4</div>
+          <div style="max-width:230px;"><div style="font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:#1A2332;">Название серии</div><div style="font-family:'Manrope',system-ui,'Segoe UI',sans-serif;font-size:12px;line-height:1.4;color:#3D4D62;margin-top:3px;">Oswald, узкий инженерный гротеск — главный типографический акцент карточки.</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="flex:none;width:30px;border-top:1.5px dashed #8590a0;"></div>
+          <div style="flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid #2F66A5;background:#F4F6FA;display:flex;align-items:center;justify-content:center;font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:13px;color:#2F66A5;">5</div>
+          <div style="max-width:230px;"><div style="font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:#EB4D8C;">Кнопка-клавиша · действие</div><div style="font-family:'Manrope',system-ui,'Segoe UI',sans-serif;font-size:12px;line-height:1.4;color:#3D4D62;margin-top:3px;">Розово-неоновый #EB4D8C с тёмной нижней гранью и мягким свечением — «горящая клавиша пуска» приборного пульта.</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="flex:none;width:30px;border-top:1.5px dashed #d57aa3;"></div>
+          <div style="flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid #EB4D8C;background:#F4F6FA;display:flex;align-items:center;justify-content:center;font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:13px;color:#EB4D8C;">7</div>
+          <div style="max-width:230px;"><div style="font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:#EB4D8C;">Микро-индикатор статуса</div><div style="font-family:'Manrope',system-ui,'Segoe UI',sans-serif;font-size:12px;line-height:1.4;color:#3D4D62;margin-top:3px;">Розовый светящийся кружок в углу: новинка, бестселлер, акция. На обычной карточке его нет.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 02 -->
+  <div style="max-width:1280px;margin:0 auto 60px;">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:30px;">
+      <span style="font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:13px;letter-spacing:.18em;color:#2F66A5;">02</span>
+      <span style="font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:15px;letter-spacing:.13em;text-transform:uppercase;color:#1A2332;">Ряд каталога — сетка держит линию</span>
+      <div style="flex:1;height:1px;background:rgba(26,35,50,.16);"></div>
+      <span style="font-family:'Manrope',system-ui,'Segoe UI',sans-serif;font-size:12px;color:#6B7280;">3 в ряд · длинное название тянет соседей на равную высоту</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);align-items:stretch;gap:26px;">
+      <dc-import name="MaterialCard" series="МК-210 АНТИКОР" task="metal" description="Антикоррозийное покрытие стальных конструкций, опор и трубопроводов." specs="{{ antikorSpecs }}" hasPhoto="{{ true }}" inStock="{{ true }}" hint-size="100%,540px" style="display:block;height:100%;"></dc-import>
+      <dc-import name="MaterialCard" series="МК-310 ХИМЗАЩИТА УСИЛЕННАЯ" task="chem" description="Стойкость к кислотам и щелочам на производственных полах и в ваннах." specs="{{ chemSpecs }}" hasPhoto="{{ true }}" inStock="{{ true }}" hint-size="100%,540px" style="display:block;height:100%;"></dc-import>
+      <dc-import name="MaterialCard" series="МК-080 ГИДРОБАРЬЕР" task="hydro" description="Бесшовная гидроизоляция фундаментов, резервуаров и подземных сооружений." specs="{{ hydroSpecs }}" hasPhoto="{{ true }}" inStock="{{ true }}" status="Новинка" hint-size="100%,540px" style="display:block;height:100%;"></dc-import>
+    </div>
+  </div>
+
+  <!-- SECTION 03 -->
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:30px;">
+      <span style="font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:13px;letter-spacing:.18em;color:#2F66A5;">03</span>
+      <span style="font-family:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;font-weight:600;font-size:15px;letter-spacing:.13em;text-transform:uppercase;color:#1A2332;">Пограничные состояния</span>
+      <div style="flex:1;height:1px;background:rgba(26,35,50,.16);"></div>
+      <span style="font-family:'Manrope',system-ui,'Segoe UI',sans-serif;font-size:12px;color:#6B7280;">нет фото · нет в наличии</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,420px));justify-content:center;align-items:stretch;gap:60px;">
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#3D4D62;">A · Нет фото объекта</span>
+        <dc-import name="MaterialCard" series="МК-540 ПРАЙМЕР" task="concrete" description="Грунт-пропитка глубокого проникновения для пористого и пылящего бетона." specs="{{ primerSpecs }}" hasPhoto="{{ false }}" inStock="{{ true }}" hint-size="100%,540px" style="display:block;height:100%;"></dc-import>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#3D4D62;">B · Временно нет в наличии</span>
+        <dc-import name="MaterialCard" series="МК-420 ТЕРМОЩИТ" task="metal" description="Термостойкое покрытие дымоходов, печей и горячих поверхностей." specs="{{ termoSpecs }}" hasPhoto="{{ true }}" inStock="{{ false }}" hint-size="100%,540px" style="display:block;height:100%;"></dc-import>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      baseSpecs: [
+        { label: 'Адгезия', value: '1,8', unit: 'МПа' },
+        { label: 'Температура', value: '−40…+90', unit: '°C' },
+        { label: 'Срок службы', value: '25', unit: 'лет' },
+        { label: 'Толщина слоя', value: '2–4', unit: 'мм' },
+      ],
+      antikorSpecs: [
+        { label: 'Адгезия', value: '3,2', unit: 'МПа' },
+        { label: 'Температура', value: '−50…+120', unit: '°C' },
+        { label: 'Срок службы', value: '20', unit: 'лет' },
+        { label: 'Толщина слоя', value: '0,3–0,6', unit: 'мм' },
+      ],
+      chemSpecs: [
+        { label: 'Адгезия', value: '2,6', unit: 'МПа' },
+        { label: 'Температура', value: '−30…+140', unit: '°C' },
+        { label: 'Срок службы', value: '15', unit: 'лет' },
+        { label: 'Толщина слоя', value: '1,5–3', unit: 'мм' },
+      ],
+      hydroSpecs: [
+        { label: 'Адгезия', value: '2,0', unit: 'МПа' },
+        { label: 'Температура', value: '−40…+80', unit: '°C' },
+        { label: 'Срок службы', value: '30', unit: 'лет' },
+        { label: 'Толщина слоя', value: '1–2', unit: 'мм' },
+      ],
+      primerSpecs: [
+        { label: 'Адгезия', value: '2,4', unit: 'МПа' },
+        { label: 'Температура', value: '−30…+70', unit: '°C' },
+        { label: 'Срок службы', value: '20', unit: 'лет' },
+        { label: 'Проникновение', value: '5', unit: 'мм' },
+      ],
+      termoSpecs: [
+        { label: 'Адгезия', value: '3,0', unit: 'МПа' },
+        { label: 'Температура', value: '−60…+450', unit: '°C' },
+        { label: 'Срок службы', value: '18', unit: 'лет' },
+        { label: 'Толщина слоя', value: '0,4–0,8', unit: 'мм' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
