@@ -12,3 +12,6 @@ node_modules/
 .env
 .env.local
 .env.*.local
+
+# Тяжёлые презентации (PDF) — не храним в репозитории
+presentation/
