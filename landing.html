@@ -228,7 +228,17 @@
       box-shadow: inset 0 2px 4px rgba(26,35,50,.06); margin-bottom: 1.5rem; font-size: 1.05rem; }
     .tech-result span { color: var(--pink); font-weight: 700; }
     .tech-features { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
-    .tech-feat .hex { background: var(--blue); margin-bottom: .85rem; }
+    /* Контурные градиентные иконки синий→розовый — фирменный приём для всех функциональных иконок */
+    .tech-feat .hex, .problem-item .hex, .sphere-card .hex, .app-card .hex, .contact-row .hex {
+      background: transparent; clip-path: none; filter: none; }
+    .tech-feat .hex svg, .problem-item .hex svg, .sphere-card .hex svg, .app-card .hex svg, .contact-row .hex svg {
+      stroke: url(#brand-grad); stroke-width: 1.6; }
+    .tech-feat .hex { width: 60px; height: 60px; margin-bottom: .85rem; }
+    .tech-feat .hex svg { width: 48px; height: 48px; }
+    .sphere-card .hex svg { width: 44px; height: 44px; }
+    .problem-item .hex svg { width: 40px; height: 40px; }
+    .app-card .hex svg { width: 40px; height: 40px; }
+    .contact-row .hex svg { width: 30px; height: 30px; }
     .tech-feat h4 { font-size: 1.05rem; margin-bottom: .4rem; }
     .tech-feat p { font-size: .88rem; color: var(--muted); }
 
@@ -238,14 +248,14 @@
     .grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; }
 
     .sphere-card { text-align: center; }
-    .sphere-card .hex { background: var(--blue); margin: 0 auto .85rem; width: 56px; height: 56px; }
+    .sphere-card .hex { background: transparent; clip-path: none; filter: none; margin: 0 auto .85rem; width: 56px; height: 56px; }
     .sphere-card h3 { font-size: 1rem; }
     .spheres-footer { display: flex; justify-content: space-between; align-items: center;
       margin-top: 2.5rem; gap: 1.5rem; flex-wrap: wrap; }
     .spheres-more { font-family: var(--f-tech); color: var(--muted); font-size: .9rem; }
 
     .app-card { text-align: center; }
-    .app-card .hex { background: var(--metal); margin: 0 auto .75rem; }
+    .app-card .hex { background: transparent; clip-path: none; filter: none; margin: 0 auto .75rem; }
     .app-card h3 { font-size: .98rem; margin-bottom: .25rem; }
     .app-card p { font-size: .82rem; color: var(--muted); }
 
@@ -316,7 +326,7 @@
     /* ── CONTACTS ── */
     .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
     .contact-row { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.25rem; }
-    .contact-row .hex { background: var(--blue); width: 40px; height: 40px; }
+    .contact-row .hex { background: transparent; clip-path: none; filter: none; width: 40px; height: 40px; }
     .contact-row .hex i { width: 18px; height: 18px; }
     .contact-row a { font-weight: 600; color: var(--ink); }
     .contacts-map { background: var(--steel); border-radius: 14px; padding: 2rem; text-align: center;
@@ -363,6 +373,16 @@
   </style>
 </head>
 <body>
+
+<!-- Градиент бренда для контурных иконок (синий металлик → розовый неон) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="brand-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2F66A5"/>
+      <stop offset="100%" stop-color="#EB4D8C"/>
+    </linearGradient>
+  </defs>
+</svg>
 
 <!-- ══ HEADER ══ -->
 <header class="header">
