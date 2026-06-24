@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>МультиКрит — демо: дым за курсором</title>
+<style>
+  :root{
+    --blue:#2F66A5; --pink:#EB4D8C; --ink:#1A2332; --steel:#E8EBEF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:"Manrope","Segoe UI",system-ui,sans-serif;
+    background:var(--ink); color:var(--steel);
+    overflow:hidden;
+  }
+
+  /* Слой дыма — на весь экран, ПОЗАДИ контента */
+  #fluid{
+    position:fixed; inset:0; width:100%; height:100%;
+    z-index:0; display:block;
+  }
+
+  /* Контент — поверх дыма. На пустых местах виден дым, на тексте/кнопке — нет */
+  .stage{
+    position:relative; z-index:1;
+    height:100%; display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    text-align:center; padding:24px;
+    pointer-events:none; /* пустые зоны прозрачны для мыши → дым реагирует */
+  }
+  .stage *{pointer-events:auto;} /* но сам текст/кнопки кликабельны */
+
+  .brand{
+    font-family:"Oswald","Manrope",sans-serif;
+    font-weight:700; letter-spacing:.5px;
+    font-size:clamp(42px,8vw,96px); line-height:1;
+    text-transform:uppercase;
+  }
+  .brand .b{color:#7FB0E6;}
+  .brand .p{color:var(--pink);}
+  .tagline{
+    margin-top:14px; font-size:clamp(13px,1.6vw,18px);
+    letter-spacing:3px; text-transform:uppercase; opacity:.75;
+  }
+  .cta{
+    margin-top:38px; display:inline-block;
+    padding:16px 34px; border-radius:14px;
+    background:linear-gradient(180deg,#f25a98,#d83f7e);
+    color:#fff; font-weight:700; font-size:16px;
+    text-decoration:none; border:0; cursor:pointer;
+    box-shadow:0 8px 24px rgba(235,77,140,.35), inset 0 1px 0 rgba(255,255,255,.3);
+  }
+  .hint{
+    position:fixed; left:0; right:0; bottom:26px; z-index:1;
+    text-align:center; font-size:14px; opacity:.6; letter-spacing:.5px;
+  }
+
+  /* Переключатель режима */
+  .switch{
+    position:fixed; top:18px; right:18px; z-index:2;
+    display:flex; gap:8px; background:rgba(26,35,50,.55);
+    padding:6px; border-radius:12px; backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .switch button{
+    border:0; cursor:pointer; font:inherit; font-size:13px; font-weight:600;
+    padding:9px 14px; border-radius:8px; color:var(--steel);
+    background:transparent; transition:.15s;
+  }
+  .switch button.active{background:var(--blue); color:#fff;}
+  .switch button:not(.active):hover{background:rgba(255,255,255,.08);}
+</style>
+</head>
+<body>
+  <canvas id="fluid"></canvas>
+
+  <div class="switch">
+    <button id="btn-brand">Фирменные цвета</button>
+    <button id="btn-rainbow">Радужный</button>
+  </div>
+
+  <div class="stage">
+    <div class="brand"><span class="b">Мульти</span><span class="p">Крит</span></div>
+    <div class="tagline">Высокомолекулярные системы</div>
+    <button class="cta">Подобрать покрытие</button>
+  </div>
+
+  <div class="hint">Веди мышкой по пустому полю — за курсором тянется дым. По тексту и кнопке дыма нет.</div>
+
+  <script src="assets/js/webgl-fluid.umd.js"></script>
+  <script>
+    // Режим запоминается и переключается перезагрузкой — так эффект всегда стартует чисто.
+    const mode = localStorage.getItem('smokeMode') || 'brand';
+
+    // Подсветить активную кнопку
+    document.getElementById(mode === 'rainbow' ? 'btn-rainbow' : 'btn-brand')
+            .classList.add('active');
+    document.getElementById('btn-brand').onclick = () => setMode('brand');
+    document.getElementById('btn-rainbow').onclick = () => setMode('rainbow');
+    function setMode(m){
+      if (m === mode) return;
+      localStorage.setItem('smokeMode', m);
+      location.reload();
+    }
+
+    // Общие настройки физики дыма
+    const base = {
+      SIM_RESOLUTION: 128,
+      DENSITY_DISSIPATION: 0.97,   // насколько быстро дым тает (меньше = дольше живёт)
+      VELOCITY_DISSIPATION: 0.2,
+      PRESSURE: 0.8,
+      CURL: 28,                     // завихрения
+      SPLAT_RADIUS: 0.25,
+      SPLAT_FORCE: 6000,
+      SHADING: true,
+      COLORFUL: true,
+      COLOR_UPDATE_SPEED: 8,
+      BACK_COLOR: { r: 26, g: 35, b: 50 },  // #1A2332 — тёмно-стальной фон
+      TRANSPARENT: false,
+      BLOOM: true,
+      BLOOM_INTENSITY: 0.7,
+      SUNRAYS: false
+    };
+
+    const brand = Object.assign({}, base, {
+      // Фирменная палитра: синий металлик, розовый неон, морская глубина, светлый сине-стальной
+      COLOR_PALETTE: ['#2F66A5', '#EB4D8C', '#1E5973', '#5B8FD0'],
+      PALETTE_INTENSITY: 0.22
+    });
+
+    WebGLFluid(document.getElementById('fluid'),
+               mode === 'rainbow' ? base : brand);
+  </script>
+</body>
+</html>
