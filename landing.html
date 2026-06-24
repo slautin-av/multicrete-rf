@@ -18,11 +18,12 @@
       --blue-d:  #244F80;
       --pink:    #EB4D8C;   /* розовый неон — действие */
       --pink-d:  #A52350;   /* нижняя грань клавиши */
-      --ink:     #1A2332;   /* антрацит — текст */
-      --steel:   #E8EBEF;   /* стальная основа — фон */
-      --scale:   #F4F6FA;   /* подсветка шкал */
-      --line:    #3D4D62;   /* контуры */
-      --muted:   #5A6678;   /* второстепенный текст */
+      --ink:     #EAF0F7;   /* светлый текст — тёмная тема */
+      --steel:   #212C3D;   /* панель/карточка на тёмном фоне */
+      --scale:   #19222F;   /* утопленные шкалы — темнее панели */
+      --line:    #34435A;   /* контуры */
+      --muted:   #93A1B5;   /* второстепенный текст */
+      --bg:      #1A2332;   /* базовый тёмный фон страницы (за дымом) */
 
       --concrete:#6B7280;
       --metal:   #4A6580;
@@ -371,43 +372,53 @@
       .wrap { padding: 0 1rem; }
     }
 
-    /* ══ Тёмный hero с интерактивным дымом (WebGL fluid) ══ */
-    .hero.hero-dark {
-      position: relative;
-      background: #1A2332;            /* бренд-разрешённая тёмная подложка */
-      overflow: hidden;
-      border-radius: 0 0 24px 24px;
-    }
-    /* Слой дыма — на весь hero, позади контента */
-    .hero.hero-dark .fluid-canvas {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      z-index: 0; display: block;
-    }
-    /* Контент поверх дыма; пустые зоны пропускают мышь к холсту → дым реагирует */
-    .hero.hero-dark > .wrap { position: relative; z-index: 1; pointer-events: none; }
-    .hero.hero-dark > .wrap button,
-    .hero.hero-dark > .wrap a,
-    .hero.hero-dark .hero-banner { pointer-events: auto; }
+    /* ══════════════════════════════════════════════════════════
+       ТЁМНАЯ ТЕМА + ИНТЕРАКТИВНЫЙ ДЫМ НА ВЕСЬ САЙТ (WebGL fluid)
+       ══════════════════════════════════════════════════════════ */
 
-    /* Перекраска текста hero под тёмный фон (только внутри hero-dark) */
-    .hero.hero-dark h1 { color: #EAF0F7; }
-    .hero.hero-dark h1 .accent { color: #7FB0E6; }
-    .hero.hero-dark .hero-tagline { color: #AEBACB; }
-    .hero.hero-dark .strip-text { color: #C7D2E0; }
+    /* База: тёмный фон-фолбэк за холстом, контент поверх дыма */
+    html { background: var(--bg); }
+    body { background: transparent; }
+
+    /* Слой дыма — фиксирован на весь экран, ПОЗАДИ всего контента.
+       pointer-events:none → холст никогда не перехватывает клики;
+       координаты мыши пробрасываем в него скриптом. */
+    #fluid-bg {
+      position: fixed; inset: 0;
+      width: 100%; height: 100%;
+      z-index: -1; pointer-events: none; display: block;
+    }
+
+    /* Шапка: тёмное стекло вместо светлого */
+    .header {
+      background: rgba(20,28,40,.72);
+      box-shadow: 0 1px 0 rgba(255,255,255,.06);
+    }
+
+    /* Модалка на тёмном */
+    .modal { background: #212C3D; }
+    .modal-close { color: var(--muted); }
+
+    /* Акценты-текст ярче для контраста на тёмном (синий металлик в тексте) */
+    .sec-label, .hero h1 .accent, .hero-badge,
+    .hero-guarantee, .strip-text { color: #7FB0E6; }
+    .h-stat-num, .spec-num { color: #7FB0E6; }
+
+    /* Hero — прозрачный, чтобы дым проступал сильнее всего на первом экране */
+    .hero.hero-dark { background: transparent; }
     .hero.hero-dark .hero-strip {
       background: rgba(255,255,255,.04);
-      border-color: rgba(255,255,255,.10);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
     }
-    .hero.hero-dark .hero-guarantee { color: #C7D2E0; }
-    .hero.hero-dark .h-stat-num { color: #7FB0E6; }
-    .hero.hero-dark .h-stat-label { color: #93A1B5; }
-    /* Вторичная кнопка читаемой на тёмном */
-    .hero.hero-dark .btn-secondary { color: #EAF0F7; box-shadow: inset 0 0 0 1.5px rgba(127,176,230,.5); }
-    .hero.hero-dark .btn-secondary:hover { background: rgba(127,176,230,.12); }
+    /* Вторичная кнопка — читаемый контур на тёмном */
+    .btn-secondary { color: #EAF0F7; box-shadow: inset 0 0 0 1.5px rgba(127,176,230,.5); }
+    .btn-secondary:hover { background: rgba(127,176,230,.12); }
   </style>
 </head>
 <body>
+
+<!-- Слой интерактивного дыма на весь сайт (за всем контентом) -->
+<canvas id="fluid-bg"></canvas>
 
 <!-- Градиент бренда для контурных иконок (синий металлик → розовый неон) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -440,7 +451,6 @@
 
 <!-- ══ HERO ══ -->
 <section class="hero hero-dark">
-  <canvas class="fluid-canvas" id="fluid-hero"></canvas>
   <div class="wrap">
     <div class="hero-banner">
       <img src="assets/images/elast_armor.png" alt="Эластомерная броня МультиКрит защищает поверхность">
@@ -782,29 +792,42 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
 
-<!-- ══ Интерактивный дым в hero (WebGL fluid, фирменная палитра) ══ -->
+<!-- ══ Интерактивный дым на весь сайт (WebGL fluid, фирменная палитра) ══ -->
 <script src="assets/js/webgl-fluid.umd.js"></script>
 <script>
-  WebGLFluid(document.getElementById('fluid-hero'), {
+  const fluidCanvas = document.getElementById('fluid-bg');
+  WebGLFluid(fluidCanvas, {
     SIM_RESOLUTION: 128,
-    DENSITY_DISSIPATION: 0.97,        // насколько быстро дым тает (меньше = живёт дольше)
-    VELOCITY_DISSIPATION: 0.2,
+    DENSITY_DISSIPATION: 1.1,         // дым тает плавно, не накапливается
+    VELOCITY_DISSIPATION: 0.6,        // движение быстро успокаивается → спокойнее
     PRESSURE: 0.8,
-    CURL: 28,                         // завихрения
-    SPLAT_RADIUS: 0.22,
-    SPLAT_FORCE: 6000,
+    CURL: 9,                          // меньше завихрений = мягче, медленнее
+    SPLAT_RADIUS: 0.18,
+    SPLAT_FORCE: 3200,                // слабее «толчок» = плавнее
     SHADING: true,
     COLORFUL: true,
-    COLOR_UPDATE_SPEED: 8,
+    COLOR_UPDATE_SPEED: 4,            // цвета переливаются медленнее
     BACK_COLOR: { r: 26, g: 35, b: 50 },   // #1A2332
     TRANSPARENT: false,
     BLOOM: true,
-    BLOOM_INTENSITY: 0.7,
+    BLOOM_INTENSITY: 0.6,
     SUNRAYS: false,
     // Фирменная палитра: синий металлик, розовый неон, морская глубина, светлый сине-стальной
     COLOR_PALETTE: ['#2F66A5', '#EB4D8C', '#1E5973', '#5B8FD0'],
-    PALETTE_INTENSITY: 0.22
+    PALETTE_INTENSITY: 0.20
   });
+
+  // Холст не перехватывает мышь (pointer-events:none), поэтому движение по всей
+  // странице пробрасываем в него вручную — дым реагирует на курсор везде.
+  function forwardToFluid(type, x, y) {
+    fluidCanvas.dispatchEvent(new MouseEvent(type, { clientX: x, clientY: y, bubbles: false }));
+  }
+  window.addEventListener('mousemove', e => forwardToFluid('mousemove', e.clientX, e.clientY), { passive: true });
+  window.addEventListener('mousedown', e => forwardToFluid('mousedown', e.clientX, e.clientY), { passive: true });
+  window.addEventListener('touchmove', e => {
+    const t = e.touches[0];
+    if (t) forwardToFluid('mousemove', t.clientX, t.clientY);
+  }, { passive: true });
 </script>
 </body>
 </html>
