@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>МультиКрит — ДО / ПОСЛЕ: эластомерная броня</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#2F66A5; --blue-light:#5B8FD0; --pink:#EB4D8C;
+    --ink:#1A2332; --steel:#E8EBEF; --steel2:#3D4D62; --sea:#1E5973;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:"Manrope","Segoe UI",system-ui,sans-serif;
+    color:var(--steel);
+    /* Тёмный стальной фон + дымные пятна фирменных цветов (имитация fluid-фона сайта) */
+    background:
+      radial-gradient(60% 50% at 20% 15%, rgba(47,102,165,.30), transparent 70%),
+      radial-gradient(55% 45% at 85% 25%, rgba(235,77,140,.18), transparent 70%),
+      radial-gradient(60% 60% at 70% 90%, rgba(30,89,115,.35), transparent 70%),
+      radial-gradient(50% 50% at 10% 85%, rgba(91,143,208,.15), transparent 70%),
+      var(--ink);
+    min-height:100vh;
+    padding:48px 20px 64px;
+  }
+
+  .wrap{max-width:1100px; margin:0 auto;}
+
+  /* ── Заголовок секции ─────────────────────────────── */
+  .head{text-align:center; margin-bottom:40px;}
+  .head h2{
+    font-family:"Oswald",sans-serif; font-weight:700;
+    font-size:clamp(26px,4.5vw,44px); line-height:1.08;
+    text-transform:uppercase; letter-spacing:.5px;
+  }
+  .head h2 .accent{color:var(--pink);}
+  .head p{
+    margin:14px auto 0; max-width:680px;
+    font-size:clamp(14px,1.6vw,17px); line-height:1.55; opacity:.8;
+  }
+
+  /* ── Пара картинок ДО / ПОСЛЕ ─────────────────────── */
+  .pair{
+    display:grid; grid-template-columns:1fr 1fr; gap:28px;
+    align-items:start; margin-bottom:44px; position:relative;
+  }
+  /* Розовый неоновый разделитель между колонками (приём card-hero из DESIGN.md) */
+  .pair::after{
+    content:''; position:absolute; top:8%; bottom:8%; left:50%;
+    width:2px; transform:translateX(-50%);
+    background:linear-gradient(180deg, transparent, rgba(235,77,140,.55), transparent);
+    filter:blur(1px);
+  }
+  .panel{position:relative; text-align:center;}
+  .panel img{
+    width:100%; height:auto; display:block;
+    filter:drop-shadow(0 12px 30px rgba(0,0,0,.45));
+  }
+  /* Бейдж ДО / ПОСЛЕ */
+  .badge{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:"Oswald",sans-serif; font-weight:600;
+    text-transform:uppercase; letter-spacing:2px;
+    font-size:clamp(14px,1.8vw,18px);
+    padding:8px 20px; border-radius:10px; margin-bottom:14px;
+  }
+  .badge.before{
+    color:var(--steel); background:rgba(61,77,98,.55);
+    border:1px solid rgba(232,235,239,.18);
+  }
+  .badge.after{
+    color:#fff; background:var(--pink);
+    box-shadow:0 4px 0 rgba(165,35,80,1), 0 0 26px rgba(235,77,140,.45);
+  }
+
+  /* ── Список воздействий (подписи фирменным шрифтом) ── */
+  .impacts{
+    display:grid; grid-template-columns:repeat(5,1fr); gap:16px;
+  }
+  .imp{
+    background:rgba(34,45,63,.72);
+    border:1px solid rgba(91,143,208,.18);
+    border-radius:14px; padding:18px 16px;
+    box-shadow:0 8px 24px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.05);
+  }
+  .imp h3{
+    font-family:"Oswald",sans-serif; font-weight:600;
+    font-size:16px; text-transform:uppercase; letter-spacing:.5px;
+    color:var(--blue-light); margin-bottom:12px; line-height:1.15;
+  }
+  .imp .row{font-size:13px; line-height:1.45; margin-bottom:10px;}
+  .imp .row:last-child{margin-bottom:0;}
+  .imp .lbl{
+    display:block; font-weight:700; text-transform:uppercase;
+    letter-spacing:.5px; font-size:10px; margin-bottom:3px;
+  }
+  .imp .row.hit .lbl{color:var(--blue-light);}     /* воздействие = синий (информация) */
+  .imp .row.fix .lbl{color:var(--pink);}           /* решение  = розовый (действие)   */
+  .imp .row span.txt{opacity:.85;}
+
+  /* ── Адаптив ──────────────────────────────────────── */
+  @media (max-width:900px){
+    .impacts{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:640px){
+    /* Картинки в стопку, разделитель убираем */
+    .pair{grid-template-columns:1fr; gap:8px;}
+    .pair::after{display:none;}
+    .impacts{grid-template-columns:1fr;}
+    body{padding:32px 14px 48px;}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <div class="head">
+      <h2>Что разрушает металл —<br>и как <span class="accent">эластомер МультиКрит</span> это останавливает</h2>
+      <p>Слева — голый металл под нагрузкой. Справа — тот же лист под эластомерной бронёй: те же воздействия, но повреждений нет.</p>
+    </div>
+
+    <!-- Пара картинок -->
+    <div class="pair">
+      <div class="panel">
+        <div class="badge before">До</div>
+        <img src="Картинки/Gemini_Generated_Image_2iwvov2iwvov2iwv.png" alt="Голый металл: абразив, удар, кавитация, налипание, коррозия">
+      </div>
+      <div class="panel">
+        <div class="badge after">После</div>
+        <img src="Картинки/Gemini_Generated_Image_64x74j64x74j64x7.png" alt="Металл под эластомерной бронёй МультиКрит: воздействия отражаются">
+      </div>
+    </div>
+
+    <!-- Подписи: что за воздействие и как эластомер справляется -->
+    <div class="impacts">
+      <div class="imp">
+        <h3>Абразивный износ</h3>
+        <div class="row hit"><span class="lbl">Воздействие</span><span class="txt">Твёрдые частицы — песок, пульпа, окалина — царапают и стачивают металл.</span></div>
+        <div class="row fix"><span class="lbl">Эластомер</span><span class="txt">Упругий слой пружинит: частицы отскакивают, не срезая материал.</span></div>
+      </div>
+
+      <div class="imp">
+        <h3>Ударные нагрузки</h3>
+        <div class="row hit"><span class="lbl">Воздействие</span><span class="txt">Удары дробят и деформируют металл — идут трещины и вмятины.</span></div>
+        <div class="row fix"><span class="lbl">Эластомер</span><span class="txt">Гасит и рассеивает энергию удара по площади, возвращая форму.</span></div>
+      </div>
+
+      <div class="imp">
+        <h3>Кавитация</h3>
+        <div class="row hit"><span class="lbl">Воздействие</span><span class="txt">Схлопывающиеся пузырьки выбивают микрократеры — питтинг.</span></div>
+        <div class="row fix"><span class="lbl">Эластомер</span><span class="txt">Эластичная поверхность поглощает микровзрывы, каверны не образуются.</span></div>
+      </div>
+
+      <div class="imp">
+        <h3>Налипание</h3>
+        <div class="row hit"><span class="lbl">Воздействие</span><span class="txt">Вязкие и липкие среды налипают и забивают поверхность.</span></div>
+        <div class="row fix"><span class="lbl">Эластомер</span><span class="txt">Гладкое антиадгезионное покрытие — налипшее стекает и соскальзывает.</span></div>
+      </div>
+
+      <div class="imp">
+        <h3>Коррозия</h3>
+        <div class="row hit"><span class="lbl">Воздействие</span><span class="txt">Влага и агрессивная среда окисляют металл — появляется ржавчина.</span></div>
+        <div class="row fix"><span class="lbl">Эластомер</span><span class="txt">Сплошной барьер изолирует металл от среды — коррозии не на чём начаться.</span></div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

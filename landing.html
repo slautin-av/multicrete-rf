@@ -413,6 +413,57 @@
     /* Вторичная кнопка — читаемый контур на тёмном */
     .btn-secondary { color: #EAF0F7; box-shadow: inset 0 0 0 1.5px rgba(127,176,230,.5); }
     .btn-secondary:hover { background: rgba(127,176,230,.12); }
+
+    /* ── Блок ДО/ПОСЛЕ в hero: пара картинок + подписи воздействий ── */
+    .dp__head { text-align: center; max-width: 800px; margin: 0 auto 2rem; }
+    .dp__title { font-size: clamp(1.5rem, 3.6vw, 2.4rem); color: var(--ink); line-height: 1.15; margin-top: .4rem; }
+    .dp__title .dp__accent { color: var(--pink); }
+    .dp__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start;
+      position: relative; margin-bottom: 1.75rem; }
+    .dp__pair::after { content: ''; position: absolute; top: 14%; bottom: 14%; left: 50%; width: 2px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, transparent, rgba(235,77,140,.55), transparent); filter: blur(1px); }
+    .dp__panel { text-align: center; }
+    .dp__frame { width: 100%; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center;
+      position: relative; }
+    .dp__frame img { max-width: 100%; max-height: 100%; width: auto; display: block; cursor: pointer;
+      filter: drop-shadow(0 14px 34px rgba(0,0,0,.5));
+      transform-origin: center; transition: transform .35s cubic-bezier(.2,.7,.2,1); will-change: transform; }
+    .dp__frame img { transition: transform .35s cubic-bezier(.2,.7,.2,1), opacity .35s ease, filter .35s ease; }
+    /* Зум ~20% при наведении мышью (десктоп) или тапе (класс .is-zoomed добавляет JS) */
+    .dp__frame img:hover,
+    .dp__frame img.is-zoomed { transform: scale(1.2); }
+    .dp__panel:hover, .dp__panel:focus-within { z-index: 5; }
+    /* Затенение неактивной картинки: фокус на той, что в зуме (десктоп — hover) */
+    .dp__pair:hover .dp__frame img { opacity: .45; filter: drop-shadow(0 14px 34px rgba(0,0,0,.5)) saturate(.7) brightness(.7); }
+    .dp__pair:hover .dp__frame img:hover { opacity: 1; filter: drop-shadow(0 18px 40px rgba(0,0,0,.6)); }
+    /* Затенение по тапу (мобильный/тач — класс задаёт JS) */
+    .dp__pair.has-zoom .dp__frame img { opacity: .45; filter: drop-shadow(0 14px 34px rgba(0,0,0,.5)) saturate(.7) brightness(.7); }
+    .dp__pair.has-zoom .dp__frame img.is-zoomed { opacity: 1; filter: drop-shadow(0 18px 40px rgba(0,0,0,.6)); }
+    @media (prefers-reduced-motion: reduce) { .dp__frame img { transition: none; } }
+    .dp__badge { display: inline-flex; align-items: center; font-family: var(--f-head); font-weight: 600;
+      text-transform: uppercase; letter-spacing: .16em; font-size: clamp(.8rem, 1.6vw, 1rem);
+      padding: .45rem 1.25rem; border-radius: 10px; margin-bottom: .75rem; }
+    .dp__badge--before { color: var(--ink); background: rgba(255,255,255,.05);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); }
+    .dp__badge--after { color: #fff; background: var(--pink);
+      box-shadow: 0 4px 0 var(--pink-d), 0 0 24px rgba(235,77,140,.35); }
+    .dp__impacts { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+    .dp__imp { padding: 1.1rem 1rem; }
+    .dp__imp h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: .02em; color: #7FB0E6;
+      margin-bottom: .7rem; line-height: 1.15; }
+    .dp__row { font-size: .82rem; line-height: 1.45; margin-bottom: .55rem; color: var(--muted); }
+    .dp__row:last-child { margin-bottom: 0; }
+    .dp__lbl { display: block; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+      font-size: .62rem; margin-bottom: .2rem; }
+    .dp__row--hit .dp__lbl { color: #7FB0E6; }
+    .dp__row--fix .dp__lbl { color: var(--pink); }
+    @media (max-width: 900px) { .dp__impacts { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) {
+      .dp__pair { grid-template-columns: 1fr; gap: 8px; }
+      .dp__pair::after { display: none; }
+      .dp__impacts { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -452,8 +503,58 @@
 <!-- ══ HERO ══ -->
 <section class="hero hero-dark">
   <div class="wrap">
-    <div class="hero-banner">
-      <img src="assets/images/elast_armor.png" alt="Эластомерная броня МультиКрит защищает поверхность">
+    <div class="dp">
+      <div class="dp__head">
+        <span class="sec-label">// Как работает эластомер</span>
+        <h2 class="dp__title">Что разрушает металл — и как <span class="dp__accent">эластомер МультиКрит</span> это останавливает</h2>
+      </div>
+
+      <div class="dp__pair">
+        <div class="dp__panel">
+          <div class="dp__badge dp__badge--before">До</div>
+          <div class="dp__frame">
+            <img src="assets/images/sections/fig1.png" alt="Голый металл: абразивный износ, удар, кавитация, биообрастание, коррозия">
+          </div>
+        </div>
+        <div class="dp__panel">
+          <div class="dp__badge dp__badge--after">После</div>
+          <div class="dp__frame">
+            <img src="assets/images/sections/fig2.png" alt="Металл под эластомерной бронёй МультиКрит: воздействия отражаются">
+          </div>
+        </div>
+      </div>
+
+      <div class="dp__impacts">
+        <div class="card dp__imp">
+          <h3>Абразивный износ</h3>
+          <div class="dp__row dp__row--hit"><span class="dp__lbl">Воздействие</span>Твёрдые частицы — песок, руда, шлам — царапают и стачивают металл.</div>
+          <div class="dp__row dp__row--fix"><span class="dp__lbl">Эластомер</span>Упругий слой пружинит: частицы отскакивают, не срезая материал.</div>
+        </div>
+
+        <div class="card dp__imp">
+          <h3>Ударные нагрузки</h3>
+          <div class="dp__row dp__row--hit"><span class="dp__lbl">Воздействие</span>Удары дробят и деформируют металл — идут трещины и вмятины.</div>
+          <div class="dp__row dp__row--fix"><span class="dp__lbl">Эластомер</span>Гасит и рассеивает энергию удара по площади, возвращая форму.</div>
+        </div>
+
+        <div class="card dp__imp">
+          <h3>Кавитация</h3>
+          <div class="dp__row dp__row--hit"><span class="dp__lbl">Воздействие</span>Схлопывающиеся пузырьки выбивают микрократеры — питтинг.</div>
+          <div class="dp__row dp__row--fix"><span class="dp__lbl">Эластомер</span>Эластичная поверхность поглощает микровзрывы, каверны не образуются.</div>
+        </div>
+
+        <div class="card dp__imp">
+          <h3>Биообрастание</h3>
+          <div class="dp__row dp__row--hit"><span class="dp__lbl">Воздействие</span>Органика и вязкие среды налипают и забивают поверхность.</div>
+          <div class="dp__row dp__row--fix"><span class="dp__lbl">Эластомер</span>Гладкое антиадгезионное покрытие — налипшее скатывается, не прилипая.</div>
+        </div>
+
+        <div class="card dp__imp">
+          <h3>Коррозия</h3>
+          <div class="dp__row dp__row--hit"><span class="dp__lbl">Воздействие</span>Влага и агрессивная среда окисляют металл — появляется ржавчина.</div>
+          <div class="dp__row dp__row--fix"><span class="dp__lbl">Эластомер</span>Сплошной барьер изолирует металл от среды — коррозии не на чём начаться.</div>
+        </div>
+      </div>
     </div>
     <div class="hero-strip">
       <span class="hex strip-hex"><i data-lucide="hexagon"></i></span>
@@ -790,6 +891,18 @@
     });
   });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Зум картинок ДО/ПОСЛЕ по тапу пальцем (на десктопе зум даёт CSS :hover).
+  // Тап по картинке увеличивает её; повторный тап или тап по другой — возвращает.
+  document.querySelectorAll('.dp__frame img').forEach(img => {
+    img.addEventListener('click', () => {
+      const pair = img.closest('.dp__pair');
+      const wasZoomed = img.classList.contains('is-zoomed');
+      document.querySelectorAll('.dp__frame img.is-zoomed').forEach(o => o.classList.remove('is-zoomed'));
+      if (!wasZoomed) { img.classList.add('is-zoomed'); pair && pair.classList.add('has-zoom'); }
+      else { pair && pair.classList.remove('has-zoom'); }
+    });
+  });
 </script>
 
 <!-- ══ Интерактивный дым на весь сайт (WebGL fluid, фирменная палитра) ══ -->
