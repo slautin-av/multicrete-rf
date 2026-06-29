@@ -21,3 +21,8 @@ presentation/
 
 # Приватная модель ценообразования: исходные калькуляции (реальные цены и коэффициенты) — не публиковать
 knowledge/калькуляции-исходники/
+
+# Детальные разборы калькуляции (содержат коэффициенты, цены, классы сложности) — приватно
+.planning/research/CALC-FORMALIZATION.md
+.planning/research/CALC-RECOMMENDATIONS.md
+.planning/research/CALC-NORMATIVE.md
