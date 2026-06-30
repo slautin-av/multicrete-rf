@@ -114,14 +114,10 @@ if ($emailInput !== '' && filter_var($emailInput, FILTER_VALIDATE_EMAIL)) {
     $cleanEmail = $emailInput;
 }
 
-// Организация обязательна (продуктовое требование владельца).
-if ($organization === '') {
-    respond(false, 'no organization', 400);
-}
-
-// Нужен хотя бы один контакт: иначе с клиентом не связаться (WR-03).
-if ($phone === '' && $cleanEmail === '') {
-    respond(false, 'no contact', 400);
+// Все поля обязательны (продуктовое требование владельца): имя, организация,
+// телефон и валидный e-mail. Дублирует фронтовую проверку — защита при обходе формы.
+if ($name === '' || $organization === '' || $phone === '' || $cleanEmail === '') {
+    respond(false, 'required fields missing', 400);
 }
 
 // Тема — с кириллицей, обязательно кодируем base64 (=?UTF-8?B?...?=).

@@ -998,6 +998,7 @@
     <div class="calc-lead">
       <h3>Оставить заявку</h3>
       <p class="calc-lead-sub">Оставьте контакты, чтобы увидеть полную построчную смету</p>
+      <p class="calc-lead-sub">Все поля обязательны для заполнения.</p>
 
       <form id="calc-lead-form" novalidate>
         <div class="pf-row">
@@ -1006,7 +1007,7 @@
             <input class="pf-input" type="text" id="lead-name" name="name" required autocomplete="name" placeholder="Как к вам обращаться">
           </div>
           <div>
-            <label class="pf-label" for="lead-org">Организация *</label>
+            <label class="pf-label" for="lead-org">Организация</label>
             <input class="pf-input" type="text" id="lead-org" name="organization" autocomplete="organization" placeholder="Например, ООО «Завод»" required>
           </div>
         </div>
@@ -1014,11 +1015,11 @@
         <div class="pf-row">
           <div>
             <label class="pf-label" for="lead-phone">Телефон</label>
-            <input class="pf-input" type="tel" id="lead-phone" name="phone" autocomplete="tel" placeholder="+7 ___ ___-__-__">
+            <input class="pf-input" type="tel" id="lead-phone" name="phone" required autocomplete="tel" placeholder="+7 ___ ___-__-__">
           </div>
           <div>
             <label class="pf-label" for="lead-email">E-mail</label>
-            <input class="pf-input" type="email" id="lead-email" name="email" autocomplete="email" placeholder="name@company.ru">
+            <input class="pf-input" type="email" id="lead-email" name="email" required autocomplete="email" placeholder="name@company.ru">
           </div>
         </div>
 
