@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
+status: verifying
 stopped_at: Создана дорожная карта v1.0 (этапы 1-2), REQUIREMENTS.md и STATE.md. Дальше — планирование этапа 1.
-last_updated: "2026-06-30T09:54:12.284Z"
+last_updated: "2026-06-30T10:02:35.239Z"
 last_activity: 2026-06-30
 progress:
   total_phases: 2
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 2
-  completed_plans: 1
-  percent: 50
+  completed_plans: 2
+  percent: 100
 ---
 
 # Project State
@@ -27,10 +27,10 @@ See: .planning/PROJECT.md (updated 2026-06-29)
 
 Phase: 1 (Движок расчёта) — EXECUTING
 Plan: 2 of 2
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-06-30
 
-Progress: [█████░░░░░] 50%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -53,6 +53,7 @@ Progress: [█████░░░░░] 50%
 
 *Updated after each plan completion*
 | Phase 1 P01 | 6 | 1 tasks | 1 files |
+| Phase 1 P02 | 15min | 3 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -69,6 +70,7 @@ Progress: [█████░░░░░] 50%
 - Опросник-анкета для подбора покрытия — отдельная следующая цель (v2 ANKETA), не в этом милстоуне
 - [Phase ?]: Гарантийный резерв в PARAMS по умолчанию 5% (как эталон «700»), переключаемо одним числом на 3% — per CONTEXT
 - [Phase ?]: Нормативы количества вспом. материалов не в PARAMS (зависят от S и массы); в PARAMS только цены за единицу и флаги вкл/выкл — количество считает engine.js
+- [Phase ?]: [Phase 1]: Движок calc() воспроизводит эталон «700» число-в-число (137600.16/143931.08/150262.00); вспомогательные материалы считает движок, цены из PARAMS
 
 ### Pending Todos
 
@@ -86,6 +88,6 @@ Progress: [█████░░░░░] 50%
 
 ## Session Continuity
 
-Last session: 2026-06-30T09:54:04.791Z
+Last session: 2026-06-30T10:02:14.913Z
 Stopped at: Создана дорожная карта v1.0 (этапы 1-2), REQUIREMENTS.md и STATE.md. Дальше — планирование этапа 1.
 Next step: `/gsd-plan-phase 1` (или `/gsd-discuss-phase 1`, если нужно уточнить подход к движку)
