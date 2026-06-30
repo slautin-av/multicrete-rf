@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Калькулятор стоимости покрытия — МультиКрит</title>
+  <meta name="description" content="Калькулятор предварительной стоимости полимерного покрытия МультиКрит: площадь, толщина, класс сложности — цена и разбивка видны сразу, без контактов.">
+
+  <!-- Шрифты бренда (скопировано из landing.html 9-12) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=Tektur:wght@500;600&display=swap" rel="stylesheet">
+
+  <!-- Собственная тёмная тема. Светлые стили assets/styles запрещены (D-08). -->
+  <link rel="stylesheet" href="./calculator.css">
+</head>
+<body>
+
+<!-- Страница-модуль: кнопка открывает окно (модуль работает и автономно). -->
+<main class="calc-page">
+  <div class="calc-page-cta">
+    <h1>Калькулятор стоимости покрытия</h1>
+    <p class="calc-sub">Предварительный расчёт по площади, толщине и классу сложности.</p>
+    <button class="btn btn-primary" id="calc-open" type="button">Получить расчёт</button>
+  </div>
+</main>
+
+<!-- ══ ОКНО КАЛЬКУЛЯТОРА — отдельный оверлей (не пересекается с #modal-overlay лендинга) ══ -->
+<div class="calc-modal-overlay" id="calc-modal-overlay" onclick="handleCalcOverlay(event)"
+     role="dialog" aria-modal="true" aria-labelledby="calc-title">
+  <div class="modal calc-modal">
+    <button class="modal-close" onclick="closeCalcModal()" aria-label="Закрыть" type="button">&times;</button>
+
+    <h2 id="calc-title">Калькулятор стоимости покрытия</h2>
+    <p class="calc-sub">Предварительный расчёт по площади, толщине и классу сложности. Цена видна сразу, без контактов.</p>
+
+    <!-- ── Поля ввода (UI-02) ── -->
+    <div class="calc-fields">
+      <div class="pf-row">
+        <div>
+          <label class="pf-label" for="calc-S">Площадь детали, м²</label>
+          <input class="pf-input" type="number" id="calc-S" min="0" step="any" inputmode="decimal" placeholder="например, 100">
+        </div>
+        <div>
+          <label class="pf-label" for="calc-T">Толщина покрытия, мм</label>
+          <input class="pf-input" type="number" id="calc-T" min="0" step="any" inputmode="decimal" placeholder="например, 5">
+        </div>
+      </div>
+
+      <label class="pf-label" id="calc-klass-label">Класс сложности</label>
+      <div class="calc-klass-options" role="radiogroup" aria-labelledby="calc-klass-label">
+        <label><input type="radio" name="calc-klass" id="calc-klass-1" value="1"> Класс 1 — простое тело вращения</label>
+        <label><input type="radio" name="calc-klass" id="calc-klass-2" value="2"> Класс 2 — сложное тело вращения (импеллер/винт)</label>
+        <label><input type="radio" name="calc-klass" id="calc-klass-3" value="3"> Класс 3 — деталь с закрываемыми зонами (обклейка/маскировка)</label>
+      </div>
+
+      <label class="calc-heavy">
+        <input type="checkbox" id="calc-heavy"> Деталь тяжелее 80 кг
+      </label>
+
+      <!-- Подсказки валидации (рендерятся из JS красным --red) -->
+      <div class="calc-errors" id="calc-errors" aria-live="polite"></div>
+
+      <button class="btn btn-primary" id="calc-run" type="button" style="width:100%; justify-content:center;">Рассчитать стоимость</button>
+    </div>
+
+    <!-- ── Empty state до расчёта ── -->
+    <div class="calc-empty" id="calc-empty">
+      <h3>Введите параметры детали</h3>
+      <p>Укажите площадь, толщину и класс сложности — покажем предварительную стоимость и ₽/м².</p>
+    </div>
+
+    <!-- ── «Шапка» сметы (скрыта до расчёта, рендерится из breakdown) ── -->
+    <div class="calc-result" id="calc-result" hidden>
+      <h3>Предварительная стоимость</h3>
+      <div id="calc-rows"></div>
+      <div class="calc-total">
+        <span class="calc-total-label">ИТОГО</span>
+        <span class="calc-total-value" id="calc-total"></span>
+      </div>
+      <div class="calc-perm2"><span>Стоимость за м²</span><b id="calc-perm2"></b></div>
+    </div>
+
+    <!-- ── Оговорки (показываются СРАЗУ, D-11) ── -->
+    <div class="calc-ogovorki" id="calc-ogovorki" hidden>
+      <h3>Важные оговорки</h3>
+      <ul id="calc-ogovorki-list"></ul>
+    </div>
+
+    <!-- ── Расшифровка классов (СРАЗУ, UI-04) ── -->
+    <div class="calc-klass-info" id="calc-klass-info">
+      <h3>Классы сложности</h3>
+      <ul id="calc-klass-info-list"></ul>
+    </div>
+  </div>
+</div>
+
+<!-- Иконки (как в landing.html 928-930) -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+
+<!-- Логика окна — ES-модуль; engine.js/params.js подключаются внутри него -->
+<script type="module" src="./calculator-ui.js"></script>
+
+</body>
+</html>
