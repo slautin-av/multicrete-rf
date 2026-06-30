@@ -110,8 +110,12 @@ export function calc(inputs, P) {
   // ── Шаг 4. Накрутки (порядок строгий — камень 3) ───────────────────────
   const sklad = (vspomMaterialy + materialy) * P.sklad / 100;              // G63 (зависит от материалов)
   const nakladnye = trudozatraty * P.nakladnye / 100;                     // G64
-  const transport = P.flagTransport ? 0 : 0;                              // G66 — флаг выкл. (CALC-08)
-  const komandirovki = P.flagKomandirovki ? 0 : 0;                        // G68 — флаг выкл. (CALC-08)
+  // Транспорт и командировки в смету НЕ входят по решению владельца (CALC-08):
+  // расчёт всегда на стандартную деталь, покрываемую на площадке ООО «МультиКрит»,
+  // без выездов и такелажа. Эти ограничения уходят в текстовые оговорки (см. ниже),
+  // отдельной расчётной строкой не считаются — поэтому здесь честный 0, не флаг.
+  const transport = 0;                                                    // G66
+  const komandirovki = 0;                                                 // G68
   const obshchayaRabot = nakladnye + vspomMaterialy + trudozatraty
     + transport + komandirovki + sklad;                                    // G74
   const pribyl = (obshchayaRabot - komandirovki) * P.pribyl / 100;        // G75
