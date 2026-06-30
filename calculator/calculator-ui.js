@@ -259,6 +259,9 @@ function initCalculatorUI() {
     try {
       await sendLead(data);
       renderLeadMessage(LEAD_SUCCESS_TEXT, false);
+      // Кнопка остаётся disabled (повторная отправка не нужна) — поясняем это
+      // пользователю сменой подписи, иначе серая кнопка выглядит как баг (WR-02).
+      if (submitBtn) submitBtn.textContent = 'Заявка отправлена';
       // Воронка D-10: раскрываем построчную детализацию из последнего расчёта.
       renderDetails(lastBreakdown);
       document.getElementById('calc-details').hidden = false;
