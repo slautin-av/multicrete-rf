@@ -52,7 +52,7 @@ function respond($success, $error = null, $code = 200)
 
 /**
  * Отвергнуть значение с CR/LF — защита от email header-injection (ASVS V5).
- * Применять к КАЖДОМУ полю, попадающему в заголовки письма (email, name).
+ * Применять к КАЖДОМУ полю, попадающему в заголовки письма (email, name, source).
  */
 function rejectIfInjection($v)
 {
@@ -101,7 +101,9 @@ $name         = rejectIfInjection(field($data, 'name'));          // может 
 $organization = field($data, 'organization');                     // тело письма
 $phone        = field($data, 'phone');                            // тело письма
 $emailInput   = rejectIfInjection(field($data, 'email'));         // идёт в Reply-To
-$source       = preg_replace('/[^a-z0-9_-]/i', '', (string) ($data['source'] ?? 'unknown'));
+// source идёт в тему письма (Subject = заголовок), поэтому defense in depth:
+// чистим регуляркой И прогоняем через rejectIfInjection (CR-01).
+$source       = rejectIfInjection(preg_replace('/[^a-z0-9_-]/i', '', (string) ($data['source'] ?? 'unknown')));
 if ($source === '') {
     $source = 'unknown';
 }
