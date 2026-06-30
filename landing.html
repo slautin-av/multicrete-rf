@@ -936,7 +936,7 @@
     <button class="modal-close" onclick="closeCalcModal()" aria-label="Закрыть" type="button">&times;</button>
 
     <h2 id="calc-title">Калькулятор стоимости покрытия</h2>
-    <p class="calc-sub">Предварительный расчёт по площади, толщине и классу сложности. Цена видна сразу, без контактов.</p>
+    <p class="calc-sub">Предварительный расчёт по площади, толщине и классу сложности. ВВЕДИТЕ ДАННЫЕ</p>
 
     <!-- ── Поля ввода (UI-02) ── -->
     <div class="calc-fields">
@@ -957,10 +957,6 @@
         <label><input type="radio" name="calc-klass" id="calc-klass-2" value="2"> Класс 2 — сложное тело вращения (импеллер/винт)</label>
         <label><input type="radio" name="calc-klass" id="calc-klass-3" value="3"> Класс 3 — деталь с закрываемыми зонами (обклейка/маскировка)</label>
       </div>
-
-      <label class="calc-heavy">
-        <input type="checkbox" id="calc-heavy"> Деталь тяжелее 80 кг
-      </label>
 
       <!-- Подсказки валидации (рендерятся из JS красным --red) -->
       <div class="calc-errors" id="calc-errors" aria-live="polite"></div>
@@ -1010,8 +1006,8 @@
             <input class="pf-input" type="text" id="lead-name" name="name" required autocomplete="name" placeholder="Как к вам обращаться">
           </div>
           <div>
-            <label class="pf-label" for="lead-org">Организация</label>
-            <input class="pf-input" type="text" id="lead-org" name="organization" autocomplete="organization" placeholder="Необязательно">
+            <label class="pf-label" for="lead-org">Организация *</label>
+            <input class="pf-input" type="text" id="lead-org" name="organization" autocomplete="organization" placeholder="Например, ООО «Завод»" required>
           </div>
         </div>
 

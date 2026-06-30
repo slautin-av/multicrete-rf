@@ -114,6 +114,11 @@ if ($emailInput !== '' && filter_var($emailInput, FILTER_VALIDATE_EMAIL)) {
     $cleanEmail = $emailInput;
 }
 
+// Организация обязательна (продуктовое требование владельца).
+if ($organization === '') {
+    respond(false, 'no organization', 400);
+}
+
 // Нужен хотя бы один контакт: иначе с клиентом не связаться (WR-03).
 if ($phone === '' && $cleanEmail === '') {
     respond(false, 'no contact', 400);

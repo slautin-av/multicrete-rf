@@ -73,13 +73,13 @@ console.log(`${matSame ? 'PASS' : 'FAIL'} — материалы не завис
 
 // ── Доп. проверка 3: текстовые оговорки (CALC-07, CALC-08) ────────────────
 // Защищает заявленное требование CALC-07: результат обязан содержать оговорку
-// про деталь до 80 кг. Без этой проверки удаление строки прошло бы незамеченным.
+// про деталь до 30 кг. Без этой проверки удаление строки прошло бы незамеченным.
 console.log('\n=== Текстовые оговорки ===');
 const rOg = calc({ S: 1.6, T: 5, klass: 1 }, PARAMS);
 const isArr = Array.isArray(rOg.ogovorki);
-const has80 = isArr && rOg.ogovorki.some((s) => /80\s*кг/.test(s));
-ok = ok && has80;
-console.log(`${has80 ? 'PASS' : 'FAIL'} — есть оговорка про деталь до 80 кг (CALC-07)`);
+const has30 = isArr && rOg.ogovorki.some((s) => /30\s*кг/.test(s));
+ok = ok && has30;
+console.log(`${has30 ? 'PASS' : 'FAIL'} — есть оговорка про деталь до 30 кг (CALC-07)`);
 const hasFiks = isArr && rOg.ogovorki.some((s) => /1 рабочий день|без транспорт/i.test(s));
 ok = ok && hasFiks;
 console.log(`${hasFiks ? 'PASS' : 'FAIL'} — есть оговорки фикс-допущений (1 день / без транспорта-командировок) (CALC-08)`);

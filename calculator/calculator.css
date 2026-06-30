@@ -127,10 +127,6 @@ img { max-width: 100%; display: block; }
   color: var(--ink); cursor: pointer; }
 .calc-klass-options input { margin-top: .2rem; accent-color: var(--blue); }
 
-/* Чекбокс «>80 кг». */
-.calc-heavy { display: flex; gap: .5rem; align-items: flex-start; margin: 1rem 0; font-size: .85rem; color: var(--ink); }
-.calc-heavy input { margin-top: .2rem; accent-color: var(--blue); }
-
 /* Подсказки валидации — ТОЛЬКО красный (ошибки). */
 .calc-error { color: var(--red); font-size: .8rem; margin-top: .25rem; }
 .calc-errors { margin: .75rem 0; }

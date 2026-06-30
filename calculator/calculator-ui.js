@@ -97,12 +97,10 @@ function initCalculatorUI() {
   const overlay = document.getElementById('calc-modal-overlay');
   const openBtn = document.getElementById('calc-open');
   const runBtn = document.getElementById('calc-run');
-  const heavyBox = document.getElementById('calc-heavy');
 
   // Элемент, на который вернуть фокус при закрытии окна.
   let lastTrigger = null;
-  // Последний рассчитанный breakdown — чтобы чекбокс «>80 кг» мог перерисовать
-  // только текст оговорки, не пересчитывая число (CALC-07).
+  // Последний рассчитанный breakdown (для воронки детализации).
   let lastBreakdown = null;
 
   // ── Механика окна (паттерн landing.html 932-934/951, переименован) ───────
@@ -137,11 +135,6 @@ function initCalculatorUI() {
   // ── Расчёт по кнопке «Рассчитать стоимость» ──────────────────────────────
   if (runBtn) runBtn.addEventListener('click', runCalculation);
 
-  // Чекбокс «>80 кг»: меняет ТОЛЬКО текст оговорки, число не трогает (CALC-07).
-  if (heavyBox) heavyBox.addEventListener('change', () => {
-    if (lastBreakdown) renderOgovorki(lastBreakdown, heavyBox.checked);
-  });
-
   // ── Форма заявки + воронка детализации (LEAD-01/LEAD-03/D-10) ────────────
   const leadForm = document.getElementById('calc-lead-form');
   if (leadForm) leadForm.addEventListener('submit', handleLeadSubmit);
@@ -166,7 +159,7 @@ function initCalculatorUI() {
     const b = calc({ S, T, klass }, PARAMS);
     lastBreakdown = b;
     renderResult(b);
-    renderOgovorki(b, heavyBox && heavyBox.checked);
+    renderOgovorki(b);
   }
 
   // ── Рендеры ──────────────────────────────────────────────────────────────
@@ -216,16 +209,11 @@ function initCalculatorUI() {
     document.getElementById('calc-result').hidden = false;
   }
 
-  // Оговорки (D-11): берём breakdown.ogovorki как есть. Чекбокс «>80 кг» меняет
-  // только показываемый текст первой оговорки (про массу), число не трогает.
-  function renderOgovorki(b, heavy) {
+  // Оговорки (D-11): берём breakdown.ogovorki как есть (текст про массу — из движка).
+  function renderOgovorki(b) {
     const list = document.getElementById('calc-ogovorki-list');
     list.innerHTML = '';
     const items = b.ogovorki.slice();
-    if (heavy) {
-      items[0] = 'Деталь тяжелее 80 кг: к расчёту добавится грузоподъёмное ' +
-        'оборудование, итоговая стоимость вырастет.';
-    }
     for (const text of items) {
       const li = document.createElement('li');
       li.textContent = text;
