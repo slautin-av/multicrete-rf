@@ -1,0 +1,224 @@
+/* calculator.css — стили окна калькулятора покрытий «МультиКрит».
+ *
+ * Тёмная тема «Стальной Vega» — самодостаточный модуль (окно работает и как
+ * отдельная страница calculator/index.html). Переменные :root и базовые классы
+ * (.modal, .btn, .pf-*) скопированы из landing.html, чтобы окно выглядело
+ * идентично лендингу (D-08). НЕ подключать assets/styles/base.css — там светлая
+ * палитра, запрещено (UI-SPEC «Источник истины токенов»).
+ *
+ * Правило цветов (UI-SPEC Color): --blue = информация (ИТОГО, focus, числа),
+ * --pink = действие (только CTA-кнопки), --red = только ошибки валидации.
+ */
+
+:root {
+  /* Палитра бренда — Стальной Vega (дословно из landing.html 15-39) */
+  --blue:    #2F66A5;   /* синий металлик — информация */
+  --blue-d:  #244F80;
+  --pink:    #EB4D8C;   /* розовый неон — действие */
+  --pink-d:  #A52350;   /* нижняя грань клавиши */
+  --ink:     #EAF0F7;   /* светлый текст — тёмная тема */
+  --steel:   #212C3D;   /* панель/карточка на тёмном фоне */
+  --scale:   #19222F;   /* утопленные шкалы — темнее панели */
+  --line:    #34435A;   /* контуры */
+  --muted:   #93A1B5;   /* второстепенный текст */
+  --bg:      #1A2332;   /* базовый тёмный фон страницы */
+
+  --red:     #D64550;   /* критические ошибки — единственное исключение */
+  --max:     1200px;
+
+  --f-head:  'Oswald', sans-serif;
+  --f-body:  'Manrope', sans-serif;
+  --f-tech:  'Tektur', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+
+html { background: var(--bg); }
+
+body {
+  font-family: var(--f-body);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+}
+
+h1, h2, h3, h4 { font-family: var(--f-head); line-height: 1.15; font-weight: 600; }
+a { color: var(--blue); text-decoration: underline; }
+img { max-width: 100%; display: block; }
+
+/* ── Кнопка-клавиша (дословно из landing.html 104-124) ─────────────────────
+   Вес 700 у .btn унаследован из лендинга — НЕ авторский токен, не менять (D-08). */
+.btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--f-body); font-weight: 700; font-size: .95rem;
+  padding: .85rem 1.75rem; border: none; border-radius: 10px;
+  cursor: pointer; transition: transform .1s, box-shadow .1s; line-height: 1.2;
+}
+.btn i { width: 18px; height: 18px; }
+/* Главная CTA — розовый неон (действие) */
+.btn-primary {
+  background: var(--pink); color: #fff;
+  box-shadow: 0 4px 0 var(--pink-d), 0 0 24px rgba(235,77,140,.3);
+}
+.btn-primary:hover { transform: translateY(1px); box-shadow: 0 3px 0 var(--pink-d), 0 0 32px rgba(235,77,140,.45); }
+.btn-primary:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--pink-d), 0 0 16px rgba(235,77,140,.4); }
+/* Вторичная — синий контур (информация) */
+.btn-secondary {
+  background: transparent; color: var(--blue);
+  box-shadow: inset 0 0 0 2px var(--blue);
+}
+.btn-secondary:hover { background: rgba(47,102,165,.06); }
+
+/* ── Поля формы (дословно из landing.html 328-336) ─────────────────────────*/
+.pf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.pf-label { font-size: .8rem; font-weight: 600; color: var(--muted); display: block; margin: .75rem 0 .35rem; }
+.pf-input { width: 100%; font-family: var(--f-body); font-size: .95rem; padding: .7rem .85rem;
+  border: none; border-radius: 8px; background: var(--scale); color: var(--ink);
+  box-shadow: inset 0 2px 4px rgba(26,35,50,.08); }
+.pf-input:focus { outline: 2px solid var(--blue); }   /* синий focus — информация */
+.pf-consent { display: flex; gap: .5rem; align-items: flex-start; margin: 1rem 0; font-size: .78rem; color: var(--muted); }
+.pf-submit { width: 100%; margin-top: .5rem; justify-content: center; }
+
+/* ── Базовая модалка (дословно из landing.html 355-363 + тёмное 410-411) ───*/
+.calc-modal-overlay, .modal-overlay {
+  position: fixed; inset: 0; background: rgba(26,35,50,.5); backdrop-filter: blur(4px);
+  display: none; align-items: center; justify-content: center; z-index: 100; padding: 1rem;
+}
+.calc-modal-overlay.open, .modal-overlay.open { display: flex; }
+.modal { background: var(--steel); border-radius: 16px; padding: 2rem; max-width: 420px; width: 100%;
+  box-shadow: 0 24px 60px rgba(26,35,50,.25); position: relative; }
+.modal h2 { font-size: 1.4rem; margin-bottom: .5rem; }
+.modal p { color: var(--muted); font-size: .9rem; margin-bottom: 1rem; }
+.modal-close { position: absolute; top: 1rem; right: 1rem; border: none; background: none; cursor: pointer;
+  font-size: 1.5rem; color: var(--muted); line-height: 1; }
+.modal-close:hover { color: var(--ink); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   НОВЫЕ КЛАССЫ ОКНА КАЛЬКУЛЯТОРА (нет в лендинге — RESEARCH «Скользкий 3»)
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Большое окно: прокручивается внутри себя, фон не дёргается на телефоне. */
+.calc-modal {
+  background: var(--steel);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 2rem;
+  position: relative;
+}
+
+/* Подзаголовок-пояснение под заголовком окна. */
+.calc-sub { color: var(--muted); font-size: .9rem; margin-bottom: 1.5rem; }
+
+/* Группа полей ввода. */
+.calc-fields { margin-bottom: 1.5rem; }
+
+/* Класс сложности — радиокнопки в строку. */
+.calc-klass-options { display: flex; flex-direction: column; gap: .5rem; margin-top: .35rem; }
+.calc-klass-options label { display: flex; gap: .5rem; align-items: flex-start; font-size: .9rem;
+  color: var(--ink); cursor: pointer; }
+.calc-klass-options input { margin-top: .2rem; accent-color: var(--blue); }
+
+/* Чекбокс «>80 кг». */
+.calc-heavy { display: flex; gap: .5rem; align-items: flex-start; margin: 1rem 0; font-size: .85rem; color: var(--ink); }
+.calc-heavy input { margin-top: .2rem; accent-color: var(--blue); }
+
+/* Подсказки валидации — ТОЛЬКО красный (ошибки). */
+.calc-error { color: var(--red); font-size: .8rem; margin-top: .25rem; }
+.calc-errors { margin: .75rem 0; }
+.calc-errors:empty { margin: 0; }
+
+/* ── Empty state до расчёта ────────────────────────────────────────────────*/
+.calc-empty { background: var(--scale); border-radius: 12px; padding: 1.5rem;
+  box-shadow: inset 0 2px 4px rgba(26,35,50,.2); margin-top: 1rem; }
+.calc-empty h3 { font-size: 1.1rem; color: var(--ink); margin-bottom: .5rem; }
+.calc-empty p { color: var(--muted); font-size: .9rem; }
+
+/* ── «Шапка» сметы ─────────────────────────────────────────────────────────*/
+.calc-result { margin-top: 1.5rem; }
+.calc-result h3 { font-family: var(--f-head); font-size: 1.25rem; color: var(--ink);
+  margin-bottom: 1rem; line-height: 1.2; }
+
+/* Строка «подпись — значение». Значение справа, табличные цифры. */
+.calc-row {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  padding: .5rem 0; border-bottom: 1px solid var(--line);
+}
+.calc-row-label { color: var(--muted); font-size: .9rem; }
+.calc-row-value {
+  color: var(--ink); font-size: .95rem;
+  text-align: right; white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Блок ИТОГО — главный визуальный якорь: крупно, синим (информация). */
+.calc-total {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  margin-top: 1rem; padding-top: 1rem; border-top: 2px solid var(--line);
+}
+.calc-total-label { font-family: var(--f-head); font-size: 1.25rem; color: var(--ink); }
+.calc-total-value {
+  font-family: var(--f-head); font-size: 1.75rem; font-weight: 600; color: var(--blue);
+  text-align: right; white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+/* Тонкая светящаяся линия-акцент под ИТОГО (DESIGN.md card-hero::after). */
+.calc-total::after { content: none; }
+.calc-perm2 {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  margin-top: .5rem; color: var(--muted); font-size: .9rem;
+}
+.calc-perm2 b { color: var(--blue); font-variant-numeric: tabular-nums; }
+
+/* ── Оговорки ──────────────────────────────────────────────────────────────*/
+.calc-ogovorki { margin-top: 1.5rem; background: var(--scale); border-radius: 12px;
+  padding: 1.25rem; box-shadow: inset 0 2px 4px rgba(26,35,50,.2); }
+.calc-ogovorki h3 { font-family: var(--f-head); font-size: 1rem; color: var(--ink); margin-bottom: .75rem; }
+.calc-ogovorki ul { list-style: none; }
+.calc-ogovorki li { position: relative; padding-left: 1.25rem; margin-bottom: .5rem;
+  font-size: .85rem; color: var(--muted); }
+.calc-ogovorki li::before { content: ''; position: absolute; left: 0; top: .5rem;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
+.calc-ogovorki li:last-child { margin-bottom: 0; }
+
+/* ── Расшифровка классов ───────────────────────────────────────────────────*/
+.calc-klass-info { margin-top: 1.5rem; }
+.calc-klass-info h3 { font-family: var(--f-head); font-size: 1rem; color: var(--ink); margin-bottom: .75rem; }
+.calc-klass-info ul { list-style: none; }
+.calc-klass-info li { display: flex; justify-content: space-between; gap: 1rem;
+  padding: .5rem 0; border-bottom: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+.calc-klass-info li:last-child { border-bottom: none; }
+.calc-klass-info .calc-koef { color: var(--blue); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* ── Заголовок страницы-модуля (когда открыт как отдельная страница) ───────*/
+.calc-page { display: flex; align-items: center; justify-content: center;
+  min-height: 100dvh; padding: 2rem 1rem; }
+.calc-page-cta { text-align: center; }
+
+/* ── Адаптив: окно во весь экран на телефоне ───────────────────────────────*/
+@media (max-width: 768px) {
+  .pf-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .calc-modal-overlay { padding: 0; }
+  .calc-modal {
+    max-width: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Уважать prefers-reduced-motion — без агрессивных анимаций. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
