@@ -2,7 +2,7 @@
 phase: 02
 slug: ui-lead-embed
 status: draft
-nyquist_compliant: false
+nyquist_compliant: true
 wave_0_complete: false
 created: 2026-06-30
 ---
@@ -10,6 +10,7 @@ created: 2026-06-30
 # Phase 02 — Validation Strategy
 
 > Per-phase validation contract for feedback sampling during execution.
+> Проект — статический сайт без JS-тест-фреймворка для UI. Единственное автоматически проверяемое ПОВЕДЕНИЕ — детерминированный самотест расчётного движка этапа 1 (`engine.selftest.js`). Весь UI/INT/LEAD-фронтенд проверяется вручную по чек-листу `calculator/MANUAL-CHECKLIST.md` (план 05). Живая доставка письма (LEAD-02 / D-02) — приёмочный ручной гейт на стороне владельца.
 
 ---
 
@@ -17,60 +18,84 @@ created: 2026-06-30
 
 | Property | Value |
 |----------|-------|
-| **Framework** | {pytest 7.x / jest 29.x / vitest / go test / other} |
-| **Config file** | {path or "none — Wave 0 installs"} |
-| **Quick run command** | `{quick command}` |
-| **Full suite command** | `{full command}` |
-| **Estimated runtime** | ~{N} seconds |
+| **Framework** | Нет JS-тест-фреймворка (статический сайт). Поведенческий контракт чисел — самописный `calculator/engine.selftest.js` (этап 1, эталон «700») |
+| **Config file** | none — установка фреймворка НЕ требуется (см. Wave 0 Requirements) |
+| **Quick run command** | `node calculator/engine.selftest.js` |
+| **Full suite command** | `node calculator/engine.selftest.js` + ручной чек-лист `calculator/MANUAL-CHECKLIST.md` |
+| **Estimated runtime** | ~1 секунда (selftest); ручной чек-лист ~10–15 минут |
 
 ---
 
 ## Sampling Rate
 
-- **After every task commit:** Run `{quick run command}`
-- **After every plan wave:** Run `{full suite command}`
-- **Before `/gsd-verify-work`:** Full suite must be green
-- **Max feedback latency:** {N} seconds
+- **After every task commit:** Run `node calculator/engine.selftest.js` (страховка: UI-правки не должны сломать движок; UI его не меняет)
+- **After every plan wave:** `node calculator/engine.selftest.js` + быстрый ручной проход (открытие окна, один расчёт)
+- **Before `/gsd-verify-work`:** selftest зелёный + ПОЛНЫЙ ручной чек-лист `calculator/MANUAL-CHECKLIST.md` пройден + **живая доставка письма (D-02) подтверждена**
+- **Max feedback latency:** ~1 секунда (автоматическая часть)
 
 ---
 
 ## Per-Task Verification Map
 
-| Task ID | Plan | Wave | Requirement | Threat Ref | Secure Behavior | Test Type | Automated Command | File Exists | Status |
-|---------|------|------|-------------|------------|-----------------|-----------|-------------------|-------------|--------|
-| {N}-01-01 | 01 | 1 | REQ-{XX} | T-{N}-01 / — | {expected secure behavior or "N/A"} | unit | `{command}` | ✅ / ❌ W0 | ⬜ pending |
+| Req ID | Plan | Wave | Behavior | Threat Ref | Test Type | Automated Command (grep-наличие артефакта) | Manual? | Status |
+|--------|------|------|----------|------------|-----------|--------------------------------------------|---------|--------|
+| UI-01 | 01/05 | 1/3 | Окно открывается/закрывается (крестик, фон, Esc), scroll-lock, фокус-трап | — | manual + grep | grep наличие `.modal`/open-close-логики в `calculator/` (наличие, не поведение) | **Manual-Only** | ⬜ pending |
+| UI-02 | 01 | 1 | Поля → объект `inputs`; «>80 кг» меняет текст, не число | — | manual + grep | grep наличие сбора полей в `calculator/ui.js` | **Manual-Only** | ⬜ pending |
+| UI-03 | 01 | 1 | «Шапка» результата совпадает с `calc()` движка | — | **unit (движок)** + manual | `node calculator/engine.selftest.js` (контракт чисел) + ручная сверка отображения | Частично авто | ⬜ pending |
+| UI-04 | 01 | 1 | Оговорки + классы сложности видны сразу | — | manual + grep | grep наличие текстов оговорок/классов в разметке | **Manual-Only** | ⬜ pending |
+| UI-05 | 01 | 1 | Валидация ловит S≤0 / T≤0 / нет класса | — | manual + grep | grep наличие валидации в `calculator/ui.js` | **Manual-Only** | ⬜ pending |
+| UI-06 | 01/05 | 1/3 | Адаптив + работа на реальном телефоне | — | manual | DevTools device mode + реальный телефон (по чек-листу) | **Manual-Only** | ⬜ pending |
+| INT-01 | 01 | 1 | Изолированный модуль `calculator/` (CSS/JS не течёт в лендинг) | — | grep | grep наличие префиксов/scope в `calculator/` | **Manual-Only** | ⬜ pending |
+| INT-02 | 05 | 3 | Кнопка «Получить расчёт» на лендинге открывает окно | — | manual + grep | `grep -v '^#' calculator/MANUAL-CHECKLIST.md \| grep -c INT-02` + клик вручную | **Manual-Only** | ⬜ pending |
+| LEAD-01 | 04 | 2 | Цена видна без формы; форма заявки необязательна (воронка за контактами) | — | manual + grep | grep наличие «детализация за контактами» логики в `calculator/lead.js` | **Manual-Only** | ⬜ pending |
+| LEAD-02 | 02/04 | 1/2 | fetch POST на `/send-lead.php`; **реальное письмо доходит** на MultiCrete@yandex.ru | T-02-04..09 | grep (фронт) + **живой приёмочный** (D-02) | `node` grep наличия `LEAD_ENDPOINT`/`fetch` в `calculator/lead.js`; контракт PHP — grep защит в `send-lead.php` | **Manual-Only (phase-gate)** | ⬜ pending |
+| LEAD-03 | 04 | 2 | Без согласия отправка недоступна; ссылка на политику 152-ФЗ | — | manual + grep | grep наличие чекбокса согласия + блокировки submit | **Manual-Only** | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
+
+**Единственная автоматическая проверка ПОВЕДЕНИЯ:** `node calculator/engine.selftest.js` — детерминированный самотест эталона «700» (движок этапа 1). UI его не меняет; selftest здесь — страховка от регрессии чисел. Все `<automated>`-команды фронтенд-планов проверяют НАЛИЧИЕ артефактов (grep строк), а не поведение — поэтому соответствующие поведения помечены Manual-Only ниже.
 
 ---
 
 ## Wave 0 Requirements
 
-- [ ] `{tests/test_file.py}` — stubs for REQ-{XX}
-- [ ] `{tests/conftest.py}` — shared fixtures
-- [ ] `{framework install}` — if no framework detected
+- [ ] `calculator/MANUAL-CHECKLIST.md` (план 05, задача 2) — ручной чек-лист приёмки UI-01..UI-06, INT-01/02, LEAD-01..LEAD-03 в формате «действие → ожидаемый результат», для десктопа И телефона. UI и почту автотестами здесь покрыть нецелесообразно.
+- [ ] **Процедура живой проверки доставки письма (D-02 / LEAD-02):** отправить реальную тестовую заявку через форму → убедиться, что письмо ПРИШЛО на `MultiCrete@yandex.ru` → **обязательно проверить папку «Спам»**. Выполняется на стадии заливки с доступами Reg.ru владельца. Если письмо не дошло — эскалация по RESEARCH (PHPMailer/SMTP 587 → Web3Forms).
+- Установка тест-фреймворка НЕ требуется: статический сайт, ручная проверка адекватна объёму; расчётный движок уже покрыт `engine.selftest.js`.
 
-*If none: "Existing infrastructure covers all phase requirements."*
+*`wave_0_complete: false` — останется `false`, пока ручной чек-лист не создан И не пройдён, а живая доставка письма не подтверждена. Это нормальное состояние до прохождения ручного гейта.*
 
 ---
 
 ## Manual-Only Verifications
 
+Поведения ниже НЕ проверяются автоматически (нет JS-тест-фреймворка для DOM/сети; доступы Reg.ru у владельца). Проверяются вручную по `calculator/MANUAL-CHECKLIST.md`.
+
 | Behavior | Requirement | Why Manual | Test Instructions |
 |----------|-------------|------------|-------------------|
-| {behavior} | REQ-{XX} | {reason} | {steps} |
-
-*If none: "All phase behaviors have automated verification."*
+| Открытие/закрытие окна калькулятора (крестик, клик по фону, Esc), scroll-lock тела, фокус-трап | UI-01, INT-02 | DOM/события без headless-фреймворка; визуально-интерактивное | На лендинге клик «Получить расчёт» → окно открылось, фон затемнён, тело не скроллится. Закрыть крестиком, кликом по фону, Esc — каждый способ закрывает. Tab не уводит фокус за пределы окна. |
+| Ввод значений → результат; «>80 кг» меняет текст, не число | UI-02 | Реакция UI на ввод | Ввести S, T, класс → «шапка» обновилась. Ввести значения, дающие >80 кг → появляется текстовая пометка, число расхода НЕ заменяется на «80». |
+| Валидация некорректного ввода (S≤0, T≤0, класс не выбран) | UI-05 | Интерактивная проверка ввода | Ввести S=0 / T=0 / без класса → расчёт блокируется, понятное сообщение, нет «NaN». |
+| Совпадение отображаемых чисел с движком | UI-03 | Сверка UI ↔ движок (число проверяется selftest'ом, отображение — глазами) | `node calculator/engine.selftest.js` зелёный. Затем для эталона «700» сверить число в UI с выводом движка — совпадает. |
+| Видимость оговорок и классов сложности | UI-04 | Визуальная проверка | Открыть окно → оговорки и описание классов видны сразу, без доскролла к скрытым блокам. |
+| Адаптив и работа на реальном телефоне | UI-06 | Только живое устройство/эмуляция | DevTools device mode (375px) + реальный телефон: окно помещается, поля кликабельны, dvh/lvh не режут контент, расчёт работает. |
+| Воронка детализации за контактами; цена без формы | LEAD-01 | Поведение последовательности UI | Открыть калькулятор, НЕ заполнять форму → итоговая цена видна. Детализация раскрывается только после/вместе с контактами (по контракту воронки). |
+| fetch отправки формы (успех/ошибка пользователю) | LEAD-02 (фронт) | Сетевой вызов без мок-фреймворка | Заполнить форму → submit → видно состояние «отправляется», затем успех или понятная ошибка. Запрос уходит на `/send-lead.php`. |
+| **Живая доставка письма владельцу (приёмочный phase-gate)** | LEAD-02 / D-02 | Требует боевого хостинга Reg.ru и почтового ящика — доступы у владельца, вне автоматического исполнения | Отправить реальную тестовую заявку → проверить `MultiCrete@yandex.ru`, **включая папку «Спам»**. Письмо пришло, поля читаемы (UTF-8), источник = `calculator`. **Фазу НЕЛЬЗЯ закрывать как «passed», пока этот шаг не пройден.** |
+| Блокировка submit без согласия; ссылка на политику | LEAD-03 | Интерактивная проверка формы | Submit без галочки согласия → отправка недоступна. Ссылка «политика конфиденциальности» открывает страницу 152-ФЗ. |
 
 ---
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references
-- [ ] No watch-mode flags
-- [ ] Feedback latency < {N}s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] Все задачи имеют `<automated>` verify (grep-наличие артефактов) ИЛИ зафиксированы как Manual-Only с инструкциями
+- [x] Единственная поведенческая автопроверка (`engine.selftest.js`) применяется на каждом коммите — sampling-непрерывность соблюдена
+- [x] Wave 0 покрывает все ручные пробелы (`MANUAL-CHECKLIST.md` + процедура живой доставки письма)
+- [x] Нет watch-mode флагов
+- [x] Feedback latency автоматической части ~1с
+- [x] `nyquist_compliant: true` выставлен во frontmatter
+- [ ] `wave_0_complete` — остаётся `false` до создания/прохождения ручного чек-листа и подтверждения живой доставки письма (D-02 phase-gate)
 
-**Approval:** {pending / approved YYYY-MM-DD}
+**Phase-gate (Manual-Only, не автоисполняемый):** фаза не может быть отмечена `passed` до прохождения живой проверки доставки письма LEAD-02 / D-02 (доступы Reg.ru у владельца). В коде для этого ничего менять не нужно — это приёмочный шаг.
+
+**Approval:** approved 2026-06-30 (контракт валидации; ручной гейт исполняется на приёмке)
