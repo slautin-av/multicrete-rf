@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: "Этап 2: планы созданы и проверены (5 планов, 3 волны)"
-last_updated: "2026-06-30T12:17:16.376Z"
-last_activity: 2026-06-30
+status: executing
+stopped_at: Этап 2 спланирован — 5 планов созданы, проверены (VERIFICATION PASSED), блокер закрыт
+last_updated: "2026-06-30T13:44:27.097Z"
+last_activity: 2026-06-30 -- Phase 02 execution started
 progress:
   total_phases: 2
   completed_phases: 1
-  total_plans: 2
+  total_plans: 7
   completed_plans: 2
-  percent: 100
+  percent: 29
 ---
 
 # Project State
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-29)
 
 **Core value:** Калькулятор достоверно прогоняет метод расчёта Алексея и выдаёт предварительную стоимость с прозрачной разбивкой — ориентир, которому можно доверять.
-**Current focus:** Phase 1 — Движок расчёта
+**Current focus:** Phase 02 — ui-lead-embed
 
 ## Current Position
 
-Phase: 2
-Plan: 5 планов готовы (02-01 … 02-05), 3 волны
-Status: Planned — ready to execute
-Last activity: 2026-06-30
+Phase: 02 (ui-lead-embed) — EXECUTING
+Plan: 1 of 5
+Status: Executing Phase 02
+Last activity: 2026-06-30 -- Phase 02 execution started
 
 Progress: [██████████] 100%
 
