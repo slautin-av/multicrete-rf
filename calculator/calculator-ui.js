@@ -42,6 +42,51 @@ const KLASS_TEXTS = {
   3: 'деталь с закрываемыми зонами (обклейка/маскировка)',
 };
 
+// ── 4. Эндпоинт отправки заявки (D-02) ─────────────────────────────────────
+// Одна легко переключаемая константа. Серверный приёмник — план 02 (/send-lead.php).
+// Fallback Web3Forms (если PHP-почта на хостинге не заработает): заменить строку на
+// 'https://api.web3forms.com/submit' и добавить access_key в data (per RESEARCH/D-02).
+const LEAD_ENDPOINT = '/send-lead.php';
+
+// Тексты успеха/ошибки — ДОСЛОВНО из UI-SPEC Copywriting.
+const LEAD_SUCCESS_TEXT = 'Спасибо, заявка отправлена. Мы свяжемся с вами в течение часа.';
+const LEAD_ERROR_TEXT = 'Не удалось отправить заявку. Попробуйте ещё раз или позвоните нам.';
+
+// Подписи строк построчной детализации (D-10). Порядок — как в breakdown/эталоне.
+// Ключи берутся из breakdown движка; формулы НЕ дублируются — только читаем поля.
+const DETAILS_ROWS = [
+  ['Дробеструйная обработка', 'stDrobestruika'],
+  ['Обеспыливание', 'stObespylivanie'],
+  ['Подготовка поверхности (до)', 'stPodgotovkaDo'],
+  ['Обезжиривание', 'stObezzhirivanie'],
+  ['Предварительное грунтование (работа)', 'stGruntPredvWork'],
+  ['Основное грунтование (работа)', 'stGruntOsnWork'],
+  ['Нанесение покрытия', 'stNanesenie'],
+  ['Подготовка поверхности (после)', 'stPodgotovkaPosle'],
+  ['— Сумма работ', 'sumWorks'],
+  ['ИТР', 'stITR'],
+  ['Страховые взносы (ЕСН)', 'esn'],
+  ['Складские расходы', 'sklad'],
+  ['Гарантийный резерв', 'garantiya'],
+  ['— Работы итого', 'rabotyItogo'],
+  ['Грунт предварительный (материал)', 'stGruntPredv'],
+  ['Грунт основной (материал)', 'stGruntOsn'],
+  ['Очиститель', 'stOchistitel'],
+];
+
+// async sendLead — реальная отправка на бэкенд (план 02). Контракт ответа: {success, error?}.
+async function sendLead(data) {
+  const res = await fetch(LEAD_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ...data, source: 'calculator' }),
+  });
+  let json = {};
+  try { json = await res.json(); } catch { json = {}; }
+  if (!json.success) throw new Error(json.error || 'send failed');
+  return json;
+}
+
 // Дальше — только браузерный код. В Node (тест) document отсутствует, поэтому
 // весь DOM-блок защищён проверкой и не мешает импорту validateInputs.
 if (typeof document !== 'undefined') {
@@ -96,6 +141,10 @@ function initCalculatorUI() {
   if (heavyBox) heavyBox.addEventListener('change', () => {
     if (lastBreakdown) renderOgovorki(lastBreakdown, heavyBox.checked);
   });
+
+  // ── Форма заявки + воронка детализации (LEAD-01/LEAD-03/D-10) ────────────
+  const leadForm = document.getElementById('calc-lead-form');
+  if (leadForm) leadForm.addEventListener('submit', handleLeadSubmit);
 
   // Расшифровка классов видна сразу (D-11/UI-04).
   renderKlassInfo();
@@ -183,6 +232,97 @@ function initCalculatorUI() {
       list.appendChild(li);
     }
     document.getElementById('calc-ogovorki').hidden = false;
+  }
+
+  // ── Отправка заявки (LEAD-02 фронт) + воронка детализации (D-10) ──────────
+  async function handleLeadSubmit(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+
+    // Без отмеченного согласия (required) браузер сам блокирует и подсветит поля.
+    // checkValidity покрывает required-имя и required-согласие 152-ФЗ (LEAD-03).
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const data = {
+      name: document.getElementById('lead-name').value.trim(),
+      organization: document.getElementById('lead-org').value.trim(),
+      phone: document.getElementById('lead-phone').value.trim(),
+      email: document.getElementById('lead-email').value.trim(),
+      website: document.getElementById('lead-website').value, // honeypot
+    };
+
+    const submitBtn = document.getElementById('lead-submit');
+    if (submitBtn) submitBtn.disabled = true;
+    try {
+      await sendLead(data);
+      renderLeadMessage(LEAD_SUCCESS_TEXT, false);
+      // Воронка D-10: раскрываем построчную детализацию из последнего расчёта.
+      renderDetails(lastBreakdown);
+      document.getElementById('calc-details').hidden = false;
+    } catch {
+      // Ошибка — сообщение красным, детализацию НЕ раскрываем.
+      renderLeadMessage(LEAD_ERROR_TEXT, true);
+      if (submitBtn) submitBtn.disabled = false;
+    }
+  }
+
+  // Сообщение успеха/ошибки под формой. Текст, не HTML — без инъекций.
+  function renderLeadMessage(text, isError) {
+    const box = document.getElementById('lead-message');
+    if (!box) return;
+    box.innerHTML = '';
+    const p = document.createElement('p');
+    p.className = isError ? 'calc-error' : 'calc-lead-success';
+    p.textContent = text;
+    box.appendChild(p);
+  }
+
+  // Построчная детализация (D-10): рендерим из breakdown. Формулы НЕ дублируем —
+  // только читаем готовые поля. Если расчёта ещё не было — детализации нет.
+  function renderDetails(b) {
+    const body = document.getElementById('calc-details-body');
+    if (!body) return;
+    body.innerHTML = '';
+    if (!b) return; // lastBreakdown пуст (форма отправлена без расчёта) — нечего рисовать
+
+    const rows = DETAILS_ROWS.slice();
+    // Эластомер показываем строкой «масса × цена = стоимость» (наглядно для инженера).
+    rows.push([
+      `Эластомер (${b.massElastomer} кг × ${formatRub(b.cenaElastomer)})`,
+      'stElastomer',
+    ]);
+
+    for (const [label, key] of rows) {
+      const value = b[key];
+      if (value === undefined) continue;
+      const row = document.createElement('div');
+      row.className = 'calc-row';
+      const l = document.createElement('span');
+      l.className = 'calc-row-label';
+      l.textContent = label;
+      const v = document.createElement('span');
+      v.className = 'calc-row-value';
+      v.textContent = formatRub(value);
+      row.append(l, v);
+      body.appendChild(row);
+    }
+
+    // Удельная стоимость за м²·мм — полезный инженерный показатель раскладки.
+    if (b.perM2mm !== undefined) {
+      const row = document.createElement('div');
+      row.className = 'calc-row';
+      const l = document.createElement('span');
+      l.className = 'calc-row-label';
+      l.textContent = 'Стоимость за м²·мм';
+      const v = document.createElement('span');
+      v.className = 'calc-row-value';
+      v.textContent = formatRub(b.perM2mm) + '/м²·мм';
+      row.append(l, v);
+      body.appendChild(row);
+    }
   }
 
   // Расшифровка классов (UI-04): коэффициенты из PARAMS.koefKlass.
