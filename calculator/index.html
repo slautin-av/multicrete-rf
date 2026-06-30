@@ -92,6 +92,57 @@
       <h3>Классы сложности</h3>
       <ul id="calc-klass-info-list"></ul>
     </div>
+
+    <!-- ══ Форма заявки (НЕОБЯЗАТЕЛЬНАЯ, LEAD-01). Цена/«шапка» уже видны выше ══ -->
+    <!-- Воронка D-10: за контакты — полная построчная детализация (НЕ цена). -->
+    <div class="calc-lead">
+      <h3>Оставить заявку</h3>
+      <p class="calc-lead-sub">Оставьте контакты, чтобы увидеть полную построчную смету</p>
+
+      <form id="calc-lead-form" novalidate>
+        <div class="pf-row">
+          <div>
+            <label class="pf-label" for="lead-name">Имя</label>
+            <input class="pf-input" type="text" id="lead-name" name="name" required autocomplete="name" placeholder="Как к вам обращаться">
+          </div>
+          <div>
+            <label class="pf-label" for="lead-org">Организация</label>
+            <input class="pf-input" type="text" id="lead-org" name="organization" autocomplete="organization" placeholder="Необязательно">
+          </div>
+        </div>
+
+        <div class="pf-row">
+          <div>
+            <label class="pf-label" for="lead-phone">Телефон</label>
+            <input class="pf-input" type="tel" id="lead-phone" name="phone" autocomplete="tel" placeholder="+7 ___ ___-__-__">
+          </div>
+          <div>
+            <label class="pf-label" for="lead-email">E-mail</label>
+            <input class="pf-input" type="email" id="lead-email" name="email" autocomplete="email" placeholder="name@company.ru">
+          </div>
+        </div>
+
+        <!-- Honeypot: имя поля совпадает с проверкой website в send-lead.php (T-02-13) -->
+        <input type="text" name="website" id="lead-website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+
+        <!-- Согласие 152-ФЗ: required, БЕЗ checked — активное согласие (T-02-11) -->
+        <label class="pf-consent" for="lead-consent">
+          <input type="checkbox" id="lead-consent" name="consent" required>
+          <span>Я согласен на <a href="/privacy/" target="_blank" rel="noopener">обработку персональных данных</a></span>
+        </label>
+
+        <button class="btn btn-primary pf-submit" id="lead-submit" type="submit">Отправить заявку</button>
+      </form>
+
+      <!-- Сообщение успеха/ошибки (заполняется из JS) -->
+      <div id="lead-message" aria-live="polite"></div>
+    </div>
+
+    <!-- ── Построчная детализация (скрыта; раскрывается после валидной отправки — D-10) ── -->
+    <div class="calc-details" id="calc-details" hidden>
+      <h3>Построчная детализация сметы</h3>
+      <div id="calc-details-body"></div>
+    </div>
   </div>
 </div>
 
