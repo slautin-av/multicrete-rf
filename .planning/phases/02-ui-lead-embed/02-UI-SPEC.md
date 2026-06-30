@@ -1,7 +1,7 @@
 ---
 phase: 2
 slug: ui-lead-embed
-status: draft
+status: approved
 shadcn_initialized: false
 preset: none
 created: 2026-06-30
@@ -65,9 +65,11 @@ created: 2026-06-30
 | Body (значения «шапки», оговорки, текст) | 16px (1rem) | 400 | 1.5 | Manrope (`--f-body`) |
 | Label (подписи полей, подписи строк сметы, метка раздела) | 13px (.8rem) | 600 | 1.3 | Manrope / Tektur для uppercase-меток |
 
-**Веса:** Regular 400 (текст/значения) + SemiBold 600 (заголовки/подписи). **Исключение:** `.btn`/`.pf-submit` наследуют `font-weight: 700` из существующего класса лендинга (`landing.html` строка 107) — менять класс кнопки нельзя (D-08), поэтому 700 допустим ТОЛЬКО на тексте кнопок.
+**Веса:** Regular 400 (текст/значения) + SemiBold 600 (заголовки/подписи) — это два авторских веса контракта. **Исключение:** вес 700 присутствует ТОЛЬКО в тексте кнопок `.btn`/`.pf-submit` — он унаследован из существующего CSS лендинга (`landing.html` строка 107), НЕ является авторским токеном контракта и изменению не подлежит (D-08). При подсчёте весов контракта 700 не учитывается.
 
 **Откуда:** `landing.html` строки 36-38, 53, 70 (clamp заголовков), 107, 329; DESIGN.md (Oswald 20-24 / Manrope 14-16 / табличные цифры). ИТОГО — крупно (Display), это смысловой акцент результата (UI-03).
+
+**Главный визуальный якорь (focal point):** блок ИТОГО — Display 28px, цвет `--blue`, выровнен так, чтобы первым притягивать взгляд при появлении результата. Иерархия внимания: ИТОГО (Display/синий) → подзаголовки блоков (Heading) → значения «шапки» и текст (Body) → подписи полей (Label). Исполнитель не должен выводить приоритет догадками — главный якорь объявлен здесь явно.
 
 ---
 
@@ -155,11 +157,11 @@ created: 2026-06-30
 
 ## Checker Sign-Off
 
-- [ ] Dimension 1 Copywriting: PASS
-- [ ] Dimension 2 Visuals: PASS
-- [ ] Dimension 3 Color: PASS
-- [ ] Dimension 4 Typography: PASS
-- [ ] Dimension 5 Spacing: PASS
-- [ ] Dimension 6 Registry Safety: PASS
+- [x] Dimension 1 Copywriting: PASS
+- [x] Dimension 2 Visuals: PASS (FLAG устранён — focal point объявлен явно)
+- [x] Dimension 3 Color: PASS
+- [x] Dimension 4 Typography: PASS (FLAG устранён — исключение веса 700 описано явно)
+- [x] Dimension 5 Spacing: PASS
+- [x] Dimension 6 Registry Safety: PASS
 
-**Approval:** pending
+**Approval:** approved (gsd-ui-checker, 2026-06-30; обе нерублокирующие рекомендации применены)
