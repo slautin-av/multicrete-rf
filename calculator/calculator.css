@@ -198,6 +198,19 @@ img { max-width: 100%; display: block; }
 .calc-klass-info li:last-child { border-bottom: none; }
 .calc-klass-info .calc-koef { color: var(--blue); font-variant-numeric: tabular-nums; white-space: nowrap; }
 
+/* ── Блок «Оставить заявку» (D-10) ─────────────────────────────────────────*/
+.calc-lead { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+.calc-lead h3 { font-family: var(--f-head); font-size: 1.1rem; color: var(--ink); margin-bottom: .35rem; }
+/* Подзаголовок-пояснение под заголовком блока заявки (как .calc-sub). */
+.calc-lead-sub { color: var(--muted); font-size: .9rem; margin-bottom: 1rem; }
+/* Сообщение об успехе отправки — зелёный, чтобы успех визуально читался (WR-01). */
+.calc-lead-success { color: #3FB57A; font-size: .85rem; margin-top: .5rem; }
+
+/* ── Построчная детализация после отправки заявки (D-10) ────────────────────*/
+.calc-details { margin-top: 1.5rem; background: var(--scale); border-radius: 12px;
+  padding: 1.25rem; box-shadow: inset 0 2px 4px rgba(26,35,50,.2); }
+.calc-details h3 { font-family: var(--f-head); font-size: 1rem; color: var(--ink); margin-bottom: .75rem; }
+
 /* ── Заголовок страницы-модуля (когда открыт как отдельная страница) ───────*/
 .calc-page { display: flex; align-items: center; justify-content: center;
   min-height: 100dvh; padding: 2rem 1rem; }
