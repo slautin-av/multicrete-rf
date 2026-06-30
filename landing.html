@@ -140,7 +140,18 @@
     }
     .nav { max-width: var(--max); margin: 0 auto; padding: .75rem 1.5rem;
       display: flex; align-items: center; gap: 1.5rem; }
-    .nav-logo img { height: 40px; width: auto; }
+    /* Логотип с прозрачным фоном + светлый абрис по контуру букв и
+       молекул, чтобы читался на тёмной шапке. Сам логотип не меняется. */
+    .nav-logo { display: inline-flex; align-items: center; padding: 2px 4px; }
+    .nav-logo img { height: 48px; width: auto; display: block;
+      filter:
+        drop-shadow(0 0 1px rgba(255,255,255,1))
+        drop-shadow(0 0 1px rgba(255,255,255,1))
+        drop-shadow(0 0 1px rgba(255,255,255,1))
+        drop-shadow(0 0 1.5px rgba(255,255,255,1))
+        drop-shadow(0 0 1.5px rgba(255,255,255,.98))
+        drop-shadow(0 0 2px rgba(255,255,255,.95))
+        drop-shadow(0 0 4px rgba(255,255,255,.8)); }
     .nav-links { display: flex; gap: 1.5rem; list-style: none; margin-left: 1rem; }
     .nav-links a { font-size: .9rem; color: var(--muted); font-weight: 500; transition: color .2s; }
     .nav-links a:hover { color: var(--blue); }
@@ -464,6 +475,27 @@
       .dp__pair::after { display: none; }
       .dp__impacts { grid-template-columns: 1fr; }
     }
+
+    /* ── Оборудование: установка МультиКрит М700 ── */
+    .equip-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 3rem; align-items: center; }
+    .equip-text .sec-title .accent { color: var(--blue); }
+    .equip-text p { color: var(--muted); margin-bottom: 1rem; }
+    .equip-text p strong { color: var(--ink); font-weight: 700; }
+    .equip-media { position: relative; border-radius: 16px; overflow: hidden; line-height: 0;
+      box-shadow: 0 12px 32px rgba(26,35,50,.18), inset 0 1px 0 rgba(255,255,255,.4); }
+    .equip-media img { width: 100%; height: auto; display: block; }
+    .equip-media::after { content: ''; position: absolute; left: 16px; right: 16px; bottom: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, rgba(235,77,140,.7), transparent); filter: blur(1px); }
+    .equip-specs { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin-top: 1rem; }
+    .equip-specs .spec-cell { text-align: center; padding: .85rem .75rem; }
+    .equip-specs .spec-num { font-size: 1.25rem; }
+    @media (max-width: 860px) {
+      .equip-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .equip-media-col { order: -1; }
+    }
+    @media (max-width: 480px) {
+      .equip-specs { grid-template-columns: repeat(2, 1fr); }
+    }
   </style>
 </head>
 <body>
@@ -503,6 +535,25 @@
 <!-- ══ HERO ══ -->
 <section class="hero hero-dark">
   <div class="wrap">
+    <div class="hero-strip">
+      <span class="hex strip-hex"><i data-lucide="hexagon"></i></span>
+      <span class="strip-text">Импортозамещение премиум-класса</span>
+      <span class="hex strip-hex"><i data-lucide="hexagon"></i></span>
+    </div>
+    <div class="hero-text-block">
+      <h1><span class="accent">Эластомерная броня</span><br>для промышленности</h1>
+      <p class="hero-tagline">Защита от износа, кавитации и коррозии. Российская альтернатива импортным эластомерным покрытиям.</p>
+      <div class="hero-guarantee"><i data-lucide="shield"></i> Гарантия сохранности изделий до 3 лет</div>
+      <div class="hero-ctas">
+        <button class="btn btn-primary" onclick="goTo('#price')"><i data-lucide="calculator"></i> Получить расчёт</button>
+        <button class="btn btn-secondary" onclick="openModal()"><i data-lucide="phone"></i> Звонок инженера</button>
+      </div>
+      <div class="hero-stats">
+        <div><div class="h-stat-num">3–4×</div><div class="h-stat-label">Износостойкость<br>выше стали</div></div>
+        <div><div class="h-stat-num">18</div><div class="h-stat-label">Месяцев<br>окупаемость</div></div>
+        <div><div class="h-stat-num">4–8</div><div class="h-stat-label">Мм толщина<br>покрытия</div></div>
+      </div>
+    </div>
     <div class="dp">
       <div class="dp__head">
         <span class="sec-label">// Как работает эластомер</span>
@@ -554,25 +605,6 @@
           <div class="dp__row dp__row--hit"><span class="dp__lbl">Воздействие</span>Влага и агрессивная среда окисляют металл — появляется ржавчина.</div>
           <div class="dp__row dp__row--fix"><span class="dp__lbl">Эластомер</span>Сплошной барьер изолирует металл от среды — коррозии не на чём начаться.</div>
         </div>
-      </div>
-    </div>
-    <div class="hero-strip">
-      <span class="hex strip-hex"><i data-lucide="hexagon"></i></span>
-      <span class="strip-text">Импортозамещение премиум-класса</span>
-      <span class="hex strip-hex"><i data-lucide="hexagon"></i></span>
-    </div>
-    <div class="hero-text-block">
-      <h1><span class="accent">Эластомерная броня</span><br>для промышленности</h1>
-      <p class="hero-tagline">Защита от износа, кавитации и коррозии. Российская альтернатива импортным эластомерным покрытиям.</p>
-      <div class="hero-guarantee"><i data-lucide="shield"></i> Гарантия сохранности изделий до 3 лет</div>
-      <div class="hero-ctas">
-        <button class="btn btn-primary" onclick="goTo('#price')"><i data-lucide="calculator"></i> Получить расчёт</button>
-        <button class="btn btn-secondary" onclick="openModal()"><i data-lucide="phone"></i> Звонок инженера</button>
-      </div>
-      <div class="hero-stats">
-        <div><div class="h-stat-num">3–4×</div><div class="h-stat-label">Износостойкость<br>выше стали</div></div>
-        <div><div class="h-stat-num">18</div><div class="h-stat-label">Месяцев<br>окупаемость</div></div>
-        <div><div class="h-stat-num">4–8</div><div class="h-stat-label">Мм толщина<br>покрытия</div></div>
       </div>
     </div>
   </div>
@@ -652,10 +684,36 @@
   </div>
 </section>
 
+<!-- ══ EQUIPMENT ══ -->
+<section class="section" id="equipment">
+  <div class="wrap equip-grid">
+    <div class="equip-text">
+      <span class="sec-label">// Оборудование</span>
+      <h2 class="sec-title">Установка <span class="accent">МультиКрит М700</span></h2>
+      <p>Эластомер — это не краска: его не нанести кистью или валиком. Двухкомпонентный состав схватывается не более чем за 1–2 минуты, поэтому компоненты нужно подогреть, точно отдозировать и подать под определённым давлением — синхронно, в нужной пропорции. Без такого оборудования нанести эластомер физически невозможно.</p>
+      <p>Поэтому мы разработали собственную установку — <strong>МультиКрит М700</strong>. Это сердце нашей технологии: она подогревает оба компонента до рабочей температуры, насосами с частотным регулированием подаёт их в точной пропорции и через смесительный пистолет распыляет состав на поверхность. Автоматика держит заданную температуру и обеспечивает равномерное покрытие на любых объёмах. Компактный корпус на колёсах — установку легко перемещать прямо на объекте.</p>
+      <p>Установка создана специально под эластомеры <strong>МультиКрит серии 700</strong>.</p>
+    </div>
+    <div class="equip-media-col">
+      <div class="equip-media">
+        <img src="assets/images/sections/equipment-collage.png" alt="Установка напыления эластомеров МультиКрит М700: компоненты А и Б, общий вид на колёсах, шкаф управления">
+      </div>
+      <div class="equip-specs">
+        <div class="spec-cell"><div class="spec-num">5:1–1:1</div><div class="spec-cap">Пропорция</div></div>
+        <div class="spec-cell"><div class="spec-num">25+25 л</div><div class="spec-cap">Ёмкости, с подогревом</div></div>
+        <div class="spec-cell"><div class="spec-num">30 бар</div><div class="spec-cap">Рабочее давление</div></div>
+        <div class="spec-cell"><div class="spec-num">7,5 м</div><div class="spec-cap">Подающий шланг</div></div>
+        <div class="spec-cell"><div class="spec-num">220 В</div><div class="spec-cap">Питание, 3 кВт</div></div>
+        <div class="spec-cell"><div class="spec-num">85 кг</div><div class="spec-cap">900×500×600 мм</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══ SPHERES ══ -->
 <section class="section" id="spheres">
   <div class="wrap">
-    <span class="sec-label">// 01 — Сферы применения</span>
+    <span class="sec-label">// Отрасли</span>
     <h2 class="sec-title">Сферы применения эластомеров</h2>
     <div class="grid-3" style="margin-top:1.5rem">
       <div class="card sphere-card"><div class="hex"><i data-lucide="pickaxe"></i></div><h3>Горнодобывающая промышленность</h3></div>
@@ -672,24 +730,10 @@
   </div>
 </section>
 
-<!-- ══ PORTFOLIO ══ -->
-<section class="section" id="portfolio">
-  <div class="wrap">
-    <span class="sec-label">// 02 — Портфолио</span>
-    <h2 class="sec-title">Примеры выполненных работ</h2>
-    <div class="grid-4" style="margin-top:1.5rem">
-      <div class="card sphere-card"><div class="hex"><i data-lucide="wrench"></i></div><h3>Восстановительный ремонт</h3></div>
-      <div class="card sphere-card"><div class="hex"><i data-lucide="settings"></i></div><h3>Ремонт изношенного оборудования</h3></div>
-      <div class="card sphere-card"><div class="hex"><i data-lucide="shield-plus"></i></div><h3>Защита нового оборудования</h3></div>
-      <div class="card sphere-card"><div class="hex"><i data-lucide="flame"></i></div><h3>Ремонт после пожара</h3></div>
-    </div>
-  </div>
-</section>
-
 <!-- ══ APPLICATIONS ══ -->
 <section class="section">
   <div class="wrap">
-    <span class="sec-label">// 03 — Применение</span>
+    <span class="sec-label">// Применение</span>
     <h2 class="sec-title">Для чего применяются эластомеры</h2>
     <div class="grid-4" style="margin-top:1.5rem">
       <div class="card app-card"><div class="hex"><i data-lucide="shield"></i></div><h3>Защита от ударов</h3><p>Гасит энергию удара, возвращает форму</p></div>
@@ -701,6 +745,39 @@
       <div class="card app-card"><div class="hex"><i data-lucide="refresh-cw"></i></div><h3>Восстановление покрытий</h3><p>Полиуретановые и резиновые детали</p></div>
       <div class="card app-card"><div class="hex"><i data-lucide="trending-up"></i></div><h3>Повышение КПД насосов</h3><p>Снижение гидравлических потерь</p></div>
     </div>
+  </div>
+</section>
+
+<!-- ══ SPECS ══ -->
+<section class="section" id="specs">
+  <div class="wrap">
+    <span class="sec-label">// Характеристики</span>
+    <h2 class="sec-title">ТТХ: эластомеры MultiCrete 765, 785, 795</h2>
+    <div class="specs-tabs" style="margin-top:1.5rem">
+      <button class="specs-tab active" id="tab-b" onclick="switchTab('b')">До отверждения</button>
+      <button class="specs-tab" id="tab-a" onclick="switchTab('a')">После отверждения</button>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <table class="specs-table" id="tbl-b">
+        <thead><tr><th>Показатель</th><th>765</th><th>785</th><th>795</th></tr></thead>
+        <tbody>
+          <tr><td>Соотношение компонентов по массе (А : Б)</td><td>100 : 72</td><td>100 : 58</td><td>100 : 89</td></tr>
+          <tr><td>Плотность смеси, г/см³</td><td>1,15</td><td>1,13</td><td>1,12</td></tr>
+          <tr><td>Расход при толщине 1 мм, кг/м²</td><td>1,25</td><td>1,2</td><td>1,2</td></tr>
+          <tr><td>Массовая доля нелетучих веществ, %</td><td>100</td><td>100</td><td>100</td></tr>
+          <tr><td>Время высыхания при +20±2 °C, сек *</td><td>60</td><td>60</td><td>60</td></tr>
+        </tbody>
+      </table>
+      <table class="specs-table" id="tbl-a" style="display:none">
+        <thead><tr><th>Показатель</th><th>765</th><th>785</th><th>795</th></tr></thead>
+        <tbody>
+          <tr><td>Твёрдость по Шор A</td><td>65</td><td>85</td><td>95</td></tr>
+          <tr><td>Прочность при разрыве, МПа</td><td>25</td><td>35</td><td>41</td></tr>
+          <tr><td>Относительное удлинение при разрыве, %</td><td>610</td><td>450</td><td>350</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="specs-foot">* для стандартного материала; по требованию заказчика — от 10 сек до 10 минут. Температура эксплуатации: от −50 до +130 °C (сухая среда), до +80 °C (влажная).</p>
   </div>
 </section>
 
@@ -738,36 +815,17 @@
   </div>
 </section>
 
-<!-- ══ SPECS ══ -->
-<section class="section" id="specs">
+<!-- ══ PORTFOLIO ══ -->
+<section class="section" id="portfolio">
   <div class="wrap">
-    <span class="sec-label">// 04 — Технические характеристики</span>
-    <h2 class="sec-title">ТТХ: эластомеры MultiCrete 765, 785, 795</h2>
-    <div class="specs-tabs" style="margin-top:1.5rem">
-      <button class="specs-tab active" id="tab-b" onclick="switchTab('b')">До отверждения</button>
-      <button class="specs-tab" id="tab-a" onclick="switchTab('a')">После отверждения</button>
+    <span class="sec-label">// Объекты</span>
+    <h2 class="sec-title">Примеры выполненных работ</h2>
+    <div class="grid-4" style="margin-top:1.5rem">
+      <div class="card sphere-card"><div class="hex"><i data-lucide="wrench"></i></div><h3>Восстановительный ремонт</h3></div>
+      <div class="card sphere-card"><div class="hex"><i data-lucide="settings"></i></div><h3>Ремонт изношенного оборудования</h3></div>
+      <div class="card sphere-card"><div class="hex"><i data-lucide="shield-plus"></i></div><h3>Защита нового оборудования</h3></div>
+      <div class="card sphere-card"><div class="hex"><i data-lucide="flame"></i></div><h3>Ремонт после пожара</h3></div>
     </div>
-    <div class="card" style="padding:0;overflow:hidden">
-      <table class="specs-table" id="tbl-b">
-        <thead><tr><th>Показатель</th><th>765</th><th>785</th><th>795</th></tr></thead>
-        <tbody>
-          <tr><td>Соотношение компонентов по массе (А : Б)</td><td>100 : 72</td><td>100 : 58</td><td>100 : 89</td></tr>
-          <tr><td>Плотность смеси, г/см³</td><td>1,15</td><td>1,13</td><td>1,12</td></tr>
-          <tr><td>Расход при толщине 1 мм, кг/м²</td><td>1,25</td><td>1,2</td><td>1,2</td></tr>
-          <tr><td>Массовая доля нелетучих веществ, %</td><td>100</td><td>100</td><td>100</td></tr>
-          <tr><td>Время высыхания при +20±2 °C, сек *</td><td>60</td><td>60</td><td>60</td></tr>
-        </tbody>
-      </table>
-      <table class="specs-table" id="tbl-a" style="display:none">
-        <thead><tr><th>Показатель</th><th>765</th><th>785</th><th>795</th></tr></thead>
-        <tbody>
-          <tr><td>Твёрдость по Шор A</td><td>65</td><td>85</td><td>95</td></tr>
-          <tr><td>Прочность при разрыве, МПа</td><td>25</td><td>35</td><td>41</td></tr>
-          <tr><td>Относительное удлинение при разрыве, %</td><td>610</td><td>450</td><td>350</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="specs-foot">* для стандартного материала; по требованию заказчика — от 10 сек до 10 минут. Температура эксплуатации: от −50 до +130 °C (сухая среда), до +80 °C (влажная).</p>
   </div>
 </section>
 
