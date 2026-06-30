@@ -40,15 +40,15 @@ created: 2026-06-30
 | Req ID | Plan | Wave | Behavior | Threat Ref | Test Type | Automated Command (grep-наличие артефакта) | Manual? | Status |
 |--------|------|------|----------|------------|-----------|--------------------------------------------|---------|--------|
 | UI-01 | 01/05 | 1/3 | Окно открывается/закрывается (крестик, фон, Esc), scroll-lock, фокус-трап | — | manual + grep | grep наличие `.modal`/open-close-логики в `calculator/` (наличие, не поведение) | **Manual-Only** | ⬜ pending |
-| UI-02 | 01 | 1 | Поля → объект `inputs`; «>80 кг» меняет текст, не число | — | manual + grep | grep наличие сбора полей в `calculator/ui.js` | **Manual-Only** | ⬜ pending |
+| UI-02 | 01 | 1 | Поля → объект `inputs`; «>80 кг» меняет текст, не число | — | manual + grep | grep наличие сбора полей в `calculator/calculator-ui.js` | **Manual-Only** | ⬜ pending |
 | UI-03 | 01 | 1 | «Шапка» результата совпадает с `calc()` движка | — | **unit (движок)** + manual | `node calculator/engine.selftest.js` (контракт чисел) + ручная сверка отображения | Частично авто | ⬜ pending |
 | UI-04 | 01 | 1 | Оговорки + классы сложности видны сразу | — | manual + grep | grep наличие текстов оговорок/классов в разметке | **Manual-Only** | ⬜ pending |
-| UI-05 | 01 | 1 | Валидация ловит S≤0 / T≤0 / нет класса | — | manual + grep | grep наличие валидации в `calculator/ui.js` | **Manual-Only** | ⬜ pending |
+| UI-05 | 01 | 1 | Валидация ловит S≤0 / T≤0 / нет класса | — | manual + grep | grep наличие валидации в `calculator/calculator-ui.js` | **Manual-Only** | ⬜ pending |
 | UI-06 | 01/05 | 1/3 | Адаптив + работа на реальном телефоне | — | manual | DevTools device mode + реальный телефон (по чек-листу) | **Manual-Only** | ⬜ pending |
 | INT-01 | 01 | 1 | Изолированный модуль `calculator/` (CSS/JS не течёт в лендинг) | — | grep | grep наличие префиксов/scope в `calculator/` | **Manual-Only** | ⬜ pending |
 | INT-02 | 05 | 3 | Кнопка «Получить расчёт» на лендинге открывает окно | — | manual + grep | `grep -v '^#' calculator/MANUAL-CHECKLIST.md \| grep -c INT-02` + клик вручную | **Manual-Only** | ⬜ pending |
-| LEAD-01 | 04 | 2 | Цена видна без формы; форма заявки необязательна (воронка за контактами) | — | manual + grep | grep наличие «детализация за контактами» логики в `calculator/lead.js` | **Manual-Only** | ⬜ pending |
-| LEAD-02 | 02/04 | 1/2 | fetch POST на `/send-lead.php`; **реальное письмо доходит** на MultiCrete@yandex.ru | T-02-04..09 | grep (фронт) + **живой приёмочный** (D-02) | `node` grep наличия `LEAD_ENDPOINT`/`fetch` в `calculator/lead.js`; контракт PHP — grep защит в `send-lead.php` | **Manual-Only (phase-gate)** | ⬜ pending |
+| LEAD-01 | 04 | 2 | Цена видна без формы; форма заявки необязательна (воронка за контактами) | — | manual + grep | grep наличие «детализация за контактами» логики в `calculator/calculator-ui.js` | **Manual-Only** | ⬜ pending |
+| LEAD-02 | 02/04 | 1/2 | fetch POST на `/send-lead.php`; **реальное письмо доходит** на MultiCrete@yandex.ru | T-02-04..09 | grep (фронт) + **живой приёмочный** (D-02) | `node` grep наличия `LEAD_ENDPOINT`/`fetch` в `calculator/calculator-ui.js`; контракт PHP — grep защит в `send-lead.php` | **Manual-Only (phase-gate)** | ⬜ pending |
 | LEAD-03 | 04 | 2 | Без согласия отправка недоступна; ссылка на политику 152-ФЗ | — | manual + grep | grep наличие чекбокса согласия + блокировки submit | **Manual-Only** | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
