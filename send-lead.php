@@ -114,6 +114,11 @@ if ($emailInput !== '' && filter_var($emailInput, FILTER_VALIDATE_EMAIL)) {
     $cleanEmail = $emailInput;
 }
 
+// Нужен хотя бы один контакт: иначе с клиентом не связаться (WR-03).
+if ($phone === '' && $cleanEmail === '') {
+    respond(false, 'no contact', 400);
+}
+
 // Тема — с кириллицей, обязательно кодируем base64 (=?UTF-8?B?...?=).
 $subject = '=?UTF-8?B?' . base64_encode('Заявка с калькулятора — МультиКрит [' . $source . ']') . '?=';
 

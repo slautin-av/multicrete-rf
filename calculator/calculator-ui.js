@@ -254,6 +254,13 @@ function initCalculatorUI() {
       website: document.getElementById('lead-website').value, // honeypot
     };
 
+    // Нужен хотя бы один способ связи: телефон ИЛИ e-mail (WR-03).
+    // checkValidity их не ловит — оба поля необязательны по отдельности.
+    if (data.phone === '' && data.email === '') {
+      renderLeadMessage('Укажите телефон или e-mail', true);
+      return;
+    }
+
     const submitBtn = document.getElementById('lead-submit');
     if (submitBtn) submitBtn.disabled = true;
     try {
