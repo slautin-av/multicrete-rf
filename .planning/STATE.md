@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Этап 3 — контекст собран (размещение блока, тексты, сборка DOCX)
-last_updated: "2026-07-01T13:11:09.834Z"
+status: milestone-ready
+stopped_at: Этап 3 (опросный лист) завершён и принят владельцем — 3/3 плана, 11/11 решений PASS. Осталась заливка сайта + ручная приёмка (письмо D-02 + реквизиты 152-ФЗ), затем закрытие милстоуна v1.0
+last_updated: "2026-07-01T15:15:01.081Z"
 last_activity: 2026-07-01
 progress:
   total_phases: 3
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 10
-  completed_plans: 8
-  percent: 80
+  completed_plans: 10
+  percent: 100
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-29)
 
 **Core value:** Калькулятор достоверно прогоняет метод расчёта Алексея и выдаёт предварительную стоимость с прозрачной разбивкой — ориентир, которому можно доверять.
-**Current focus:** Phase 03 — anketa
+**Current focus:** Милстоун v1.0 — все 3 этапа выполнены; осталась заливка сайта + ручная приёмка
 
 ## Current Position
 
-Phase: 03 (anketa) — EXECUTING
-Plan: 2 of 3
-Status: Ready to execute
-Last activity: 2026-07-01
+Phase: 03 (anketa) — ЗАВЕРШЁН ✓ (принят владельцем 2026-07-01)
+Plan: 3 of 3 complete
+Status: Milestone ready — остаётся заливка на Reg.ru + ручная приёмка (письмо D-02, реквизиты 152-ФЗ)
+Last activity: 2026-07-01 -- Phase 03 complete (verification 11/11 PASS)
 
-Progress: [████████░░] 80%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
