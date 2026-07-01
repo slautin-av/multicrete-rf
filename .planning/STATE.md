@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: milestone_complete
-stopped_at: Этап 2 спланирован — 5 планов созданы, проверены (VERIFICATION PASSED), блокер закрыт
-last_updated: "2026-06-30T13:44:27.097Z"
-last_activity: 2026-06-30 -- Phase 02 execution started
+status: completed
+stopped_at: Этап 3 — контекст собран (размещение блока, тексты, сборка DOCX)
+last_updated: "2026-07-01T10:02:13.631Z"
+last_activity: 2026-06-30
 progress:
-  total_phases: 2
+  total_phases: 3
   completed_phases: 2
   total_plans: 7
-  completed_plans: 2
+  completed_plans: 7
   percent: 100
 ---
 
@@ -101,10 +101,11 @@ Progress: [██████████] 100%
 
 ## Session Continuity
 
-Last session: 2026-06-30
-Stopped at: Этап 2 (калькулятор + заявка + встраивание) выполнен и принят владельцем. Решено НЕ заливать сайт сразу, а сначала добавить ОПРОСНЫЙ ЛИСТ, потом залить всё целиком.
+Last session: 2026-07-01T10:02:13.611Z
+Stopped at: Этап 3 — контекст собран (размещение блока, тексты, сборка DOCX)
 
 ЗАПЛАНИРОВАНО (новый блок работ — опросный лист):
+
 - Только СКАЧИВАЕМЫЙ бланк, онлайн-формы НЕ делаем (решение владельца). Поток: скачать → заполнить офлайн → подписать → приложить материалы → прислать на e-mail.
 - Подробности и открытые вопросы — в разделе «Pending Todos» выше (формат файла PDF/DOCX, место кнопки на сайте, текст инструкции, целевой e-mail).
 
