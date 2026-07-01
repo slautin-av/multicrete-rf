@@ -65,6 +65,6 @@
 **Plans:** 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Wave 0: тело опросника (OOXML) + build-anketa.ps1 + verify-anketa.ps1 [волна 1]
+- [x] 03-01-PLAN.md — Wave 0: тело опросника (OOXML) + build-anketa.ps1 + verify-anketa.ps1 [волна 1]
 - [ ] 03-02-PLAN.md — сборка приёмочного .docx + verify + ручная приёмка владельца в Word (D-07) [волна 2]
 - [ ] 03-03-PLAN.md — блок «С чего начать» на landing.html: калькулятор + скачивание опросного листа (D-08..D-11) [волна 1]
