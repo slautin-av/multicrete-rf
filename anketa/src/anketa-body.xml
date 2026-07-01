@@ -1,7 +1,7 @@
-<w:p><w:pPr><w:pStyle w:val="1"/></w:pPr><w:r><w:t>ОПРОСНЫЙ ЛИСТ на подбор защитного покрытия МультиКрит</w:t></w:r></w:p>
-<w:p><w:pPr><w:pStyle w:val="2"/></w:pPr><w:r><w:t>Универсальный бланк (для любого оборудования и отрасли)</w:t></w:r></w:p>
+<w:p><w:pPr><w:pStyle w:val="1"/><w:spacing w:before="80" w:after="40" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:t>ОПРОСНЫЙ ЛИСТ на подбор защитного покрытия МультиКрит</w:t></w:r></w:p>
+<w:p><w:pPr><w:pStyle w:val="2"/><w:spacing w:before="80" w:after="40" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>Универсальный бланк (для любого оборудования и отрасли)</w:t></w:r></w:p>
 <w:p><w:r><w:rPr><w:b/></w:rPr><w:t xml:space="preserve">Как заполнять. </w:t></w:r><w:r><w:t>Заполните все поля, которые применимы к вашей детали. Если параметр неизвестен или не относится к вашему случаю — поставьте прочерк «—». Чем точнее данные, тем точнее подбор покрытия и предварительный расчёт. К бланку можно приложить чертежи и фото — это ускорит ответ.</w:t></w:r></w:p>
-<w:p><w:pPr><w:pStyle w:val="1"/></w:pPr><w:r><w:t>Блок 0. Заказчик</w:t></w:r></w:p>
+<w:p><w:pPr><w:pStyle w:val="1"/><w:spacing w:before="80" w:after="40" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:t>Блок 0. Заказчик</w:t></w:r></w:p>
 <w:tbl>
   <w:tblPr>
     <w:tblStyle w:val="ab"/>
@@ -33,8 +33,8 @@
     <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
   </w:tr>
 </w:tbl>
-<w:p/>
-<w:p><w:pPr><w:pStyle w:val="1"/></w:pPr><w:r><w:t>Блок 1. Объект — что защищаем</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:rPr><w:sz w:val="12"/><w:szCs w:val="12"/></w:rPr></w:pPr></w:p>
+<w:p><w:pPr><w:pStyle w:val="1"/><w:spacing w:before="80" w:after="40" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:t>Блок 1. Объект — что защищаем</w:t></w:r></w:p>
 <w:p><w:r><w:rPr><w:b/></w:rPr><w:t>Тип применения (отметьте один или несколько):</w:t></w:r></w:p>
 <w:p><w:r><w:t xml:space="preserve">☐ Насосное оборудование    ☐ Гребной / судовой винт    ☐ Трубопровод, отвод, колено</w:t></w:r></w:p>
 <w:p><w:r><w:t xml:space="preserve">☐ Гидроциклон / циклон    ☐ Дробильно-размольное (мельница, шнек)    ☐ Дымосос / вентилятор</w:t></w:r></w:p>
@@ -66,8 +66,8 @@
     <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
   </w:tr>
 </w:tbl>
-<w:p/>
-<w:p><w:pPr><w:pStyle w:val="1"/></w:pPr><w:r><w:t>Блок 2. Материал, геометрия и предыдущее покрытие</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:rPr><w:sz w:val="12"/><w:szCs w:val="12"/></w:rPr></w:pPr></w:p>
+<w:p><w:pPr><w:pStyle w:val="1"/><w:spacing w:before="80" w:after="40" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:t>Блок 2. Материал, геометрия и предыдущее покрытие</w:t></w:r></w:p>
 <w:tbl>
   <w:tblPr>
     <w:tblStyle w:val="ab"/>
@@ -107,8 +107,8 @@
     <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
   </w:tr>
 </w:tbl>
-<w:p/>
-<w:p><w:pPr><w:pStyle w:val="2"/></w:pPr><w:r><w:t>Ранее применявшееся покрытие</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:rPr><w:sz w:val="12"/><w:szCs w:val="12"/></w:rPr></w:pPr></w:p>
+<w:p><w:pPr><w:pStyle w:val="2"/><w:spacing w:before="80" w:after="40" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>Ранее применявшееся покрытие</w:t></w:r></w:p>
 <w:tbl>
   <w:tblPr>
     <w:tblStyle w:val="ab"/>
@@ -144,8 +144,8 @@
     <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
   </w:tr>
 </w:tbl>
-<w:p/>
-<w:p><w:pPr><w:pStyle w:val="1"/></w:pPr><w:r><w:t>Блок 3. Условия эксплуатации</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:rPr><w:sz w:val="12"/><w:szCs w:val="12"/></w:rPr></w:pPr></w:p>
+<w:p><w:pPr><w:pStyle w:val="1"/><w:spacing w:before="80" w:after="40" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:t>Блок 3. Условия эксплуатации</w:t></w:r></w:p>
 <w:tbl>
   <w:tblPr>
     <w:tblStyle w:val="ab"/>
@@ -193,15 +193,15 @@
     <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
   </w:tr>
 </w:tbl>
-<w:p/>
-<w:p><w:pPr><w:pStyle w:val="1"/></w:pPr><w:r><w:t>Блок 4. Механизмы разрушения — ЧТО именно портит деталь</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:rPr><w:sz w:val="12"/><w:szCs w:val="12"/></w:rPr></w:pPr></w:p>
+<w:p><w:pPr><w:pStyle w:val="1"/><w:spacing w:before="80" w:after="40" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:t>Блок 4. Механизмы разрушения — ЧТО именно портит деталь</w:t></w:r></w:p>
 <w:p><w:r><w:rPr><w:i/></w:rPr><w:t>Это ключевой блок. Отметьте применимые виды воздействия и уточните детали. По ним подбирается тип и твёрдость покрытия.</w:t></w:r></w:p>
-<w:p><w:pPr><w:pStyle w:val="2"/></w:pPr><w:r><w:t>4.0. Характер воздействия (главный вопрос — как частицы/среда бьют по поверхности):</w:t></w:r></w:p>
+<w:p><w:pPr><w:pStyle w:val="2"/><w:spacing w:before="80" w:after="40" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>4.0. Характер воздействия (главный вопрос — как частицы/среда бьют по поверхности):</w:t></w:r></w:p>
 <w:p><w:r><w:t>☐ Истирание вскользь, под малым углом (прямые трубы, шнеки — поток идёт вдоль стенки)</w:t></w:r></w:p>
 <w:p><w:r><w:t>☐ Удар по нормали, под большим углом (крыльчатки, колена, отводы — поток бьёт «в лоб»)</w:t></w:r></w:p>
 <w:p><w:r><w:t>☐ Кавитация (схлопывание пузырьков — крыльчатки, винты)</w:t></w:r></w:p>
 <w:p><w:r><w:t xml:space="preserve">☐ Комбинированно / затрудняюсь — опишите словами: __________</w:t></w:r></w:p>
-<w:p><w:pPr><w:pStyle w:val="2"/></w:pPr><w:r><w:t>4.1. Абразивное воздействие</w:t></w:r></w:p>
+<w:p><w:pPr><w:pStyle w:val="2"/><w:spacing w:before="80" w:after="40" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>4.1. Абразивное воздействие</w:t></w:r></w:p>
 <w:tbl>
   <w:tblPr>
     <w:tblStyle w:val="ab"/>
@@ -237,8 +237,8 @@
     <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
   </w:tr>
 </w:tbl>
-<w:p/>
-<w:p><w:pPr><w:pStyle w:val="2"/></w:pPr><w:r><w:t>4.2. Кавитация</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:rPr><w:sz w:val="12"/><w:szCs w:val="12"/></w:rPr></w:pPr></w:p>
+<w:p><w:pPr><w:pStyle w:val="2"/><w:spacing w:before="80" w:after="40" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>4.2. Кавитация</w:t></w:r></w:p>
 <w:tbl>
   <w:tblPr>
     <w:tblStyle w:val="ab"/>
@@ -262,8 +262,8 @@
     <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
   </w:tr>
 </w:tbl>
-<w:p/>
-<w:p><w:pPr><w:pStyle w:val="2"/></w:pPr><w:r><w:t>4.3. Эрозия / гидроабразив</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:rPr><w:sz w:val="12"/><w:szCs w:val="12"/></w:rPr></w:pPr></w:p>
+<w:p><w:pPr><w:pStyle w:val="2"/><w:spacing w:before="80" w:after="40" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>4.3. Эрозия / гидроабразив</w:t></w:r></w:p>
 <w:tbl>
   <w:tblPr>
     <w:tblStyle w:val="ab"/>
@@ -287,8 +287,8 @@
     <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
   </w:tr>
 </w:tbl>
-<w:p/>
-<w:p><w:pPr><w:pStyle w:val="2"/></w:pPr><w:r><w:t>4.4. Химическое воздействие</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:rPr><w:sz w:val="12"/><w:szCs w:val="12"/></w:rPr></w:pPr></w:p>
+<w:p><w:pPr><w:pStyle w:val="2"/><w:spacing w:before="80" w:after="40" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>4.4. Химическое воздействие</w:t></w:r></w:p>
 <w:tbl>
   <w:tblPr>
     <w:tblStyle w:val="ab"/>
@@ -320,8 +320,8 @@
     <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
   </w:tr>
 </w:tbl>
-<w:p/>
-<w:p><w:pPr><w:pStyle w:val="2"/></w:pPr><w:r><w:t>4.5. Ударные / вибрационные нагрузки, налипание, биообрастание</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:rPr><w:sz w:val="12"/><w:szCs w:val="12"/></w:rPr></w:pPr></w:p>
+<w:p><w:pPr><w:pStyle w:val="2"/><w:spacing w:before="80" w:after="40" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:t>4.5. Ударные / вибрационные нагрузки, налипание, биообрастание</w:t></w:r></w:p>
 <w:tbl>
   <w:tblPr>
     <w:tblStyle w:val="ab"/>
@@ -349,8 +349,8 @@
     <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
   </w:tr>
 </w:tbl>
-<w:p/>
-<w:p><w:pPr><w:pStyle w:val="1"/></w:pPr><w:r><w:t>Блок 5. Задача и приложения</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:rPr><w:sz w:val="12"/><w:szCs w:val="12"/></w:rPr></w:pPr></w:p>
+<w:p><w:pPr><w:pStyle w:val="1"/><w:spacing w:before="80" w:after="40" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:t>Блок 5. Задача и приложения</w:t></w:r></w:p>
 <w:tbl>
   <w:tblPr>
     <w:tblStyle w:val="ab"/>
@@ -386,8 +386,8 @@
     <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
   </w:tr>
 </w:tbl>
-<w:p/>
-<w:p><w:pPr><w:pStyle w:val="1"/></w:pPr><w:r><w:t>Блок 6. Составил</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:rPr><w:sz w:val="12"/><w:szCs w:val="12"/></w:rPr></w:pPr></w:p>
+<w:p><w:pPr><w:pStyle w:val="1"/><w:spacing w:before="80" w:after="40" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:t>Блок 6. Составил</w:t></w:r></w:p>
 <w:tbl>
   <w:tblPr>
     <w:tblStyle w:val="ab"/>
@@ -419,7 +419,7 @@
     <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
   </w:tr>
 </w:tbl>
-<w:p/>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:rPr><w:sz w:val="12"/><w:szCs w:val="12"/></w:rPr></w:pPr></w:p>
 <w:p>
   <w:r><w:rPr><w:b/></w:rPr><w:t>УТВЕРЖДАЮ</w:t></w:r>
   <w:r><w:t xml:space="preserve">  _______________________________________________</w:t></w:r>
