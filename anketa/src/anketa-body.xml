@@ -1,0 +1,428 @@
+<w:p><w:pPr><w:pStyle w:val="1"/></w:pPr><w:r><w:t>ОПРОСНЫЙ ЛИСТ на подбор защитного покрытия МультиКрит</w:t></w:r></w:p>
+<w:p><w:pPr><w:pStyle w:val="2"/></w:pPr><w:r><w:t>Универсальный бланк (для любого оборудования и отрасли)</w:t></w:r></w:p>
+<w:p><w:r><w:rPr><w:b/></w:rPr><w:t xml:space="preserve">Как заполнять. </w:t></w:r><w:r><w:t>Заполните все поля, которые применимы к вашей детали. Если параметр неизвестен или не относится к вашему случаю — поставьте прочерк «—». Чем точнее данные, тем точнее подбор покрытия и предварительный расчёт. К бланку можно приложить чертежи и фото — это ускорит ответ.</w:t></w:r></w:p>
+<w:p><w:pPr><w:pStyle w:val="1"/></w:pPr><w:r><w:t>Блок 0. Заказчик</w:t></w:r></w:p>
+<w:tbl>
+  <w:tblPr>
+    <w:tblStyle w:val="ab"/>
+    <w:tblW w:w="0" w:type="auto"/>
+    <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+  </w:tblPr>
+  <w:tblGrid>
+    <w:gridCol w:w="6000"/>
+    <w:gridCol w:w="4675"/>
+  </w:tblGrid>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Поле</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Значение</w:t></w:r></w:p></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Предприятие</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Структурное подразделение</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Отрасль</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Дата заполнения</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+</w:tbl>
+<w:p/>
+<w:p><w:pPr><w:pStyle w:val="1"/></w:pPr><w:r><w:t>Блок 1. Объект — что защищаем</w:t></w:r></w:p>
+<w:p><w:r><w:rPr><w:b/></w:rPr><w:t>Тип применения (отметьте один или несколько):</w:t></w:r></w:p>
+<w:p><w:r><w:t xml:space="preserve">☐ Насосное оборудование    ☐ Гребной / судовой винт    ☐ Трубопровод, отвод, колено</w:t></w:r></w:p>
+<w:p><w:r><w:t xml:space="preserve">☐ Гидроциклон / циклон    ☐ Дробильно-размольное (мельница, шнек)    ☐ Дымосос / вентилятор</w:t></w:r></w:p>
+<w:p><w:r><w:t xml:space="preserve">☐ Мешалка / лопасти    ☐ Ёмкость / резервуар    ☐ Запорная арматура    ☐ Другое: __________</w:t></w:r></w:p>
+<w:tbl>
+  <w:tblPr>
+    <w:tblStyle w:val="ab"/>
+    <w:tblW w:w="0" w:type="auto"/>
+    <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+  </w:tblPr>
+  <w:tblGrid>
+    <w:gridCol w:w="6000"/>
+    <w:gridCol w:w="4675"/>
+  </w:tblGrid>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Поле</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Значение</w:t></w:r></w:p></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Наименование оборудования / изделия</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Участки, подверженные износу (где именно разрушается)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Количество однотипных изделий на предприятии</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+</w:tbl>
+<w:p/>
+<w:p><w:pPr><w:pStyle w:val="1"/></w:pPr><w:r><w:t>Блок 2. Материал, геометрия и предыдущее покрытие</w:t></w:r></w:p>
+<w:tbl>
+  <w:tblPr>
+    <w:tblStyle w:val="ab"/>
+    <w:tblW w:w="0" w:type="auto"/>
+    <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+  </w:tblPr>
+  <w:tblGrid>
+    <w:gridCol w:w="6000"/>
+    <w:gridCol w:w="4675"/>
+  </w:tblGrid>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Поле</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Значение</w:t></w:r></w:p></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Материал основы, марка (сталь / чугун / бронза / нерж. / бетон / …)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Состояние поверхности (новая / изношенная / есть коррозия)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Толщина стенок: проектная / остаточная</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Габаритные размеры и основной диаметр</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Масса изделия</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Возможность демонтажа детали для нанесения (да / нет)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+</w:tbl>
+<w:p/>
+<w:p><w:pPr><w:pStyle w:val="2"/></w:pPr><w:r><w:t>Ранее применявшееся покрытие</w:t></w:r></w:p>
+<w:tbl>
+  <w:tblPr>
+    <w:tblStyle w:val="ab"/>
+    <w:tblW w:w="0" w:type="auto"/>
+    <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+  </w:tblPr>
+  <w:tblGrid>
+    <w:gridCol w:w="6000"/>
+    <w:gridCol w:w="4675"/>
+  </w:tblGrid>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Поле</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Значение</w:t></w:r></w:p></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Наносилось ли покрытие раньше? (да / нет)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Если да — тип / марка / производитель</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Характеристики (твёрдость, состав, если известны)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Толщина слоя, мм</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Как себя показало (срок службы, причина замены)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+</w:tbl>
+<w:p/>
+<w:p><w:pPr><w:pStyle w:val="1"/></w:pPr><w:r><w:t>Блок 3. Условия эксплуатации</w:t></w:r></w:p>
+<w:tbl>
+  <w:tblPr>
+    <w:tblStyle w:val="ab"/>
+    <w:tblW w:w="0" w:type="auto"/>
+    <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+  </w:tblPr>
+  <w:tblGrid>
+    <w:gridCol w:w="6000"/>
+    <w:gridCol w:w="4675"/>
+  </w:tblGrid>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Поле</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Значение</w:t></w:r></w:p></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Рабочая среда (что контактирует с поверхностью)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Температура среды: постоянная / пиковая, °C</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>pH среды</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Давление (рабочее / на выходе), МПа / атм</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Скорость: потока среды / вращения (обороты ротора, винта)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Производительность / расход</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Средняя наработка до износа, час</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Требуемый межремонтный ресурс покрытия</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+</w:tbl>
+<w:p/>
+<w:p><w:pPr><w:pStyle w:val="1"/></w:pPr><w:r><w:t>Блок 4. Механизмы разрушения — ЧТО именно портит деталь</w:t></w:r></w:p>
+<w:p><w:r><w:rPr><w:i/></w:rPr><w:t>Это ключевой блок. Отметьте применимые виды воздействия и уточните детали. По ним подбирается тип и твёрдость покрытия.</w:t></w:r></w:p>
+<w:p><w:pPr><w:pStyle w:val="2"/></w:pPr><w:r><w:t>4.0. Характер воздействия (главный вопрос — как частицы/среда бьют по поверхности):</w:t></w:r></w:p>
+<w:p><w:r><w:t>☐ Истирание вскользь, под малым углом (прямые трубы, шнеки — поток идёт вдоль стенки)</w:t></w:r></w:p>
+<w:p><w:r><w:t>☐ Удар по нормали, под большим углом (крыльчатки, колена, отводы — поток бьёт «в лоб»)</w:t></w:r></w:p>
+<w:p><w:r><w:t>☐ Кавитация (схлопывание пузырьков — крыльчатки, винты)</w:t></w:r></w:p>
+<w:p><w:r><w:t xml:space="preserve">☐ Комбинированно / затрудняюсь — опишите словами: __________</w:t></w:r></w:p>
+<w:p><w:pPr><w:pStyle w:val="2"/></w:pPr><w:r><w:t>4.1. Абразивное воздействие</w:t></w:r></w:p>
+<w:tbl>
+  <w:tblPr>
+    <w:tblStyle w:val="ab"/>
+    <w:tblW w:w="0" w:type="auto"/>
+    <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+  </w:tblPr>
+  <w:tblGrid>
+    <w:gridCol w:w="6000"/>
+    <w:gridCol w:w="4675"/>
+  </w:tblGrid>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Поле</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Значение</w:t></w:r></w:p></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Основные абразивы (материал: песок / руда / шлак / …)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Фракция (размер частиц), мм</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Форма частиц (угловатые / округлые)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Твёрдость частиц (по Моосу, если известна)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Концентрация в среде, %</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+</w:tbl>
+<w:p/>
+<w:p><w:pPr><w:pStyle w:val="2"/></w:pPr><w:r><w:t>4.2. Кавитация</w:t></w:r></w:p>
+<w:tbl>
+  <w:tblPr>
+    <w:tblStyle w:val="ab"/>
+    <w:tblW w:w="0" w:type="auto"/>
+    <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+  </w:tblPr>
+  <w:tblGrid>
+    <w:gridCol w:w="6000"/>
+    <w:gridCol w:w="4675"/>
+  </w:tblGrid>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Поле</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Значение</w:t></w:r></w:p></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>% разрушения поверхности</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Зоны кавитации (подробное описание)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+</w:tbl>
+<w:p/>
+<w:p><w:pPr><w:pStyle w:val="2"/></w:pPr><w:r><w:t>4.3. Эрозия / гидроабразив</w:t></w:r></w:p>
+<w:tbl>
+  <w:tblPr>
+    <w:tblStyle w:val="ab"/>
+    <w:tblW w:w="0" w:type="auto"/>
+    <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+  </w:tblPr>
+  <w:tblGrid>
+    <w:gridCol w:w="6000"/>
+    <w:gridCol w:w="4675"/>
+  </w:tblGrid>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Поле</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Значение</w:t></w:r></w:p></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Скорость потока в зоне износа, м/с</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Наличие взвешенных частиц (да / нет, какие)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+</w:tbl>
+<w:p/>
+<w:p><w:pPr><w:pStyle w:val="2"/></w:pPr><w:r><w:t>4.4. Химическое воздействие</w:t></w:r></w:p>
+<w:tbl>
+  <w:tblPr>
+    <w:tblStyle w:val="ab"/>
+    <w:tblW w:w="0" w:type="auto"/>
+    <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+  </w:tblPr>
+  <w:tblGrid>
+    <w:gridCol w:w="6000"/>
+    <w:gridCol w:w="4675"/>
+  </w:tblGrid>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Поле</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Значение</w:t></w:r></w:p></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Наименование вещества</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Концентрация, %</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Температура контакта, °C</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Характер контакта (постоянно / периодически / проливы с уборкой)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+</w:tbl>
+<w:p/>
+<w:p><w:pPr><w:pStyle w:val="2"/></w:pPr><w:r><w:t>4.5. Ударные / вибрационные нагрузки, налипание, биообрастание</w:t></w:r></w:p>
+<w:tbl>
+  <w:tblPr>
+    <w:tblStyle w:val="ab"/>
+    <w:tblW w:w="0" w:type="auto"/>
+    <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+  </w:tblPr>
+  <w:tblGrid>
+    <w:gridCol w:w="6000"/>
+    <w:gridCol w:w="4675"/>
+  </w:tblGrid>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Поле</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Значение</w:t></w:r></w:p></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Удары / вибрация (характер, частота)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Налипание продукта (что налипает)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Биообрастание (для судовых деталей)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+</w:tbl>
+<w:p/>
+<w:p><w:pPr><w:pStyle w:val="1"/></w:pPr><w:r><w:t>Блок 5. Задача и приложения</w:t></w:r></w:p>
+<w:tbl>
+  <w:tblPr>
+    <w:tblStyle w:val="ab"/>
+    <w:tblW w:w="0" w:type="auto"/>
+    <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+  </w:tblPr>
+  <w:tblGrid>
+    <w:gridCol w:w="6000"/>
+    <w:gridCol w:w="4675"/>
+  </w:tblGrid>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Поле</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Значение</w:t></w:r></w:p></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Формулировка задачи (что хотим получить)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Пожелания по покрытию: желаемая твёрдость по Шор А и/или тип — если есть предпочтения (необязательно)</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Чертежи (в Приложении), кол-во листов</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Фото (в Приложении), шт.</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Другие параметры / пожелания</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+</w:tbl>
+<w:p/>
+<w:p><w:pPr><w:pStyle w:val="1"/></w:pPr><w:r><w:t>Блок 6. Составил</w:t></w:r></w:p>
+<w:tbl>
+  <w:tblPr>
+    <w:tblStyle w:val="ab"/>
+    <w:tblW w:w="0" w:type="auto"/>
+    <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+  </w:tblPr>
+  <w:tblGrid>
+    <w:gridCol w:w="6000"/>
+    <w:gridCol w:w="4675"/>
+  </w:tblGrid>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Поле</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Значение</w:t></w:r></w:p></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Должность</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Ф.И.О.</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Телефон</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+  <w:tr>
+    <w:tc><w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>e-mail</w:t></w:r></w:p></w:tc>
+    <w:tc><w:tcPr><w:tcW w:w="4675" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+  </w:tr>
+</w:tbl>
+<w:p/>
+<w:p>
+  <w:r><w:rPr><w:b/></w:rPr><w:t>УТВЕРЖДАЮ</w:t></w:r>
+  <w:r><w:t xml:space="preserve">  _______________________________________________</w:t></w:r>
+</w:p>
+<w:p><w:r><w:rPr><w:i/></w:rPr><w:t>(руководитель подразделения Заказчика — должность, подпись, Фамилия И.О.)</w:t></w:r></w:p>
+<w:p><w:r><w:t xml:space="preserve">Заполненный бланк с приложениями (чертежи, фото) отправьте на e-mail: </w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t>MultiCrete@mail.ru</w:t></w:r><w:r><w:t>. Мы подберём покрытие и подготовим предварительный расчёт.</w:t></w:r></w:p>
