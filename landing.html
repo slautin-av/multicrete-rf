@@ -261,6 +261,8 @@
     .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
     .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem; }
     .grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; }
+    .start-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.5rem; }
+    @media (max-width: 640px) { .start-cards { grid-template-columns: 1fr; } }
 
     .sphere-card { text-align: center; }
     .sphere-card .hex { background: transparent; clip-path: none; filter: none; margin: 0 auto .85rem; width: 56px; height: 56px; }
@@ -828,6 +830,29 @@
       <div class="card sphere-card"><div class="hex"><i data-lucide="settings"></i></div><h3>Ремонт изношенного оборудования</h3></div>
       <div class="card sphere-card"><div class="hex"><i data-lucide="shield-plus"></i></div><h3>Защита нового оборудования</h3></div>
       <div class="card sphere-card"><div class="hex"><i data-lucide="flame"></i></div><h3>Ремонт после пожара</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ START (С чего начать) ══ -->
+<section class="section" id="start">
+  <div class="wrap">
+    <span class="sec-label">// С чего начать</span>
+    <h2 class="sec-title">Посчитайте сами или пришлите данные на подбор</h2>
+    <p class="sec-sub">Два простых способа начать — выберите удобный.</p>
+    <div class="start-cards">
+      <div class="card" style="display:flex;flex-direction:column;gap:1rem;align-items:flex-start">
+        <div class="hex"><i data-lucide="calculator"></i></div>
+        <h3>Онлайн-калькулятор</h3>
+        <p style="color:var(--muted);flex:1;margin:0">За минуту прикиньте предварительную стоимость покрытия по трём параметрам — без звонков и ожидания.</p>
+        <button class="btn btn-primary" onclick="openCalcModal(this)"><i data-lucide="calculator"></i> Рассчитать стоимость</button>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;gap:1rem;align-items:flex-start">
+        <div class="hex"><i data-lucide="file-text"></i></div>
+        <h3>Опросной лист</h3>
+        <p style="color:var(--muted);flex:1;margin:0">Скачайте бланк, заполните по вашей детали и пришлите нам — подберём покрытие и подготовим расчёт.</p>
+        <a class="btn btn-secondary" href="anketa/oprosnyj-list-multicrete.docx" download="Опросной лист МультиКрит.docx"><i data-lucide="download"></i> Скачать опросной лист</a>
+      </div>
     </div>
   </div>
 </section>
