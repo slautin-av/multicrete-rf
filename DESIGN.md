@@ -4,7 +4,7 @@
 
 Логотип, цвета, шрифты, тон голоса, юридика — берутся из `multicrete-brand/brand.md` (источник истины бренда). Этот файл описывает **веб-реализацию**: тему, токены, компоненты, скевоморфизм в коде, фон-дым, сетку, отступы, анимацию, адаптивность.
 
-> **Статус:** v2.0 (2026-07-01) синхронизирован с фактическим кодом сайта — `landing.html` (весь CSS в `<style>`) и `calculator/calculator.css`. Это описание — эталон для будущих проектов: новые страницы/сайты должны повторять именно эти решения.
+> **Статус:** v2.1 (2026-07-01) синхронизирован с фактическим кодом сайта — `landing.html` (весь CSS в `<style>`) и `calculator/calculator.css`; добавлен раздел «Кейс — карточка и страница для сайта» как эталон для генератора кейсов (`multicrete-cases`). Это описание — эталон для будущих проектов: новые страницы/сайты/кейсы должны повторять именно эти решения.
 
 ## Ссылка на бренд
 
@@ -199,6 +199,179 @@ body { background: transparent; } /* контент поверх дыма */
 
 ---
 
+## Кейс — карточка и страница для сайта (для генератора кейсов)
+
+Этот раздел — **самодостаточный эталон** для ассистента проекта `multicrete-cases`: как из `кейс.md` (проблема / решение / результат / цифры / подписи к фото) собрать визуальный кейс для сайта мультикрит.рф так, чтобы все кейсы выглядели **однотипно и в фирменной тёмной теме**. Всё, что нужно (токены, шрифты, классы, готовый HTML), — ниже; лазить в код сайта не требуется.
+
+### Правила кейса (обязательные)
+
+1. **Тема — тёмная**, токены из таблицы `:root` выше. Никаких светлых фонов. Текст `--ink`, панели `--steel`, утопленные цифры `--scale`, акцент-цифры `#7FB0E6`.
+2. **Розовый `--pink` — только** на бейдже «После» и на главной CTA. Всё остальное действие/акцент — синий/светлый. Правило «розовый = действие» не размывать.
+3. **Тип задачи → цвет гекс-бейджа:** Бетон `--concrete`, Металл `--metal`, Химзащита `--chem`, Гидро `--hydro`. Насос/колесо/мешалка/шнек = обычно Металл.
+4. **Приватность (модель двух файлов).** Публичная страница строится из `кейс_публичный.md`. По умолчанию **НЕ показывать**: имя заказчика, точную сумму, контакты. Цифры эффекта — проценты/сроки (`+220% срок службы`, `простой с 14 до 3 дней`), а не рубли. Показывать заказчика/сумму — только если по кейсу явно разрешено.
+5. **Тон — инженер инженеру, от ценности для читателя** (проблема узнаётся → решение рабочее → эффект измерим → «применимо у меня»). Без рекламных штампов, восклицаний, давления. Совпадает с `brand.md` и PROJECT.md генератора кейсов.
+6. **Цифры — только из `кейс.md`** (единый источник правды). Не выдумывать, пустой слот не заполнять «водой».
+
+### Маппинг `кейс.md` → визуальные блоки
+
+| Из `кейс.md` | Блок на странице | Классы / токены |
+|---|---|---|
+| `part` + тип задачи | Заголовок кейса + гекс-бейдж типа | `.sec-title` (Oswald) + `.hex` (цвет по типу) |
+| `elastomer`, `warranty`, отрасль, ключевой KPI | **Snapshot-бокс** над сгибом (сводка) | `.case-snapshot` (сетка `.spec-cell`) |
+| Фото «до» / «после» | Блок «до/после» с зумом | `.dp__*` (уже есть на сайте) |
+| `## Проблема` / `## Решение` / `## Результат` | Три текстовых блока с метками | `.sec-label` + подзаголовок + текст `--muted`/`--ink` |
+| `## Цифры` | Сетка утопленных шкал | `.spec-cell` + `.spec-num` (`#7FB0E6`) |
+| `## Подписи к фото` | Галерея с подписями | `.card` в `.grid-3` |
+| — | CTA внизу | `.btn-primary` «Рассчитать стоимость» + `.btn-secondary` «Скачать опросной лист» |
+
+### Готовый HTML — карточка кейса (для галереи «Примеры работ» / индекса кейсов)
+
+Компактная карточка-ссылка на полную страницу. Ставится в `.grid-3`/`.grid-4` рядом с другими кейсами — единообразно.
+
+```html
+<a class="card case-tile" href="cases/2024-04-biver-koleso-nasosa.html">
+  <div class="case-tile__media">
+    <img src="cases/media/biver-after.jpg" alt="Рабочее колесо насоса после восстановления">
+    <span class="hex case-tile__type" style="background:var(--metal)"><i data-lucide="settings"></i></span>
+  </div>
+  <h3 class="case-tile__title">Рабочее колесо насоса</h3>
+  <p class="case-tile__sub">Восстановление эластомером МультиКрит765</p>
+  <div class="case-tile__kpi"><span class="spec-num">+3 года</span><span class="spec-cap">срок службы</span></div>
+</a>
+```
+
+### Готовый HTML — страница кейса (отдельный файл `cases/<slug>.html`)
+
+Самодостаточная страница: подключает те же шрифты и токены, что и сайт, и переиспользует его классы. Ниже — скелет, заполненный реальным примером (кейс Бивер). Ассистент подставляет данные из `кейс.md`, соблюдая правила приватности.
+
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Кейс: восстановление рабочего колеса насоса — МультиКрит</title>
+  <meta name="description" content="Восстановление изношенного рабочего колеса насоса эластомером МультиКрит765: защита от кавитации и абразива, ввод в работу через 4 суток.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=Tektur:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --blue:#2F66A5; --blue-d:#244F80; --pink:#EB4D8C; --pink-d:#A52350;
+      --ink:#EAF0F7; --steel:#212C3D; --scale:#19222F; --line:#34435A; --muted:#93A1B5; --bg:#1A2332;
+      --concrete:#6B7280; --metal:#4A6580; --chem:#2F66A5; --hydro:#1E5973; --red:#D64550; --max:1000px;
+      --f-head:'Oswald',sans-serif; --f-body:'Manrope',sans-serif; --f-tech:'Tektur',sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box} *{margin:0;padding:0}
+    html{background:var(--bg)}
+    body{font-family:var(--f-body);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+    h1,h2,h3{font-family:var(--f-head);line-height:1.15;font-weight:600}
+    img{max-width:100%;display:block}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 1.5rem}
+    .section{padding:56px 0}
+    .sec-label{font-family:var(--f-tech);font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:#7FB0E6;display:inline-block;margin-bottom:.5rem}
+    .sec-title{font-size:clamp(1.7rem,4vw,2.4rem);margin-bottom:.75rem}
+    /* Панель/карточка */
+    .card{background:var(--steel);border-radius:12px;padding:1.5rem;
+      box-shadow:0 8px 24px rgba(26,35,50,.18),inset 0 1px 0 rgba(255,255,255,.06)}
+    /* Утопленная шкала-цифра */
+    .spec-cell{background:var(--scale);border-radius:8px;padding:1rem 1.25rem;text-align:center;
+      box-shadow:inset 0 2px 4px rgba(0,0,0,.35),inset 0 -1px 0 rgba(255,255,255,.05)}
+    .spec-num{font-family:var(--f-head);font-size:1.6rem;font-weight:700;color:#7FB0E6;display:block}
+    .spec-cap{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+    /* Гекс-бейдж типа */
+    .hex{width:48px;height:48px;display:inline-flex;align-items:center;justify-content:center;color:#fff;
+      clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+    /* Кнопки */
+    .btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--f-body);font-weight:700;font-size:.95rem;
+      padding:.85rem 1.75rem;border:none;border-radius:10px;cursor:pointer;text-decoration:none}
+    .btn-primary{background:var(--pink);color:#fff;box-shadow:0 4px 0 var(--pink-d),0 0 24px rgba(235,77,140,.3)}
+    .btn-secondary{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px rgba(127,176,230,.5)}
+    /* Snapshot-бокс */
+    .case-snapshot{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin:1.5rem 0}
+    /* Блок до/после */
+    .dp__pair{display:grid;grid-template-columns:1fr 1fr;gap:24px;position:relative;margin:1.5rem 0}
+    .dp__pair::after{content:'';position:absolute;top:14%;bottom:14%;left:50%;width:2px;transform:translateX(-50%);
+      background:linear-gradient(180deg,transparent,rgba(235,77,140,.55),transparent);filter:blur(1px)}
+    .dp__panel{text-align:center}
+    .dp__frame img{width:100%;border-radius:10px;filter:drop-shadow(0 14px 34px rgba(0,0,0,.5))}
+    .dp__badge{display:inline-flex;font-family:var(--f-head);font-weight:600;text-transform:uppercase;letter-spacing:.16em;
+      font-size:.85rem;padding:.4rem 1.1rem;border-radius:10px;margin-bottom:.6rem}
+    .dp__badge--before{color:var(--ink);background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+    .dp__badge--after{color:#fff;background:var(--pink);box-shadow:0 4px 0 var(--pink-d),0 0 24px rgba(235,77,140,.35)}
+    .case-block{margin:2rem 0}
+    .case-block p{color:var(--muted);margin-top:.5rem}
+    .case-block p strong{color:var(--ink)}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .gallery figcaption{font-size:.8rem;color:var(--muted);margin-top:.5rem}
+    .case-cta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem}
+    @media(max-width:720px){.case-snapshot{grid-template-columns:repeat(2,1fr)} .dp__pair{grid-template-columns:1fr}
+      .dp__pair::after{display:none} .grid-3{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <main class="wrap section">
+    <!-- Заголовок + тип задачи -->
+    <span class="hex" style="background:var(--metal)"><i data-lucide="settings"></i></span>
+    <span class="sec-label">// Кейс · Металл · насосное оборудование</span>
+    <h1 class="sec-title">Восстановление рабочего колеса насоса</h1>
+
+    <!-- Snapshot-бокс (сводка над сгибом) -->
+    <div class="case-snapshot">
+      <div class="spec-cell"><span class="spec-num">М765</span><span class="spec-cap">эластомер</span></div>
+      <div class="spec-cell"><span class="spec-num">65</span><span class="spec-cap">Shore A</span></div>
+      <div class="spec-cell"><span class="spec-num">4&nbsp;сут</span><span class="spec-cap">до ввода в работу</span></div>
+      <div class="spec-cell"><span class="spec-num">12&nbsp;мес</span><span class="spec-cap">гарантия</span></div>
+    </div>
+
+    <!-- До / после -->
+    <div class="dp__pair">
+      <div class="dp__panel"><span class="dp__badge dp__badge--before">До</span>
+        <div class="dp__frame"><img src="media/biver-before.jpg" alt="Колесо до: износ футеровки, оголён металл"></div></div>
+      <div class="dp__panel"><span class="dp__badge dp__badge--after">После</span>
+        <div class="dp__frame"><img src="media/biver-after.jpg" alt="Колесо после: новый эластомерный обод"></div></div>
+    </div>
+
+    <!-- Проблема / Решение / Результат -->
+    <div class="case-block"><span class="sec-label">// Проблема</span>
+      <p>Полиуретановая футеровка колеса разрушилась: абразивный поток и кавитация сорвали защитный слой местами до металла, геометрия лопастей потеряна. Дальнейшая работа вела к падению КПД и риску повреждения самого колеса.</p></div>
+    <div class="case-block"><span class="sec-label">// Решение</span>
+      <p>Поверхность подготовили, установили формовочную оснастку по наружному диаметру и сформировали новый слой эластомера <strong>МультиКрит765</strong>. Твёрдость подобрана под исходный материал — характеристики детали сохранены.</p></div>
+    <div class="case-block"><span class="sec-label">// Результат</span>
+      <p>Геометрия покрытия полностью восстановлена, работы выполнены в срок, деталь введена в эксплуатацию через 4 суток. Покрытие принимает ударно-абразивную нагрузку на себя вместо металла колеса.</p></div>
+
+    <!-- Цифры (утопленные шкалы) -->
+    <div class="case-snapshot">
+      <div class="spec-cell"><span class="spec-num">до&nbsp;45&nbsp;мм</span><span class="spec-cap">толщина покрытия</span></div>
+      <div class="spec-cell"><span class="spec-num">65</span><span class="spec-cap">Shore A</span></div>
+      <div class="spec-cell"><span class="spec-num">20&nbsp;°C</span><span class="spec-cap">температура нанесения</span></div>
+      <div class="spec-cell"><span class="spec-num">4&nbsp;сут</span><span class="spec-cap">отверждение</span></div>
+    </div>
+
+    <!-- Галерея с подписями -->
+    <div class="grid-3 gallery">
+      <figure class="card"><img src="media/step-1.jpg" alt=""><figcaption>Бандаж по наружному диаметру, видна изношенная поверхность.</figcaption></figure>
+      <figure class="card"><img src="media/step-2.jpg" alt=""><figcaption>Опалубочные вставки перед нанесением эластомера.</figcaption></figure>
+      <figure class="card"><img src="media/step-3.jpg" alt=""><figcaption>Свежий слой МультиКрит765 на восстановленной поверхности.</figcaption></figure>
+    </div>
+
+    <!-- CTA -->
+    <div class="case-cta">
+      <a class="btn btn-primary" href="../landing.html#start"><i data-lucide="calculator"></i> Рассчитать стоимость</a>
+      <a class="btn btn-secondary" href="../anketa/oprosnyj-list-multicrete.docx" download="Опросной лист МультиКрит.docx"><i data-lucide="download"></i> Скачать опросной лист</a>
+    </div>
+  </main>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
+```
+
+> **Приватность в примере:** заказчик «Бивер», сумма 68 327,73 руб. и контакт **намеренно не показаны** — на публичной странице их нет (правило 4). Если по кейсу разрешено — добавить строку заказчика в snapshot и/или отзыв.
+> **Фон-дым (WebGL):** на отдельной странице кейса опционален. Для простоты выше — статический тёмный фон `--bg`; при желании подключить холст `#fluid-bg` и `assets/js/webgl-fluid.umd.js` как на лендинге.
+> **Слаг файла:** латиница/дефисы (`cases/2024-04-biver-koleso-nasosa.html`) — правило имён из CLAUDE.md сайта.
+
+---
+
 ## Сетка и отступы
 
 | Элемент | Значение |
@@ -300,6 +473,7 @@ body { background: transparent; } /* контент поверх дыма */
 | 1.0 | 2026-06-12 | Создан DESIGN.md (урок 3.05): скевоморфизм, компоненты, сетка, адаптивность, edge cases (описана светлая тема) |
 | 1.1 | 2026-06-12 | Урок 3.06: фирменный приём контурных иконок с градиентом синий→розовый |
 | **2.0** | **2026-07-01** | **Синхронизация с фактическим кодом: тема переведена на ТЁМНУЮ (панели `#212C3D`, шкалы `#19222F`, текст `#EAF0F7`); добавлен раздел про интерактивный WebGL-дым (снят прежний запрет WebGL); выписана точная таблица токенов `:root` + акцент на тёмном `#7FB0E6`; исправлена вторичная кнопка (светлый/синий контур, не розовый); реальные брейкпойнты 480/640/768/1024; разделены реализованный лендинг и планируемый каталог; компоненты приведены к фактическим классам** |
+| **2.1** | **2026-07-01** | **Добавлен самодостаточный раздел «Кейс — карточка и страница для сайта» для генератора кейсов `multicrete-cases`: маппинг `кейс.md` (проблема/решение/результат/цифры/фото) → визуальные блоки, правила (тёмная тема, розовый только на «После»+CTA, цвет бейджа по типу, приватность, инженерный тон), готовый HTML карточки-кейса и отдельной страницы кейса с реальным примером** |
 
 При изменениях бренда — синхронизируй с `brand.md`. При изменении кода сайта — обновляй токены/компоненты здесь и версию.
 
