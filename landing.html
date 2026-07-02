@@ -178,8 +178,9 @@
     .strip-hex { background: var(--blue); width: 42px; height: 42px; flex-shrink: 0; }
     .strip-hex i { width: 20px; height: 20px; }
     .strip-text { flex: 1; text-align: center;
-      font-family: var(--f-head); font-weight: 600; font-size: clamp(1rem, 3vw, 2rem);
-      text-transform: uppercase; color: var(--blue); letter-spacing: .28em; }
+      font-family: var(--f-head); font-weight: 700; font-size: clamp(1rem, 3vw, 2rem);
+      text-transform: uppercase; color: var(--pink); letter-spacing: .28em;
+      text-shadow: 0 0 18px rgba(235,77,140,.35); }
     .hero-text-block { text-align: center; padding-top: 2.25rem; max-width: 820px; margin: 0 auto; }
     .hero-text-block .hero-ctas, .hero-text-block .hero-stats { justify-content: center; }
     .hero-text-block .hero-stats { max-width: 560px; margin: 0 auto; }
@@ -256,6 +257,18 @@
     .contact-row .hex svg { width: 30px; height: 30px; }
     .tech-feat h4 { font-size: 1.05rem; margin-bottom: .4rem; }
     .tech-feat p { font-size: .88rem; color: var(--muted); }
+    /* ── Технология: раскладка «текст слева / картинка + карточки справа» ── */
+    /* Сетка 2×2: [текст | картинка] и [чипы | две карточки] — ряды делят высоту, верх выровнен */
+    .tech-top { display: grid; grid-template-columns: 1fr 1.15fr; gap: 1.75rem 2.75rem; align-items: stretch; margin-bottom: 2.5rem; }
+    .tech-media { display: flex; align-items: center; }
+    .tech-media img { width: 100%; height: auto; display: block; }
+    /* Две карточки растягиваются на высоту блока чипов слева (тот же ряд сетки) */
+    .tech-grid--compact { margin: 0; gap: 1rem; grid-template-rows: 1fr; }
+    .tech-grid--compact .tech-card { padding: 1.15rem 1.3rem; display: flex; flex-direction: column; }
+    .tech-grid--compact .tech-card h3 { font-size: 1.18rem; margin-bottom: .5rem; }
+    .tech-grid--compact .tech-card p { font-size: .92rem; }
+    .tech-grid--compact .tech-card-label { font-size: .85rem; margin-bottom: .6rem; }
+    @media (max-width: 900px) { .tech-top { grid-template-columns: 1fr; gap: 1.75rem; } }
 
     /* ── GRID секции ── */
     .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
@@ -346,7 +359,7 @@
     .contact-row .hex { background: transparent; clip-path: none; filter: none; width: 40px; height: 40px; }
     .contact-row .hex i { width: 18px; height: 18px; }
     .contact-row a { font-weight: 600; color: var(--ink); }
-    .contacts-map { background: var(--steel); border-radius: 14px; padding: 2rem; text-align: center;
+    .contacts-map { background: var(--steel); border-radius: 14px; padding: 1.5rem 1.25rem; text-align: center;
       box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 8px 24px rgba(26,35,50,.08);
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .75rem; }
     .contacts-map i { width: 40px; height: 40px; color: var(--blue); }
@@ -417,14 +430,32 @@
 
     /* Акценты-текст ярче для контраста на тёмном (синий металлик в тексте) */
     .sec-label, .hero h1 .accent, .hero-badge,
-    .hero-guarantee, .strip-text { color: #7FB0E6; }
+    .hero-guarantee { color: #7FB0E6; }
     .h-stat-num, .spec-num { color: #7FB0E6; }
 
     /* Hero — прозрачный, чтобы дым проступал сильнее всего на первом экране */
     .hero.hero-dark { background: transparent; }
+    /* Верхняя плашка — объёмная приподнятая рамка с розовым абрисом; при наведении слегка растёт */
     .hero.hero-dark .hero-strip {
-      background: rgba(255,255,255,.04);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      border: 1px solid rgba(235,77,140,.35);
+      box-shadow:
+        0 10px 26px rgba(0,0,0,.38),
+        0 2px 6px rgba(0,0,0,.25),
+        0 0 22px rgba(235,77,140,.12),
+        inset 0 1px 0 rgba(255,255,255,.18);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      will-change: transform;
+    }
+    .hero.hero-dark .hero-strip:hover {
+      transform: scale(1.025);
+      border-color: rgba(235,77,140,.6);
+      box-shadow:
+        0 16px 36px rgba(0,0,0,.44),
+        0 4px 10px rgba(0,0,0,.3),
+        0 0 34px rgba(235,77,140,.32),
+        inset 0 1px 0 rgba(255,255,255,.22);
     }
     /* Вторичная кнопка — читаемый контур на тёмном */
     .btn-secondary { color: #EAF0F7; box-shadow: inset 0 0 0 1.5px rgba(127,176,230,.5); }
@@ -481,6 +512,26 @@
       .dp__impacts { grid-template-columns: 1fr; }
     }
 
+    /* ── Hero: ряд возможностей сверх защиты (горизонтальные карточки) ── */
+    .dp__caps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+    .dp__cap { display: flex; gap: .85rem; align-items: center; padding: .85rem 1rem; }
+    .dp__cap .hex { flex: none; width: 46px; height: 46px; background: var(--metal); margin: 0; }
+    .dp__cap .hex svg { width: 26px; height: 26px; }
+    .dp__cap h4 { font-size: .95rem; margin: 0; line-height: 1.2; }
+    @media (max-width: 900px) { .dp__caps { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .dp__caps { grid-template-columns: 1fr; } }
+
+    /* ── «Где применять»: минимальный блок с большой живой кнопкой ── */
+    .where-wrap { text-align: center; max-width: 760px; margin: 0 auto; }
+    .where-wrap .sec-sub { margin: 1.1rem auto 2.4rem; }
+    .btn-xl { font-size: 1.15rem; padding: 1.1rem 2.6rem; border-radius: 12px;
+      transition: transform .2s ease, box-shadow .2s ease; }
+    .btn-xl i { width: 22px; height: 22px; }
+    .btn-xl.btn-primary:hover { transform: translateY(-2px);
+      box-shadow: 0 8px 0 var(--pink-d), 0 0 44px rgba(235,77,140,.6); }
+    .btn-xl.btn-primary:active { transform: translateY(2px);
+      box-shadow: 0 2px 0 var(--pink-d), 0 0 20px rgba(235,77,140,.5); }
+
     /* ── Оборудование: установка МультиКрит М700 ── */
     .equip-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 3rem; align-items: center; }
     .equip-text .sec-title .accent { color: var(--blue); }
@@ -501,6 +552,110 @@
     @media (max-width: 480px) {
       .equip-specs { grid-template-columns: repeat(2, 1fr); }
     }
+
+    /* ── Лента кейсов: горизонтальная прокрутка (НЕ автокарусель), масштабируется по мере добавления ── */
+    .case-strip {
+      display: grid; grid-auto-flow: column; grid-auto-columns: minmax(280px, 320px);
+      gap: 1.25rem; margin-top: 1.5rem; padding: .25rem .25rem 1.25rem;
+      overflow-x: auto; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
+    }
+    .case-strip::-webkit-scrollbar { height: 8px; }
+    .case-strip::-webkit-scrollbar-track { background: var(--scale); border-radius: 4px; }
+    .case-strip::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+    .case-tile {
+      scroll-snap-align: start; display: flex; flex-direction: column;
+      padding: 0; overflow: hidden; text-decoration: none;
+    }
+    .case-tile__media {
+      position: relative; aspect-ratio: 16 / 10; line-height: 0;
+      background: linear-gradient(135deg, var(--blue-d), var(--scale));
+      display: flex; align-items: center; justify-content: center;
+    }
+    .case-tile__media img { width: 100%; height: 100%; object-fit: cover; }
+    /* Водяной знак, пока нет фото узла (деградирует красиво) */
+    .case-tile__media .case-tile__ghost { color: rgba(127,176,230,.18); }
+    .case-tile__media .case-tile__ghost svg { width: 88px; height: 88px; }
+    .case-tile__type { position: absolute; top: .75rem; left: .75rem; width: 40px; height: 40px; }
+    .case-tile__type i { width: 20px; height: 20px; }
+    .case-tile__title { font-size: 1.12rem; padding: 1rem 1.25rem 0; color: var(--ink); }
+    .case-tile__sub { font-size: .85rem; color: var(--muted); padding: .25rem 1.25rem 0; }
+    .case-tile__kpi { display: flex; align-items: baseline; gap: .5rem;
+      padding: .75rem 1.25rem 1.25rem; margin-top: auto; }
+    .case-tile__kpi .spec-num { font-size: 1.4rem; color: #7FB0E6; font-family: var(--f-head); font-weight: 700; }
+    .case-tile__kpi .spec-cap { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+    /* ── Технология: маленькие чипы «виды работ» (2 ряда × 3) в левой колонке ── */
+    .tech-kinds { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: .6rem; }
+    .tech-kind { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: .45rem;
+      padding: .8rem .5rem; }
+    .tech-kind .hex { width: 36px; height: 36px; background: transparent; clip-path: none; filter: none; margin: 0; }
+    .tech-kind .hex svg { width: 24px; height: 24px; stroke: url(#brand-grad); stroke-width: 1.6; }
+    .tech-kind span:last-child { font-size: .74rem; color: var(--ink); font-weight: 600; line-height: 1.2; }
+    @media (max-width: 420px) { .tech-kinds { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ── Отзывы: карусель карточек + лайтбокс ── */
+    .reviews-carousel { display: flex; align-items: center; gap: .75rem; }
+    .reviews-grid { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; text-align: left; }
+    .reviews-arrow { flex: none; width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--steel); border: 1px solid var(--line); color: var(--ink); cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
+      transition: background .2s, transform .2s; }
+    .reviews-arrow:hover { background: var(--blue); transform: scale(1.08); }
+    .reviews-arrow i { width: 24px; height: 24px; }
+    @media (max-width: 560px) { .reviews-arrow { width: 40px; height: 40px; } .reviews-carousel { gap: .35rem; } .reviews-arrow i { width: 20px; height: 20px; } }
+
+    /* Просмотр скана оригинала — оверлей поверх страницы */
+    .orig-overlay { position: fixed; inset: 0; background: rgba(26,35,50,.82); backdrop-filter: blur(4px);
+      display: none; align-items: center; justify-content: center; z-index: 130; padding: 2rem 1rem; }
+    .orig-overlay.open { display: flex; }
+    .orig-overlay img { max-width: min(760px, 94vw); max-height: 90vh; width: auto; height: auto;
+      object-fit: contain; border-radius: 8px; background: #fff; box-shadow: 0 24px 60px rgba(0,0,0,.6); }
+    .orig-close { position: fixed; top: 1rem; right: 1.25rem; font-size: 2rem; color: #fff; z-index: 131; }
+    .review-card { cursor: pointer; display: flex; flex-direction: column; gap: .85rem; }
+    .review-card__head { display: flex; align-items: center; gap: .7rem; }
+    .review-card__head .hex { width: 44px; height: 44px; flex-shrink: 0; }
+    .review-card__head .hex i { width: 20px; height: 20px; }
+    .review-card__co { font-family: var(--f-head); font-weight: 600; font-size: 1rem; color: var(--ink); line-height: 1.2; }
+    .review-card__tag { font-family: var(--f-tech); font-size: .66rem; text-transform: uppercase; letter-spacing: .06em; color: #7FB0E6; margin-top: .15rem; }
+    .review-card__quote { font-size: .92rem; color: var(--muted); font-style: italic; flex: 1;
+      display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+    .review-card__more { font-size: .82rem; color: var(--pink); font-weight: 700; display: inline-flex; align-items: center; gap: .35rem; }
+    .review-card__more i { width: 15px; height: 15px; }
+
+    .review-overlay { position: fixed; inset: 0; background: rgba(26,35,50,.6); backdrop-filter: blur(4px);
+      display: none; align-items: center; justify-content: center; z-index: 120; padding: 1rem; }
+    .review-overlay.open { display: flex; }
+    .review-modal { background: #212C3D; border-radius: 16px; padding: 2rem; max-width: 640px; width: 100%;
+      max-height: 88vh; overflow: auto; position: relative; box-shadow: 0 24px 60px rgba(0,0,0,.5); text-align: left; }
+    .review-modal__tag { font-family: var(--f-tech); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em;
+      color: #7FB0E6; margin-bottom: .5rem; padding-right: 6.5rem; }
+    .review-modal__co { font-size: 1.35rem; color: var(--ink); margin-bottom: .2rem; padding-right: 6.5rem; }
+    .review-modal__role { font-size: .85rem; color: var(--muted); margin-bottom: 1.1rem; padding-right: 6.5rem; }
+    /* Миниатюра скана оригинала — у крестика (правый верх) */
+    .review-modal__orig { position: absolute; top: 1rem; right: 3.4rem; width: 52px; height: 68px;
+      border-radius: 6px; overflow: hidden; display: block; background: #fff;
+      border: 1px solid var(--line); box-shadow: 0 4px 14px rgba(0,0,0,.45); }
+    .review-modal__orig img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .review-modal__orig-badge { position: absolute; right: 3px; bottom: 3px; width: 18px; height: 18px; border-radius: 4px;
+      background: rgba(26,35,50,.82); display: flex; align-items: center; justify-content: center; }
+    .review-modal__orig-badge i { width: 12px; height: 12px; color: #fff; }
+    .review-modal__orig-cap { position: absolute; left: 0; right: 0; top: 0; text-align: center;
+      font-family: var(--f-tech); font-size: .5rem; text-transform: uppercase; letter-spacing: .05em;
+      color: #fff; background: rgba(47,102,165,.9); padding: 1px 0; }
+    .review-modal__orig:hover { box-shadow: 0 6px 18px rgba(0,0,0,.55); border-color: var(--blue); }
+    .review-modal__quote { font-size: 1.1rem; color: var(--ink); font-style: italic; line-height: 1.5;
+      border-left: 3px solid var(--pink); padding-left: 1rem; margin-bottom: 1.1rem; }
+    .review-modal__body { font-size: .95rem; color: var(--muted); line-height: 1.65; }
+    .review-modal__counter { font-family: var(--f-tech); font-size: .72rem; letter-spacing: .08em; color: var(--muted); margin-top: 1.25rem; }
+    .review-nav { position: fixed; top: 50%; transform: translateY(-50%); z-index: 121;
+      width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      background: var(--steel); border: 1px solid var(--line); color: var(--ink); cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0,0,0,.4); transition: background .2s, transform .2s; }
+    .review-nav:hover { background: var(--blue); transform: translateY(-50%) scale(1.08); }
+    .review-nav i { width: 24px; height: 24px; }
+    .review-nav--prev { left: 16px; }
+    .review-nav--next { right: 16px; }
+    @media (max-width: 720px) { .review-nav { width: 40px; height: 40px; } .review-nav--prev { left: 6px; } .review-nav--next { right: 6px; } }
   </style>
 </head>
 <body>
@@ -523,10 +678,10 @@
   <nav class="nav">
     <a href="/" class="nav-logo"><img src="assets/images/Logo_Multicrete.png" alt="МультиКрит"></a>
     <ul class="nav-links">
-      <li><a href="#spheres">Услуги</a></li>
-      <li><a href="#portfolio">Портфолио</a></li>
+      <li><a href="#spheres">Применение</a></li>
+      <li><a href="#portfolio">Кейсы</a></li>
       <li><a href="#specs">ТТХ</a></li>
-      <li><a href="#price">Цены</a></li>
+      <li><a href="#price">Прайс-лист</a></li>
       <li><a href="#contacts">Контакты</a></li>
     </ul>
     <div class="nav-right">
@@ -541,22 +696,16 @@
 <section class="hero hero-dark">
   <div class="wrap">
     <div class="hero-strip">
-      <span class="hex strip-hex"><i data-lucide="hexagon"></i></span>
       <span class="strip-text">Импортозамещение премиум-класса</span>
-      <span class="hex strip-hex"><i data-lucide="hexagon"></i></span>
     </div>
     <div class="hero-text-block">
       <h1><span class="accent">Эластомерная броня</span><br>для промышленности</h1>
       <p class="hero-tagline">Защита от износа, кавитации и коррозии. Российская альтернатива импортным эластомерным покрытиям.</p>
       <div class="hero-guarantee"><i data-lucide="shield"></i> Гарантия сохранности изделий до 3 лет</div>
-      <div class="hero-ctas">
-        <button class="btn btn-primary" onclick="openCalcModal(this)"><i data-lucide="calculator"></i> Получить расчёт</button>
-        <button class="btn btn-secondary" onclick="openModal()"><i data-lucide="phone"></i> Звонок инженера</button>
-      </div>
       <div class="hero-stats">
         <div><div class="h-stat-num">3–4×</div><div class="h-stat-label">Износостойкость<br>выше стали</div></div>
         <div><div class="h-stat-num">18</div><div class="h-stat-label">Месяцев<br>окупаемость</div></div>
-        <div><div class="h-stat-num">4–8</div><div class="h-stat-label">Мм толщина<br>покрытия</div></div>
+        <div><div class="h-stat-num">от 1</div><div class="h-stat-label">Мм — толщина<br>под задачу</div></div>
       </div>
     </div>
     <div class="dp">
@@ -611,43 +760,15 @@
           <div class="dp__row dp__row--fix"><span class="dp__lbl">Эластомер</span>Сплошной барьер изолирует металл от среды — коррозии не на чём начаться.</div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- ══ PROBLEM ══ -->
-<section class="section problem">
-  <div class="wrap problem-grid">
-    <div>
-      <span class="sec-label">// Проблема</span>
-      <h2 class="sec-title">Металл не выдерживает нагрузок</h2>
-      <div class="problem-items">
-        <div class="problem-item">
-          <div class="hex"><i data-lucide="cog"></i></div>
-          <div><h4>Абразивный износ</h4><p>Песок и руда уничтожают сталь. Оборудование изнашивается в разы быстрее нормы.</p></div>
-        </div>
-        <div class="problem-item">
-          <div class="hex"><i data-lucide="droplet"></i></div>
-          <div><h4>Кавитация и коррозия</h4><p>Вода и химия разрушают структуру металла. Насосы и трубопроводы выходят из строя.</p></div>
-        </div>
-        <div class="problem-item">
-          <div class="hex"><i data-lucide="lock"></i></div>
-          <div><h4>Залипание</h4><p>Простои на очистку 2 раза в сутки. Конвейеры, валы, воздуховоды.</p></div>
-        </div>
-      </div>
-      <div class="problem-cta-box">
-        <p>Простои стоят миллионы.</p>
-        <span>Каждый час остановки — прямые потери производства</span>
-      </div>
-    </div>
-    <div class="scenario">
-      <div class="spec-cell scenario-bad">
-        <div class="scenario-tag">Типичный сценарий</div>
-        <p style="font-size:.95rem">Рабочее колесо насоса — замена раз в <strong>3–6 месяцев</strong>. Стоимость узла: <strong>150–800 тыс. руб.</strong></p>
-      </div>
-      <div class="spec-cell scenario-good">
-        <div class="scenario-tag">С МультиКрит</div>
-        <p style="font-size:.95rem">Ресурс увеличивается в <strong>3–5 раз</strong>. Стоимость защиты в <strong>разы ниже</strong> покупки нового узла.</p>
+      <!-- Ряд возможностей сверх защиты (объединено с бывшим блоком «Применение») -->
+      <div class="dp__caps">
+        <div class="card dp__cap"><div class="hex"><i data-lucide="volume-x"></i></div><h4>Шумопоглощение</h4></div>
+        <div class="card dp__cap"><div class="hex"><i data-lucide="vibrate"></i></div><h4>Стойкость к вибрации</h4></div>
+        <div class="card dp__cap"><div class="hex"><i data-lucide="refresh-cw"></i></div><h4>Восстановление изношенных эластомерных покрытий</h4></div>
+        <div class="card dp__cap"><div class="hex"><i data-lucide="spray-can"></i></div><h4>Бесшовная технология нанесения</h4></div>
+        <div class="card dp__cap"><div class="hex"><i data-lucide="trending-up"></i></div><h4>Повышение КПД насосного оборудования</h4></div>
+        <div class="card dp__cap"><div class="hex"><i data-lucide="sparkles"></i></div><h4>Предотвращение налипания</h4></div>
       </div>
     </div>
   </div>
@@ -656,133 +777,64 @@
 <!-- ══ TECHNOLOGY ══ -->
 <section class="section">
   <div class="wrap">
-    <span class="sec-label">// Технология</span>
-    <h2 class="sec-title">Технология «Эффект батута»</h2>
-    <p class="sec-sub">Бесшовный монолитный кокон — химическая связь с металлом, любая геометрия, без швов.</p>
-    <div class="tech-grid">
-      <div class="card tech-card bad">
-        <div class="tech-card-label">✗ Эпоксид / металл</div>
-        <h3>Твёрдые, но хрупкие</h3>
-        <p>Трескаются как стекло при ударе. Откол покрытия — мгновенный выход из строя.</p>
+    <div class="tech-top">
+      <!-- Ряд 1: текст (слева) + картинка батута (справа) -->
+      <div class="tech-textcol">
+        <span class="sec-label">// Технология</span>
+        <h2 class="sec-title">Технология «Эффект батута»</h2>
+        <p class="sec-sub" style="margin-bottom:1rem">Упругая броня, которая не трескается от удара, а гасит его.</p>
+        <p class="sec-sub" style="max-width:820px;margin-bottom:0">Мы напыляем на деталь монолитный бесшовный слой полиуретанового эластомера — и он работает как батут. Там, где твёрдое покрытие принимает удар жёстко и идёт трещинами и сколами, эластомер прогибается: ловит летящий абразив и удар, поглощает и рассеивает их энергию в своей толще, а затем упруго возвращает форму. Разрушительная энергия гасится ещё на поверхности — металл под слоем остаётся целым. Толщину подбираем под характер воздействия: от 1 мм и практически без верхнего предела (обычно 2–6 мм) — столько, сколько нужно под конкретную задачу защиты. Твёрдость от 65 до 95 по Шору A (в зависимости от задачи) даёт тот самый баланс: покрытие достаточно упруго, чтобы амортизировать, и достаточно прочно, чтобы не изнашиваться.</p>
+        <span class="sec-label" style="display:block;margin-top:1.25rem">// Виды работ</span>
       </div>
-      <div class="card tech-card good">
-        <div class="tech-card-label">✓ МультиКрит 700</div>
-        <h3>Пружинит, гасит удар</h3>
-        <p>Возвращает форму после деформации. Эластомер работает как броня — поглощает, не разрушаясь.</p>
+      <div class="tech-media"><img src="assets/images/sections/batut.png" alt="Эффект батута: слева твёрдое покрытие трескается от удара, справа эластомер МультиКрит пружинит и гасит удар"></div>
+
+      <!-- Ряд 2: чипы (слева) + две карточки (справа) — один ряд сетки, совпадают верх и низ -->
+      <div class="tech-kinds">
+        <div class="card tech-kind"><span class="hex"><i data-lucide="wrench"></i></span><span>Восстановительный ремонт</span></div>
+        <div class="card tech-kind"><span class="hex"><i data-lucide="settings"></i></span><span>Ремонт изношенного оборудования</span></div>
+        <div class="card tech-kind"><span class="hex"><i data-lucide="shield-plus"></i></span><span>Защита нового оборудования</span></div>
+        <div class="card tech-kind"><span class="hex"><i data-lucide="shapes"></i></span><span>Восстановление геометрии узла</span></div>
+        <div class="card tech-kind"><span class="hex"><i data-lucide="sparkles"></i></span><span>Устранение налипания</span></div>
+        <div class="card tech-kind"><span class="hex"><i data-lucide="flame"></i></span><span>Ремонт после пожара</span></div>
+      </div>
+      <div class="tech-grid tech-grid--compact">
+        <div class="card tech-card bad">
+          <div class="tech-card-label">✗ Твёрдое покрытие</div>
+          <h3>Принимает удар жёстко</h3>
+          <p>Эпоксид, керамика, наплавка трескаются и скалываются. Откол — мгновенный выход из строя.</p>
+        </div>
+        <div class="card tech-card good">
+          <div class="tech-card-label">✓ Эластомер МультиКрит 700</div>
+          <h3>Пружинит и гасит удар</h3>
+          <p>Прогибается, поглощает энергию и возвращает форму. Работает как броня — амортизирует, не разрушаясь.</p>
+        </div>
       </div>
     </div>
-    <div class="tech-result"><p>Износостойкость выше стали в <span>3–4 раза.</span> Адгезия &gt; 100% — когезионный разрыв.</p></div>
     <div class="tech-features">
       <div class="card tech-feat">
         <div class="hex"><i data-lucide="link"></i></div>
-        <h4>100% адгезия</h4><p>Химическая связь с металлом. Отслоение невозможно.</p>
+        <h4>Адгезия &gt; 2,5 МПа</h4><p>Химическая связь с металлом, когезионный разрыв — отслоение исключено.</p>
+      </div>
+      <div class="card tech-feat">
+        <div class="hex"><i data-lucide="trending-up"></i></div>
+        <h4>Ресурс узла ×3–5</h4><p>Служит в 3–5 раз дольше — реже ремонты и меньше простоев.</p>
       </div>
       <div class="card tech-feat">
         <div class="hex"><i data-lucide="hexagon"></i></div>
-        <h4>Любая геометрия</h4><p>Бесшовное покрытие сложных форм: лопасти, колёса, трубопроводы.</p>
-      </div>
-      <div class="card tech-feat">
-        <div class="hex"><i data-lucide="shield"></i></div>
-        <h4>Без швов</h4><p>Монолитный кокон. Толщина 4–8 мм. Исключает риск отслоения.</p>
+        <h4>Любая геометрия, без швов</h4><p>Монолитный бесшовный кокон на сложных формах — лопасти, колёса, трубы. Нет подплёночной коррозии, продукт не налипает.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ EQUIPMENT ══ -->
-<section class="section" id="equipment">
-  <div class="wrap equip-grid">
-    <div class="equip-text">
-      <span class="sec-label">// Оборудование</span>
-      <h2 class="sec-title">Установка <span class="accent">МультиКрит М700</span></h2>
-      <p>Эластомер — это не краска: его не нанести кистью или валиком. Двухкомпонентный состав схватывается не более чем за 1–2 минуты, поэтому компоненты нужно подогреть, точно отдозировать и подать под определённым давлением — синхронно, в нужной пропорции. Без такого оборудования нанести эластомер физически невозможно.</p>
-      <p>Поэтому мы разработали собственную установку — <strong>МультиКрит М700</strong>. Это сердце нашей технологии: она подогревает оба компонента до рабочей температуры, насосами с частотным регулированием подаёт их в точной пропорции и через смесительный пистолет распыляет состав на поверхность. Автоматика держит заданную температуру и обеспечивает равномерное покрытие на любых объёмах. Компактный корпус на колёсах — установку легко перемещать прямо на объекте.</p>
-      <p>Установка создана специально под эластомеры <strong>МультиКрит серии 700</strong>.</p>
-    </div>
-    <div class="equip-media-col">
-      <div class="equip-media">
-        <img src="assets/images/sections/equipment-collage.png" alt="Установка напыления эластомеров МультиКрит М700: компоненты А и Б, общий вид на колёсах, шкаф управления">
-      </div>
-      <div class="equip-specs">
-        <div class="spec-cell"><div class="spec-num">5:1–1:1</div><div class="spec-cap">Пропорция</div></div>
-        <div class="spec-cell"><div class="spec-num">25+25 л</div><div class="spec-cap">Ёмкости, с подогревом</div></div>
-        <div class="spec-cell"><div class="spec-num">30 бар</div><div class="spec-cap">Рабочее давление</div></div>
-        <div class="spec-cell"><div class="spec-num">7,5 м</div><div class="spec-cap">Подающий шланг</div></div>
-        <div class="spec-cell"><div class="spec-num">220 В</div><div class="spec-cap">Питание, 3 кВт</div></div>
-        <div class="spec-cell"><div class="spec-num">85 кг</div><div class="spec-cap">900×500×600 мм</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ SPHERES ══ -->
+<!-- ══ WHERE (Где применять) ══ -->
 <section class="section" id="spheres">
-  <div class="wrap">
-    <span class="sec-label">// Отрасли</span>
-    <h2 class="sec-title">Сферы применения эластомеров</h2>
-    <div class="grid-3" style="margin-top:1.5rem">
-      <div class="card sphere-card"><div class="hex"><i data-lucide="pickaxe"></i></div><h3>Горнодобывающая промышленность</h3></div>
-      <div class="card sphere-card"><div class="hex"><i data-lucide="flask-conical"></i></div><h3>Химическая промышленность</h3></div>
-      <div class="card sphere-card"><div class="hex"><i data-lucide="anchor"></i></div><h3>Судостроение</h3></div>
-      <div class="card sphere-card"><div class="hex"><i data-lucide="droplets"></i></div><h3>Водоснабжение и водоотведение</h3></div>
-      <div class="card sphere-card"><div class="hex"><i data-lucide="fuel"></i></div><h3>Нефтегазовая промышленность</h3></div>
-      <div class="card sphere-card"><div class="hex"><i data-lucide="factory"></i></div><h3>Металлургическая отрасль</h3></div>
-    </div>
-    <div class="spheres-footer">
-      <button class="btn btn-primary" onclick="openModal()"><i data-lucide="phone"></i> Обсудить вашу задачу</button>
-      <span class="spheres-more">И ещё более 30 различных отраслей</span>
-    </div>
-  </div>
-</section>
-
-<!-- ══ APPLICATIONS ══ -->
-<section class="section">
-  <div class="wrap">
-    <span class="sec-label">// Применение</span>
-    <h2 class="sec-title">Для чего применяются эластомеры</h2>
-    <div class="grid-4" style="margin-top:1.5rem">
-      <div class="card app-card"><div class="hex"><i data-lucide="shield"></i></div><h3>Защита от ударов</h3><p>Гасит энергию удара, возвращает форму</p></div>
-      <div class="card app-card"><div class="hex"><i data-lucide="flask-conical"></i></div><h3>Защита от химического износа</h3><p>Кислоты, щёлочи, растворители</p></div>
-      <div class="card app-card"><div class="hex"><i data-lucide="zap"></i></div><h3>Защита от царапин и сколов</h3><p>Эластичный слой принимает повреждение</p></div>
-      <div class="card app-card"><div class="hex"><i data-lucide="tornado"></i></div><h3>Защита от абразива</h3><p>Песок, руда, шлам — материал выдерживает</p></div>
-      <div class="card app-card"><div class="hex"><i data-lucide="volume-x"></i></div><h3>Звукопоглощение</h3><p>Снижение шума и вибрации оборудования</p></div>
-      <div class="card app-card"><div class="hex"><i data-lucide="droplet"></i></div><h3>Герметизация</h3><p>Бесшовный монолитный кокон без зазоров</p></div>
-      <div class="card app-card"><div class="hex"><i data-lucide="refresh-cw"></i></div><h3>Восстановление покрытий</h3><p>Полиуретановые и резиновые детали</p></div>
-      <div class="card app-card"><div class="hex"><i data-lucide="trending-up"></i></div><h3>Повышение КПД насосов</h3><p>Снижение гидравлических потерь</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ SPECS ══ -->
-<section class="section" id="specs">
-  <div class="wrap">
-    <span class="sec-label">// Характеристики</span>
-    <h2 class="sec-title">ТТХ: эластомеры MultiCrete 765, 785, 795</h2>
-    <div class="specs-tabs" style="margin-top:1.5rem">
-      <button class="specs-tab active" id="tab-b" onclick="switchTab('b')">До отверждения</button>
-      <button class="specs-tab" id="tab-a" onclick="switchTab('a')">После отверждения</button>
-    </div>
-    <div class="card" style="padding:0;overflow:hidden">
-      <table class="specs-table" id="tbl-b">
-        <thead><tr><th>Показатель</th><th>765</th><th>785</th><th>795</th></tr></thead>
-        <tbody>
-          <tr><td>Соотношение компонентов по массе (А : Б)</td><td>100 : 72</td><td>100 : 58</td><td>100 : 89</td></tr>
-          <tr><td>Плотность смеси, г/см³</td><td>1,15</td><td>1,13</td><td>1,12</td></tr>
-          <tr><td>Расход при толщине 1 мм, кг/м²</td><td>1,25</td><td>1,2</td><td>1,2</td></tr>
-          <tr><td>Массовая доля нелетучих веществ, %</td><td>100</td><td>100</td><td>100</td></tr>
-          <tr><td>Время высыхания при +20±2 °C, сек *</td><td>60</td><td>60</td><td>60</td></tr>
-        </tbody>
-      </table>
-      <table class="specs-table" id="tbl-a" style="display:none">
-        <thead><tr><th>Показатель</th><th>765</th><th>785</th><th>795</th></tr></thead>
-        <tbody>
-          <tr><td>Твёрдость по Шор A</td><td>65</td><td>85</td><td>95</td></tr>
-          <tr><td>Прочность при разрыве, МПа</td><td>25</td><td>35</td><td>41</td></tr>
-          <tr><td>Относительное удлинение при разрыве, %</td><td>610</td><td>450</td><td>350</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="specs-foot">* для стандартного материала; по требованию заказчика — от 10 сек до 10 минут. Температура эксплуатации: от −50 до +130 °C (сухая среда), до +80 °C (влажная).</p>
+  <div class="wrap where-wrap">
+    <span class="sec-label">// Где применять</span>
+    <h2 class="sec-title">Эластомер защищает не отрасль, а деталь</h2>
+    <p class="sec-sub">На каждом производстве есть узел, который выходит из строя первым: импеллер, который съедает абразив; шнек, на который налипает продукт и останавливает линию на очистку; приёмник, который разбивают удары; металл, который точат коррозия и кавитация. Мы наносим бесшовную эластомерную броню прямо на вашу деталь — и превращаем источник вечных простоев и ремонтов в стабильно работающий узел, который служит в 3–5 раз дольше.</p>
+    <p class="sec-sub" style="margin-top:-1rem">Опишите задачу — подберём защиту под ваш узел и посчитаем окупаемость по вашим же простоям.</p>
+    <button class="btn btn-primary btn-xl" onclick="openModal()"><i data-lucide="phone"></i> Обсудить вашу задачу</button>
   </div>
 </section>
 
@@ -807,29 +859,54 @@
   <div class="wrap">
     <span class="sec-label">// Сравнение</span>
     <h2 class="sec-title">Российская альтернатива MetaLine и Belzona</h2>
-    <p class="sec-sub">Качество мировых брендов без геополитических рисков.</p>
+    <p class="sec-sub">Свойства мировых брендов — но со сроками, ценой и документами, понятными снабжению.</p>
     <table class="cmp-table">
       <thead><tr><th></th><th class="th-import">⚠ Импорт (MetaLine, Belzona)</th><th class="th-mc">🛡 МультиКрит (РФ)</th></tr></thead>
       <tbody>
-        <tr><td>Логистика</td><td class="cmp-bad">Долгая доставка, границы</td><td class="cmp-good">✓ Наличие на складе в Ижевске</td></tr>
-        <tr><td>Финансы</td><td class="cmp-bad">Валютные риски (€/$)</td><td class="cmp-good">✓ Оплата в рублях (₽)</td></tr>
-        <tr><td>Сервис</td><td class="cmp-bad">Сложности с выездом</td><td class="cmp-good">✓ Выезд бригады за 24 часа</td></tr>
-        <tr><td>Риски</td><td class="cmp-bad">Санкционные ограничения</td><td class="cmp-good">✓ Полная независимость</td></tr>
+        <tr><td>Сроки поставки</td><td class="cmp-bad">Долгая доставка через границу, риск задержек</td><td class="cmp-good">✓ Материал со склада в Ижевске, поставка по РФ</td></tr>
+        <tr><td>Цена и оплата</td><td class="cmp-bad">Цена в валюте (€/$), скачет вместе с курсом</td><td class="cmp-good">✓ Твёрдая цена в рублях, договор и закрывающие документы</td></tr>
+        <tr><td>Инженерная поддержка</td><td class="cmp-bad">Инженер за рубежом, поддержка через посредников</td><td class="cmp-good">✓ Свой инженер: подбор состава, обследование узла, сопровождение</td></tr>
+        <tr><td>Надёжность поставщика</td><td class="cmp-bad">Санкции, риск ухода бренда с рынка</td><td class="cmp-good">✓ Российский производитель — поставки не прекратятся</td></tr>
       </tbody>
     </table>
+  </div>
+</section>
+
+<!-- ══ CLIENTS / ОТЗЫВЫ ══ -->
+<section class="section" id="reviews">
+  <div class="wrap" style="text-align:center">
+    <span class="sec-label">// Доверие</span>
+    <h2 class="sec-title">Отзывы и рекомендации предприятий</h2>
+    <p class="sec-sub" style="margin:0 auto 2rem">Результаты применения на промышленных предприятиях. Нажмите на карточку — отзыв увеличится, а рядом с крестиком будет скан оригинала письма.</p>
+    <!-- Карусель отзывов: показывает 3 (адаптивно 2/1), стрелки крутят по кругу. Рендер из REVIEWS. -->
+    <div class="reviews-carousel">
+      <button class="reviews-arrow" type="button" aria-label="Предыдущие отзывы" onclick="carouselNav(-1)"><i data-lucide="chevron-left"></i></button>
+      <div class="reviews-grid" id="reviews-grid"></div>
+      <button class="reviews-arrow" type="button" aria-label="Следующие отзывы" onclick="carouselNav(1)"><i data-lucide="chevron-right"></i></button>
+    </div>
   </div>
 </section>
 
 <!-- ══ PORTFOLIO ══ -->
 <section class="section" id="portfolio">
   <div class="wrap">
-    <span class="sec-label">// Объекты</span>
+    <span class="sec-label">// Кейсы</span>
     <h2 class="sec-title">Примеры выполненных работ</h2>
-    <div class="grid-4" style="margin-top:1.5rem">
-      <div class="card sphere-card"><div class="hex"><i data-lucide="wrench"></i></div><h3>Восстановительный ремонт</h3></div>
-      <div class="card sphere-card"><div class="hex"><i data-lucide="settings"></i></div><h3>Ремонт изношенного оборудования</h3></div>
-      <div class="card sphere-card"><div class="hex"><i data-lucide="shield-plus"></i></div><h3>Защита нового оборудования</h3></div>
-      <div class="card sphere-card"><div class="hex"><i data-lucide="flame"></i></div><h3>Ремонт после пожара</h3></div>
+    <p class="sec-sub">Разбор реальных задач: что было, что сделали, что получилось.</p>
+
+    <!-- Лента кейсов. Каждая плитка ведёт на страницу cases/<slug>.html.
+         Когда в cases/media/ появятся фото узла — раскомментировать <img> и убрать .case-tile__ghost. -->
+    <div class="case-strip">
+      <a class="card case-tile" href="cases/2024-04-biver-koleso-nasosa.html">
+        <div class="case-tile__media">
+          <!-- <img src="cases/media/image5.jpeg" alt="Рабочее колесо насоса после восстановления эластомером МультиКрит765"> -->
+          <span class="case-tile__ghost"><i data-lucide="settings"></i></span>
+          <span class="hex case-tile__type" style="background:var(--metal)"><i data-lucide="settings"></i></span>
+        </div>
+        <h3 class="case-tile__title">Рабочее колесо насоса</h3>
+        <p class="case-tile__sub">Восстановление эластомером МультиКрит765</p>
+        <div class="case-tile__kpi"><span class="spec-num">4 суток</span><span class="spec-cap">до ввода в работу</span></div>
+      </a>
     </div>
   </div>
 </section>
@@ -843,8 +920,8 @@
     <div class="start-cards">
       <div class="card" style="display:flex;flex-direction:column;gap:1rem;align-items:flex-start">
         <div class="hex"><i data-lucide="calculator"></i></div>
-        <h3>Онлайн-калькулятор</h3>
-        <p style="color:var(--muted);flex:1;margin:0">За минуту прикиньте предварительную стоимость покрытия по трём параметрам — без звонков и ожидания.</p>
+        <h3>Онлайн-калькулятор серии 700</h3>
+        <p style="color:var(--muted);flex:1;margin:0">За минуту прикиньте предварительную стоимость покрытия эластомерами МультиКрит серии 700 — по трём параметрам, без звонков и ожидания.</p>
         <button class="btn btn-primary" onclick="openCalcModal(this)"><i data-lucide="calculator"></i> Рассчитать стоимость</button>
       </div>
       <div class="card" style="display:flex;flex-direction:column;gap:1rem;align-items:flex-start">
@@ -857,21 +934,84 @@
   </div>
 </section>
 
-<!-- ══ CLIENTS ══ -->
-<section class="section">
-  <div class="wrap" style="text-align:center">
-    <span class="sec-label">// Доверие</span>
-    <h2 class="sec-title">Доверие лидеров промышленности</h2>
-    <p class="sec-sub" style="margin:0 auto 2rem">Наши материалы прошли испытания на крупнейших предприятиях России.</p>
-    <div class="clients-logos">
-      <div class="client-logo">Челны-Огнеупор</div>
-      <div class="client-logo">РусМинералз</div>
-      <div class="client-logo">АО СебряковЦемент</div>
-      <div class="client-logo">ТМК</div>
+<!-- ══ SPECS ══ -->
+<section class="section" id="specs">
+  <div class="wrap">
+    <span class="sec-label">// Характеристики</span>
+    <h2 class="sec-title">ТТХ: эластомеры MultiCrete 765, 785, 795</h2>
+    <div class="specs-tabs" style="margin-top:1.5rem">
+      <button class="specs-tab active" id="tab-b" onclick="switchTab('b')">До отверждения</button>
+      <button class="specs-tab" id="tab-a" onclick="switchTab('a')">После отверждения</button>
     </div>
-    <div class="testimonials" style="text-align:left">
-      <div class="card testimonial"><p>«Налипание уменьшилось… износа покрытия не наблюдается»</p><span>— АО СебряковЦемент, после 6 месяцев эксплуатации МультиКрит 795</span></div>
-      <div class="card testimonial"><p>«Успешные промышленные испытания»</p><span>— ТМК (Трубная Металлургическая Компания)</span></div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <table class="specs-table" id="tbl-b">
+        <thead><tr><th>Показатель</th><th>765</th><th>785</th><th>795</th></tr></thead>
+        <tbody>
+          <tr><td>Соотношение компонентов по объёму (А : Б)</td><td>2 : 1</td><td>2 : 1</td><td>2 : 1</td></tr>
+          <tr><td>Плотность смеси, г/см³</td><td>1,15</td><td>1,13</td><td>1,12</td></tr>
+          <tr><td>Расход при толщине 1 мм, кг/м²</td><td>1,25</td><td>1,2</td><td>1,2</td></tr>
+          <tr><td>Массовая доля нелетучих веществ, %</td><td>100</td><td>100</td><td>100</td></tr>
+          <tr><td>Время высыхания при +20±2 °C, сек *</td><td>60–90</td><td>60–90</td><td>60–90</td></tr>
+        </tbody>
+      </table>
+      <table class="specs-table" id="tbl-a" style="display:none">
+        <thead><tr><th>Показатель</th><th>765</th><th>785</th><th>795</th></tr></thead>
+        <tbody>
+          <tr><td>Твёрдость по Шор A</td><td>65</td><td>85</td><td>95</td></tr>
+          <tr><td>Прочность при разрыве, МПа</td><td>25</td><td>35</td><td>41</td></tr>
+          <tr><td>Относительное удлинение при разрыве, %</td><td>610</td><td>450</td><td>350</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="specs-foot">* для стандартного материала; по требованию заказчика — от 10 сек до 10 минут. Температура эксплуатации: от −50 до +90 °C (сухая среда), до +80 °C (влажная).</p>
+  </div>
+</section>
+
+<!-- ══ CARTRIDGE (Картриджная система) — СКРЫТО (hidden). Снять атрибут hidden, когда система пройдёт испытания и будет готов контент ══ -->
+<section class="section" id="cartridge" hidden>
+  <div class="wrap equip-grid">
+    <div class="equip-text">
+      <span class="sec-label">// Способ №2 · нанесение</span>
+      <h2 class="sec-title">Картриджная система напыления</h2>
+      <p>[Заготовка] Компактный способ нанесения эластомера для труднодоступных мест и небольших участков — без громоздкой установки. Сейчас проходит промышленные испытания.</p>
+      <p>[Текст, характеристики и фото добавим, когда система будет готова.]</p>
+    </div>
+    <div class="equip-media-col">
+      <div class="equip-media">
+        <img src="assets/images/sections/equipment-collage.png" alt="Картриджная система напыления эластомера МультиКрит (заготовка)">
+      </div>
+      <div class="equip-specs">
+        <div class="spec-cell"><div class="spec-num">—</div><div class="spec-cap">Параметр</div></div>
+        <div class="spec-cell"><div class="spec-num">—</div><div class="spec-cap">Параметр</div></div>
+        <div class="spec-cell"><div class="spec-num">—</div><div class="spec-cap">Параметр</div></div>
+        <div class="spec-cell"><div class="spec-num">—</div><div class="spec-cap">Параметр</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EQUIPMENT ══ -->
+<section class="section" id="equipment">
+  <div class="wrap equip-grid">
+    <div class="equip-text">
+      <span class="sec-label">// Оборудование</span>
+      <h2 class="sec-title">Наносим своим оборудованием — <span class="accent">установкой МультиКрит М700</span></h2>
+      <p>Для вас это значит: <strong>качество нанесения мы контролируем от и до</strong>, не зависим от чужих подрядчиков и работаем прямо на вашем объекте — на детали любой геометрии и любом объёме. Установку разработали и собираем сами: и материал, и технику под него делает один производитель.</p>
+      <p>Почему это важно. Эластомер — не краска: его не нанести кистью или валиком. Двухкомпонентный состав схватывается за 1–2 минуты, поэтому компоненты нужно подогреть, точно отдозировать и подать под давлением синхронно, в нужной пропорции. Без такого оборудования нанести эластомер физически невозможно.</p>
+      <p><strong>МультиКрит М700</strong> подогревает оба компонента до рабочей температуры, насосами с частотным регулированием подаёт их в точной пропорции и через смесительный пистолет распыляет состав на поверхность. Автоматика держит температуру и равномерность слоя; компактный корпус на колёсах легко перемещается по цеху. Установка создана специально под эластомеры <strong>МультиКрит серии 700</strong>.</p>
+    </div>
+    <div class="equip-media-col">
+      <div class="equip-media">
+        <img src="assets/images/sections/equipment-collage.png" alt="Установка напыления эластомеров МультиКрит М700: компоненты А и Б, общий вид на колёсах, шкаф управления">
+      </div>
+      <div class="equip-specs">
+        <div class="spec-cell"><div class="spec-num">5:1–1:1</div><div class="spec-cap">Пропорция</div></div>
+        <div class="spec-cell"><div class="spec-num">25+25 л</div><div class="spec-cap">Ёмкости, с подогревом</div></div>
+        <div class="spec-cell"><div class="spec-num">30 бар</div><div class="spec-cap">Рабочее давление</div></div>
+        <div class="spec-cell"><div class="spec-num">7,5 м</div><div class="spec-cap">Подающий шланг</div></div>
+        <div class="spec-cell"><div class="spec-num">220 В</div><div class="spec-cap">Питание, 3 кВт</div></div>
+        <div class="spec-cell"><div class="spec-num">85 кг</div><div class="spec-cap">900×500×600 мм</div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -880,20 +1020,24 @@
 <section class="section" id="price">
   <div class="wrap form-grid">
     <div>
-      <span class="sec-label">// Получить прайс</span>
-      <h2 class="sec-title">Получите прайс-лист и индивидуальную скидку</h2>
-      <p style="color:var(--muted)">Оставьте заявку — подберём материал под вашу задачу, рассчитаем расход и пришлём прайс.</p>
+      <span class="sec-label">// Сотрудничество</span>
+      <h2 class="sec-title">Ищем партнёров в регионах</h2>
+      <p style="color:var(--muted)">Мы производитель эластомерных покрытий и оборудования. Расширяем сеть региональных партнёров и представителей. А если вы заказчик — оставьте заявку, пришлём прайс-лист и расчёт под вашу задачу.</p>
       <ul class="perks">
-        <li>Подбор материала по описанию задачи</li>
-        <li>Расчёт расхода и стоимости</li>
-        <li>Технический паспорт на материал</li>
-        <li>Инструкция по нанесению</li>
+        <li>Материалы и оборудование напрямую от производителя</li>
+        <li>Обучение технологии нанесения и техподдержка</li>
+        <li>Подбор составов под задачи ваших клиентов</li>
+        <li>Закреплённый регион</li>
         <li>Ответ в течение 1 рабочего дня</li>
       </ul>
-      <div class="timer"><i data-lucide="timer"></i> Индивидуальная скидка действует 3 дня</div>
     </div>
     <div class="form-box">
       <form onsubmit="submitForm(event)">
+        <div style="display:flex;flex-direction:column;gap:.45rem;margin-bottom:1rem">
+          <label class="pf-label">Цель обращения</label>
+          <label style="display:flex;gap:.5rem;align-items:center;font-size:.9rem;color:var(--muted)"><input type="radio" name="purpose" value="partner" checked> Партнёрство в регионе</label>
+          <label style="display:flex;gap:.5rem;align-items:center;font-size:.9rem;color:var(--muted)"><input type="radio" name="purpose" value="price"> Прайс-лист / расчёт по задаче</label>
+        </div>
         <div class="pf-row">
           <div><label class="pf-label">Имя</label><input class="pf-input" type="text" placeholder="Иван Петров" required></div>
           <div><label class="pf-label">Организация</label><input class="pf-input" type="text" placeholder="ООО Завод"></div>
@@ -902,10 +1046,10 @@
           <div><label class="pf-label">Телефон *</label><input class="pf-input" type="tel" placeholder="+7 (000) 000-00-00" required></div>
           <div><label class="pf-label">E-mail</label><input class="pf-input" type="email" placeholder="mail@company.ru"></div>
         </div>
-        <label class="pf-label">Описание задачи</label>
-        <textarea class="pf-input pf-textarea" placeholder="Что защищаем, от чего, условия эксплуатации..."></textarea>
+        <label class="pf-label">Ваш регион и задача</label>
+        <textarea class="pf-input pf-textarea" placeholder="Регион, что защищаем / вопрос по партнёрству..."></textarea>
         <div class="pf-consent"><input type="checkbox" id="pc" checked><label for="pc">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</label></div>
-        <button type="submit" class="btn btn-primary pf-submit">Получить прайс-лист</button>
+        <button type="submit" class="btn btn-primary pf-submit">Отправить заявку</button>
       </form>
     </div>
   </div>
@@ -918,15 +1062,27 @@
     <h2 class="sec-title">Контакты</h2>
     <div class="contacts-grid" style="margin-top:1.5rem">
       <div>
-        <div class="contact-row"><div class="hex"><i data-lucide="phone"></i></div><div><a href="tel:+73412324151">+7 (3412) 32-41-51</a><p style="color:var(--muted);font-size:.9rem">+7 (965) 842-41-51</p></div></div>
-        <div class="contact-row"><div class="hex"><i data-lucide="mail"></i></div><div><a href="mailto:MultiCrete@yandex.ru">MultiCrete@yandex.ru</a></div></div>
-        <div class="contact-row"><div class="hex"><i data-lucide="map-pin"></i></div><div><p style="color:var(--muted)">г. Ижевск, ул. 40 лет Победы, д. 92</p></div></div>
-        <div class="contact-row"><div class="hex"><i data-lucide="globe"></i></div><div><a href="https://www.MultiCrete.ru">www.MultiCrete.ru</a></div></div>
+        <div class="contact-row"><div class="hex"><i data-lucide="phone"></i></div><div>
+          <a href="tel:+73412324151">+7 (3412) 32-41-51</a>
+          <p style="color:var(--muted)"><a href="tel:+79127502677">+7 912 750-26-77</a> — техслужба</p>
+          <p style="color:var(--muted)"><a href="tel:+79128709588">+7 912 870-95-88</a> — бухгалтерия</p>
+        </div></div>
+        <div class="contact-row"><div class="hex"><i data-lucide="mail"></i></div><div>
+          <a href="mailto:MultiCrete@yandex.ru">MultiCrete@yandex.ru</a>
+          <p style="color:var(--muted)"><a href="mailto:MultiCrete@mail.ru">MultiCrete@mail.ru</a></p>
+        </div></div>
+        <div class="contact-row"><div class="hex"><i data-lucide="factory"></i></div><div>
+          <p style="color:var(--muted)"><b style="color:var(--ink);font-weight:600">Производство:</b><br>427000, Удмуртия, с. Завьялово, пер. Планетный, д.&nbsp;5</p>
+        </div></div>
+        <div class="contact-row"><div class="hex"><i data-lucide="building-2"></i></div><div>
+          <p style="color:var(--muted)"><b style="color:var(--ink);font-weight:600">Юридический адрес:</b><br>426035, г. Ижевск, ул. им. Репина, 8-15</p>
+        </div></div>
+        <div class="contact-row"><div class="hex"><i data-lucide="globe"></i></div><div><a href="https://мультикрит.рф">мультикрит.рф</a></div></div>
       </div>
       <div class="contacts-map">
         <i data-lucide="map-pin"></i>
-        <span>г. Ижевск, ул. 40 лет Победы, д. 92</span>
-        <a href="https://yandex.ru/maps/?text=Ижевск+ул+40+лет+победы+92" target="_blank">Открыть на Яндекс Картах →</a>
+        <span>Производство:<br>427000, Удмуртия, с.&nbsp;Завьялово,<br>пер. Планетный, д.&nbsp;5</span>
+        <a href="https://yandex.ru/maps/?text=Удмуртия%2C+Завьялово%2C+переулок+Планетный%2C+5" target="_blank">Открыть на Яндекс Картах →</a>
       </div>
     </div>
   </div>
@@ -960,8 +1116,8 @@
   <div class="modal calc-modal">
     <button class="modal-close" onclick="closeCalcModal()" aria-label="Закрыть" type="button">&times;</button>
 
-    <h2 id="calc-title">Калькулятор стоимости покрытия</h2>
-    <p class="calc-sub">Предварительный расчёт по площади, толщине и классу сложности. ВВЕДИТЕ ДАННЫЕ</p>
+    <h2 id="calc-title">Калькулятор стоимости покрытия · серия 700</h2>
+    <p class="calc-sub">Предварительный расчёт покрытия эластомерами МультиКрит серии 700 — по площади, толщине и классу сложности.</p>
 
     <!-- ── Поля ввода (UI-02) ── -->
     <div class="calc-fields">
@@ -1072,6 +1228,32 @@
   </div>
 </div>
 
+<!-- ══ ЛАЙТБОКС ОТЗЫВА (стрелки листают по кругу) ══ -->
+<div class="review-overlay" id="review-overlay" onclick="handleReviewOverlay(event)" role="dialog" aria-modal="true" aria-labelledby="review-co">
+  <button class="review-nav review-nav--prev" type="button" aria-label="Предыдущий отзыв" onclick="reviewNav(-1)"><i data-lucide="chevron-left"></i></button>
+  <div class="review-modal">
+    <button class="modal-close" type="button" aria-label="Закрыть" onclick="closeReview()">&times;</button>
+    <a class="review-modal__orig" id="review-orig" href="#" title="Показать скан оригинала письма" onclick="openReviewOrig();return false;" hidden>
+      <img id="review-orig-img" src="" alt="Скан оригинала письма">
+      <span class="review-modal__orig-badge"><i data-lucide="maximize-2"></i></span>
+      <span class="review-modal__orig-cap">Оригинал</span>
+    </a>
+    <div class="review-modal__tag" id="review-tag"></div>
+    <h2 class="review-modal__co" id="review-co"></h2>
+    <div class="review-modal__role" id="review-role"></div>
+    <blockquote class="review-modal__quote" id="review-quote"></blockquote>
+    <div class="review-modal__body" id="review-body"></div>
+    <div class="review-modal__counter" id="review-counter"></div>
+  </div>
+  <button class="review-nav review-nav--next" type="button" aria-label="Следующий отзыв" onclick="reviewNav(1)"><i data-lucide="chevron-right"></i></button>
+</div>
+
+<!-- ══ ПРОСМОТР СКАНА ОРИГИНАЛА (поверх страницы, не новая вкладка) ══ -->
+<div class="orig-overlay" id="orig-overlay" onclick="handleOrigOverlay(event)" role="dialog" aria-modal="true" aria-label="Скан оригинала письма">
+  <button class="modal-close orig-close" type="button" aria-label="Закрыть" onclick="closeOrig()">&times;</button>
+  <img id="orig-img" src="" alt="Скан оригинала письма">
+</div>
+
 <script src="https://unpkg.com/lucide@latest"></script>
 <script>
   lucide.createIcons();
@@ -1096,6 +1278,125 @@
     });
   });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  /* ══ ОТЗЫВЫ ══ База растёт добавлением объекта в массив REVIEWS (порядок = порядок листания).
+     Поля: co — организация, role — автор/должность, subject — краткая метка на карточке,
+     type — «Результат применения» / «Рекомендация» / «Письмо поддержки», icon/color — гекс-бейдж,
+     quote — цитата (без внешних кавычек), body — развёрнутый текст (можно пустым). */
+  const REVIEWS = [
+    { co: 'НПФ «Челны-Огнеупор»', role: 'Директор И. Н. Ризванов', subject: 'Металл · шаровые краны', type: 'Результат применения', icon: 'badge-check', color: 'var(--metal)',
+      orig: 'assets/images/reviews/chelny-ogneupor.png',
+      quote: 'Шаровые краны с уплотнениями седел из эластомера МультиКрит 785 соответствуют техническим требованиям к арматуре для объектов ОАО «Газпром». Класс герметичности «А» по ГОСТ Р 54808-2011.',
+      body: 'С 2013 года для уплотнений седла шара магистральных газовых и нефтяных кранов применялся немецкий MetaLine. В 2024 году материал заменён на отечественный МультиКрит 785 (кран Ду1000 мм, Ру8,0 МПа). Твёрдость 85 Шор A удовлетворяет требованиям, адгезия удовлетворительная, механическая (токарная) обработка возможна, испытания на герметичность — положительные.' },
+    { co: 'АО «Себряковцемент»', role: 'Начальник цеха «Обжиг клинкера» А. В. Коверов', subject: 'Налипание · шнеки питателя', type: 'Результат применения', icon: 'badge-check', color: 'var(--metal)',
+      orig: 'assets/images/reviews/sebryakovcement.png',
+      quote: 'После нанесения защитного покрытия МультиКрит 785 налипание сырьевой смеси уменьшилось… на самих витках и валу износа покрытия не наблюдается.',
+      body: 'Влажная сырьевая смесь (17–19%) налипала на перья и валы шнеков реверсивного питателя и останавливала оборудование для очистки. После нанесения МультиКрит 785 налипание уменьшилось. Оборудование в работе с 10.12.2024 по 07.04.2025; износ проявился только на торцах пера (из-за неподходящей марки стали), на витках и валу износа нет. Планируется повторный эксперимент после смены марки стали витков шнека.' },
+    { co: 'ТМК «Трубопроводные решения»', role: 'Главный инженер С. А. Татаринов', subject: 'Ударный износ · приёмники труб', type: 'Результат применения', icon: 'badge-check', color: 'var(--metal)',
+      orig: 'assets/images/reviews/tmk-chelyabinsk.png',
+      quote: 'К стойкости покрытия МультиКрит 785 замечаний не выявлено. Покрытие без видимых дефектов и критического износа… допущено к нанесению.',
+      body: 'МультиКрит 785 нанесён на приёмники механизации инспекционной площадки стана «1020-1220». Опытные испытания с 26.04 по 31.07.2024: покрытие обеспечивает требуемую адгезию к металлу без отслоения, высокую износостойкость и снижает ударную нагрузку на приёмники труб. Допущено к нанесению на элементы транспортной механизации в ТЭСЦ №6.' },
+    { co: 'ООО «РусМинералз»', role: 'Генеральный директор А. В. Петренко', subject: 'Рекомендация · футеровка', type: 'Рекомендация', icon: 'thumbs-up', color: 'var(--blue)',
+      orig: 'assets/images/reviews/rusminerals.png',
+      quote: 'В части выбора материала для футеровки (полиуретан) настоятельно рекомендуем компанию ООО «МультиКрит». Данная компания является лидером и имеет множество положительных рекомендаций.',
+      body: '' },
+    { co: 'НПО «Винт» · АО «ЦС «Звездочка»»', role: 'Зам. директора — главный инженер А. С. Ионкин', subject: 'Судоремонт · гребные винты', type: 'Письмо поддержки', icon: 'ship', color: 'var(--hydro)',
+      orig: 'assets/images/reviews/vint-zvezdochka.png',
+      quote: 'Материалы МультиКрит (серия 700) с эффектом упругой диссипации энергии способны эффективно заместить импортные аналоги и превзойти традиционные эпоксидные составы по стойкости к ударным нагрузкам.',
+      body: 'Ранее для ремонта гребных винтов и проточной части использовались импортные MetaLine (Германия) и Belzona (США/Великобритания). Филиал подтверждает потребность в отечественных эластомерных покрытиях судового назначения (стойких к морской воде, УФ-излучению и кавитации), выражает заинтересованность в применении материалов МультиКрит при условии сертификации РМРС и поддерживает выполнение ОКР.' },
+    { co: 'СРЗ «Нерпа» · АО «ЦС «Звездочка»»', role: 'Главный инженер И. И. Арслангереев', subject: 'Судоремонт · доковый ремонт ВМФ', type: 'Письмо поддержки', icon: 'anchor', color: 'var(--hydro)',
+      orig: 'assets/images/reviews/nerpa.png',
+      quote: 'Технология МультиКрит (напыление эластомеров холодного отверждения мобильной установкой М700) позволяет производить ремонт непосредственно в доке, без термообработки, обеспечивая монолитное бесшовное покрытие.',
+      body: 'При ремонте движительно-рулевых колонок, гребных винтов и корпусных конструкций судов ВМФ эпоксидные компаунды (Belzona) дают сколы в ледовых условиях, а гуммирование резиной требует демонтажа валолиний и вулканизации в печах. Предприятие подтверждает готовность предоставить производственную базу для натурных испытаний опытной партии материалов МультиКрит.' },
+    { co: 'АО «Североречфлот»', role: 'Генеральный директор С. Г. Сандулов', subject: 'Судовые движители', type: 'Письмо поддержки', icon: 'ship', color: 'var(--hydro)',
+      orig: 'assets/images/reviews/severrechflot.png',
+      quote: 'Готовы участвовать в натурных испытаниях защитного покрытия для судовых движителей скоростных пассажирских судов на подводных крыльях.',
+      body: '' },
+    { co: 'ООО «Си Тех»', role: 'Генеральный директор П. В. Ежов', subject: 'Гидроабразив · кавитация', type: 'Письмо поддержки', icon: 'handshake', color: 'var(--hydro)',
+      orig: 'assets/images/reviews/sitech.png',
+      quote: 'Подтверждаем высокую заинтересованность в продукции МультиКрит — полиуретановых эластомерах серии 700 для защиты промышленного оборудования от гидроабразивного износа и кавитации.',
+      body: 'Предприятие испытывает потребность в импортозамещении материалов MetaLine (Германия) и готово рассматривать продукцию МультиКрит в качестве основного аналога при наличии разрешительных документов Морского Регистра (РМРС). Поддерживает заявку на выполнение ОКР для сертификационных испытаний и постановки продукции на серийное производство.' },
+    { co: 'АО «ЦС «Дальзавод»»', role: 'Главный инженер А. А. Пика', subject: 'Судоремонт · защита оборудования', type: 'Письмо поддержки', icon: 'anchor', color: 'var(--hydro)',
+      orig: 'assets/images/reviews/dalzavod.png',
+      quote: 'Подтверждаем высокую заинтересованность в продукции МультиКрит — полиуретановых эластомерах серии 700 для защиты промышленного оборудования от гидроабразивного износа и кавитации.',
+      body: 'Предприятие испытывает потребность в импортозамещении материалов MetaLine (Германия) и готово рассматривать МультиКрит в качестве основного аналога при наличии документов РМРС. Поддерживает заявку МультиКрит на выполнение ОКР для сертификационных испытаний и серийного производства.' }
+  ];
+
+  let curReview = 0;
+  let carStart = 0;                       // индекс первой видимой карточки в карусели
+  function visibleCount() { const w = window.innerWidth; return w >= 900 ? 3 : (w >= 600 ? 2 : 1); }
+  function cardHTML(r, i) {
+    return `
+      <article class="card review-card" onclick="openReview(${i})" tabindex="0" role="button" aria-label="Читать отзыв: ${r.co}">
+        <div class="review-card__head">
+          <span class="hex" style="background:${r.color}"><i data-lucide="${r.icon}"></i></span>
+          <div><div class="review-card__co">${r.co}</div><div class="review-card__tag">${r.subject}</div></div>
+        </div>
+        <p class="review-card__quote">«${r.quote}»</p>
+        <span class="review-card__more">Читать целиком <i data-lucide="arrow-right"></i></span>
+      </article>`;
+  }
+  function renderReviews() {
+    const grid = document.getElementById('reviews-grid');
+    if (!grid) return;
+    const n = Math.min(visibleCount(), REVIEWS.length);
+    grid.style.gridTemplateColumns = 'repeat(' + n + ', 1fr)';
+    let html = '';
+    for (let k = 0; k < n; k++) {
+      const i = (carStart + k) % REVIEWS.length;
+      html += cardHTML(REVIEWS[i], i);
+    }
+    grid.innerHTML = html;
+    // стрелки карусели прячем, если крутить нечего
+    document.querySelectorAll('.reviews-arrow').forEach(a => a.style.display = REVIEWS.length > n ? '' : 'none');
+    lucide.createIcons();
+  }
+  function carouselNav(d) { carStart = (carStart + d + REVIEWS.length) % REVIEWS.length; renderReviews(); }
+  window.addEventListener('resize', renderReviews);
+
+  // ── Просмотр скана оригинала поверх страницы (не новая вкладка) ──
+  function openReviewOrig() { const r = REVIEWS[curReview]; if (r && r.orig) openOrig(r.orig); }
+  function openOrig(src) {
+    document.getElementById('orig-img').src = src;
+    document.getElementById('orig-overlay').classList.add('open');
+  }
+  function closeOrig() { document.getElementById('orig-overlay').classList.remove('open'); }
+  function handleOrigOverlay(e) { if (e.target === document.getElementById('orig-overlay')) closeOrig(); }
+  function openReview(i) {
+    curReview = (i + REVIEWS.length) % REVIEWS.length;
+    const r = REVIEWS[curReview];
+    document.getElementById('review-tag').textContent = r.type;
+    document.getElementById('review-co').textContent = r.co;
+    document.getElementById('review-role').textContent = r.role;
+    document.getElementById('review-quote').textContent = '«' + r.quote + '»';
+    document.getElementById('review-body').textContent = r.body || '';
+    document.getElementById('review-counter').textContent = 'Отзыв ' + (curReview + 1) + ' из ' + REVIEWS.length;
+    const orig = document.getElementById('review-orig');
+    if (r.orig) {
+      document.getElementById('review-orig-img').src = r.orig;
+      orig.removeAttribute('hidden');
+    } else {
+      orig.setAttribute('hidden', '');
+    }
+    document.getElementById('review-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    lucide.createIcons();
+  }
+  function closeReview() { document.getElementById('review-overlay').classList.remove('open'); document.body.style.overflow = ''; }
+  function reviewNav(d) { openReview(curReview + d); }
+  function handleReviewOverlay(e) { if (e.target === document.getElementById('review-overlay')) closeReview(); }
+  document.addEventListener('keydown', e => {
+    // Открыт скан оригинала — Esc/клик закрывают только его
+    if (document.getElementById('orig-overlay').classList.contains('open')) {
+      if (e.key === 'Escape') closeOrig();
+      return;
+    }
+    if (!document.getElementById('review-overlay').classList.contains('open')) return;
+    if (e.key === 'Escape') closeReview();
+    if (e.key === 'ArrowLeft') reviewNav(-1);
+    if (e.key === 'ArrowRight') reviewNav(1);
+  });
+  renderReviews();
 
   // Зум картинок ДО/ПОСЛЕ по тапу пальцем (на десктопе зум даёт CSS :hover).
   // Тап по картинке увеличивает её; повторный тап или тап по другой — возвращает.
