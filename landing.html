@@ -290,7 +290,7 @@
     .app-card p { font-size: .82rem; color: var(--muted); }
 
     /* ── ROI ── */
-    .roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+    .roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: end; }
     .roi-cards { display: flex; flex-direction: column; gap: 1rem; }
     .roi-card { display: flex; align-items: baseline; gap: 1rem; }
     .roi-num { font-family: var(--f-head); font-size: 2.5rem; font-weight: 700; color: var(--pink); min-width: 90px; }
@@ -462,8 +462,8 @@
     .btn-secondary:hover { background: rgba(127,176,230,.12); }
 
     /* ── Блок ДО/ПОСЛЕ в hero: пара картинок + подписи воздействий ── */
-    .dp__head { text-align: center; max-width: 800px; margin: 0 auto 2rem; }
-    .dp__title { font-size: clamp(1.5rem, 3.6vw, 2.4rem); color: var(--ink); line-height: 1.15; margin-top: .4rem; }
+    .dp__head { text-align: left; margin: 0 0 2rem; }
+    .dp__title { font-size: clamp(1.3rem, 3.1vw, 2.15rem); color: var(--ink); line-height: 1.15; margin-top: .4rem; white-space: nowrap; }
     .dp__title .dp__accent { color: var(--pink); }
     .dp__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start;
       position: relative; margin-bottom: 1.75rem; }
@@ -506,6 +506,7 @@
     .dp__row--hit .dp__lbl { color: #7FB0E6; }
     .dp__row--fix .dp__lbl { color: var(--pink); }
     @media (max-width: 900px) { .dp__impacts { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .dp__title { white-space: normal; } }
     @media (max-width: 560px) {
       .dp__pair { grid-template-columns: 1fr; gap: 8px; }
       .dp__pair::after { display: none; }
@@ -521,9 +522,21 @@
     @media (max-width: 900px) { .dp__caps { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 560px) { .dp__caps { grid-template-columns: 1fr; } }
 
-    /* ── «Где применять»: минимальный блок с большой живой кнопкой ── */
-    .where-wrap { text-align: center; max-width: 760px; margin: 0 auto; }
-    .where-wrap .sec-sub { margin: 1.1rem auto 2.4rem; }
+    /* ── «Где применять»: текст + изображение детали ── */
+    .where-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 3rem; align-items: center; }
+    .where-wrap { text-align: left; }
+    .where-wrap .sec-sub { margin: 1.1rem 0 2.4rem; }
+    .where-figure { margin: 0; position: relative; }
+    .where-figure img { width: 100%; height: auto; display: block;
+      filter: drop-shadow(0 18px 40px rgba(0,0,0,.5)); }
+    .where-figure__cap { font-size: .85rem; color: var(--muted); margin-top: .9rem; text-align: center; }
+    /* Заглушка, пока файл изображения не добавлен (img.onerror) */
+    .where-figure.is-empty { min-height: 300px; border: 1.5px dashed var(--line); border-radius: 16px;
+      display: flex; align-items: center; justify-content: center; background: var(--scale); }
+    .where-figure.is-empty::before { content: 'Здесь появится изображение детали\A (assets/images/sections/fig4.png)';
+      white-space: pre-wrap; text-align: center; color: var(--muted); font-family: var(--f-tech); font-size: .8rem; padding: 1.5rem; }
+    .where-figure.is-empty .where-figure__cap { display: none; }
+    @media (max-width: 820px) { .where-grid { grid-template-columns: 1fr; gap: 2rem; } }
     .btn-xl { font-size: 1.15rem; padding: 1.1rem 2.6rem; border-radius: 12px;
       transition: transform .2s ease, box-shadow .2s ease; }
     .btn-xl i { width: 22px; height: 22px; }
@@ -533,21 +546,59 @@
       box-shadow: 0 2px 0 var(--pink-d), 0 0 20px rgba(235,77,140,.5); }
 
     /* ── Оборудование: установка МультиКрит М700 ── */
-    .equip-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 3rem; align-items: center; }
+    .equip-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 3rem; align-items: stretch; }
     .equip-text .sec-title .accent { color: var(--blue); }
     .equip-text p { color: var(--muted); margin-bottom: 1rem; }
     .equip-text p strong { color: var(--ink); font-weight: 700; }
+    /* Двухстрочный заголовок + пункты-карточки одной ширины. Ширину задаёт строка 2 (nowrap),
+       .equip-head сжимается по ней (fit-content); строка 1 растягивается выключкой, карточки/лид — width:100% (не влияют на ширину). */
+    .equip-text { display: flex; flex-direction: column; align-items: flex-start; }
+    .equip-head { width: fit-content; max-width: 100%; display: flex; flex-direction: column; flex: 1 1 auto; }
+    .equip-title { display: block; margin-bottom: 1rem; line-height: 1.08; }
+    .equip-title__l1 { display: block; font-family: var(--f-head); font-weight: 600; color: var(--muted);
+      font-size: clamp(1.5rem, 3.3vw, 2.35rem); text-align: justify; text-align-last: justify; }
+    .equip-title__l2 { display: block; font-family: var(--f-head); font-weight: 700; color: var(--ink);
+      font-size: clamp(1.8rem, 4.1vw, 2.7rem); white-space: nowrap; }
+    .equip-lead { width: 100%; color: var(--muted); margin-bottom: .85rem; }
+    .equip-lead strong { color: var(--ink); font-weight: 700; }
+    .equip-points { width: 100%; list-style: none; margin: 0; padding: 0; display: grid; gap: .7rem;
+      flex: 1 1 auto; grid-auto-rows: 1fr; }
+    .equip-points li { display: flex; align-items: center; gap: .75rem; padding: .85rem 1.1rem; color: var(--muted); line-height: 1.45;
+      background: var(--steel); border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(26,35,50,.18), inset 0 1px 0 rgba(255,255,255,.06);
+      transition: transform .15s ease, box-shadow .15s ease; }
+    .equip-points li:hover { transform: translateY(-3px);
+      box-shadow: 0 12px 26px rgba(26,35,50,.34), inset 0 1px 0 rgba(255,255,255,.09); }
+    .equip-points li strong { color: var(--ink); font-weight: 700; }
+    .equip-points li::before { content: ''; flex: none; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--pink); box-shadow: 0 0 8px rgba(235,77,140,.6); }
+    /* Завершающие абзацы всего блока — во всю ширину, разделены линиями */
+    .equip-outro { margin-top: 2rem; }
+    .equip-outro__p { color: var(--muted); font-size: 1.02rem; line-height: 1.7;
+      padding-top: 1.5rem; border-top: 1px solid var(--line); }
+    .equip-outro__p:not(:first-child) { margin-top: 1.25rem; }
+    .equip-outro__p strong { color: var(--ink); font-weight: 700; }
     .equip-media { position: relative; border-radius: 16px; overflow: hidden; line-height: 0;
-      box-shadow: 0 12px 32px rgba(26,35,50,.18), inset 0 1px 0 rgba(255,255,255,.4); }
+      box-shadow: 0 12px 32px rgba(26,35,50,.18), inset 0 1px 0 rgba(255,255,255,.4);
+      transition: transform .15s ease, box-shadow .15s ease; }
+    .equip-media:hover { transform: translateY(-3px);
+      box-shadow: 0 18px 40px rgba(26,35,50,.3), inset 0 1px 0 rgba(255,255,255,.4); }
     .equip-media img { width: 100%; height: auto; display: block; }
     .equip-media::after { content: ''; position: absolute; left: 16px; right: 16px; bottom: 0; height: 3px;
       background: linear-gradient(90deg, transparent, rgba(235,77,140,.7), transparent); filter: blur(1px); }
     .equip-specs { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin-top: 1rem; }
-    .equip-specs .spec-cell { text-align: center; padding: .85rem .75rem; }
+    .equip-specs .spec-cell { text-align: center; padding: .85rem .75rem; transition: transform .15s ease, box-shadow .15s ease; }
+    .equip-specs .spec-cell:hover { transform: translateY(-3px);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,.35), inset 0 -1px 0 rgba(255,255,255,.05), 0 8px 18px rgba(26,35,50,.4); }
     .equip-specs .spec-num { font-size: 1.25rem; }
     @media (max-width: 860px) {
       .equip-grid { grid-template-columns: 1fr; gap: 2rem; }
       .equip-media-col { order: -1; }
+    }
+    @media (max-width: 560px) {
+      .equip-head { width: 100%; }
+      .equip-title__l1 { text-align-last: left; }
+      .equip-title__l2 { white-space: normal; }
     }
     @media (max-width: 480px) {
       .equip-specs { grid-template-columns: repeat(2, 1fr); }
@@ -829,12 +880,18 @@
 
 <!-- ══ WHERE (Где применять) ══ -->
 <section class="section" id="spheres">
-  <div class="wrap where-wrap">
-    <span class="sec-label">// Где применять</span>
-    <h2 class="sec-title">Эластомер защищает не отрасль, а деталь</h2>
-    <p class="sec-sub">На каждом производстве есть узел, который выходит из строя первым: импеллер, который съедает абразив; шнек, на который налипает продукт и останавливает линию на очистку; приёмник, который разбивают удары; металл, который точат коррозия и кавитация. Мы наносим бесшовную эластомерную броню прямо на вашу деталь — и превращаем источник вечных простоев и ремонтов в стабильно работающий узел, который служит в 3–5 раз дольше.</p>
-    <p class="sec-sub" style="margin-top:-1rem">Опишите задачу — подберём защиту под ваш узел и посчитаем окупаемость по вашим же простоям.</p>
-    <button class="btn btn-primary btn-xl" onclick="openModal()"><i data-lucide="phone"></i> Обсудить вашу задачу</button>
+  <div class="wrap where-grid">
+    <div class="where-wrap">
+      <span class="sec-label">// Где применять</span>
+      <h2 class="sec-title">Эластомер защищает не отрасль, а деталь</h2>
+      <p class="sec-sub">На каждом производстве есть узел, который выходит из строя первым: импеллер, который съедает абразив; шнек, на который налипает продукт и останавливает линию на очистку; приёмник, который разбивают удары; металл, который точат коррозия и кавитация. Мы наносим бесшовную эластомерную броню прямо на вашу деталь — и превращаем источник вечных простоев и ремонтов в стабильно работающий узел, который служит в 3–5 раз дольше.</p>
+      <p class="sec-sub" style="margin-top:-1rem">Опишите задачу — подберём защиту под ваш узел и посчитаем окупаемость по вашим же простоям.</p>
+      <button class="btn btn-primary btn-xl" onclick="openModal()"><i data-lucide="phone"></i> Обсудить вашу задачу</button>
+    </div>
+    <figure class="where-figure">
+      <img src="assets/images/sections/fig4.png" alt="Импеллер насоса: половина — голый изношенный металл под абразивом, половина под красной эластомерной бронёй МультиКрит"
+           onerror="this.style.display='none';this.parentElement.classList.add('is-empty')">
+    </figure>
   </div>
 </section>
 
@@ -844,12 +901,12 @@
     <div>
       <span class="sec-label">// Экономика</span>
       <h2 class="sec-title">Инвестиции, а не затраты</h2>
-      <p class="sec-sub" style="margin-bottom:1rem">Стоимость защиты в разы ниже покупки нового узла. Ресурс оборудования с МультиКрит в 3–5 раз дольше стандартного.</p>
+      <p class="sec-sub" style="margin-bottom:1.5rem">Стоимость защиты в разы ниже покупки нового узла. Ресурс оборудования с МультиКрит в 3–5 раз дольше стандартного.</p>
+      <div class="card roi-card"><div class="roi-num">↓</div><div><div class="roi-unit">Экономия</div><div class="roi-desc">Предотвращение замены дорогих узлов</div></div></div>
     </div>
     <div class="roi-cards">
       <div class="card roi-card"><div class="roi-num">18</div><div><div class="roi-unit">месяцев</div><div class="roi-desc">Средний срок окупаемости защиты</div></div></div>
       <div class="card roi-card"><div class="roi-num">3–5</div><div><div class="roi-unit">раз</div><div class="roi-desc">Увеличение срока службы оборудования</div></div></div>
-      <div class="card roi-card"><div class="roi-num">↓</div><div><div class="roi-unit">Экономия</div><div class="roi-desc">Предотвращение замены дорогих узлов</div></div></div>
     </div>
   </div>
 </section>
@@ -874,10 +931,10 @@
 
 <!-- ══ CLIENTS / ОТЗЫВЫ ══ -->
 <section class="section" id="reviews">
-  <div class="wrap" style="text-align:center">
+  <div class="wrap">
     <span class="sec-label">// Доверие</span>
     <h2 class="sec-title">Отзывы и рекомендации предприятий</h2>
-    <p class="sec-sub" style="margin:0 auto 2rem">Результаты применения на промышленных предприятиях. Нажмите на карточку — отзыв увеличится, а рядом с крестиком будет скан оригинала письма.</p>
+    <p class="sec-sub" style="margin:0 0 2rem">Результаты применения на промышленных предприятиях. Нажмите на карточку — отзыв увеличится, а рядом с крестиком будет скан оригинала письма.</p>
     <!-- Карусель отзывов: показывает 3 (адаптивно 2/1), стрелки крутят по кругу. Рендер из REVIEWS. -->
     <div class="reviews-carousel">
       <button class="reviews-arrow" type="button" aria-label="Предыдущие отзывы" onclick="carouselNav(-1)"><i data-lucide="chevron-left"></i></button>
@@ -897,10 +954,18 @@
     <!-- Лента кейсов. Каждая плитка ведёт на страницу cases/<slug>.html.
          Когда в cases/media/ появятся фото узла — раскомментировать <img> и убрать .case-tile__ghost. -->
     <div class="case-strip">
+      <a class="card case-tile" href="cases/2026-02-npo-centr-ustanovka-dco.html">
+        <div class="case-tile__media">
+          <img src="cases/media/2-korpus-posle.jpg" alt="Корпус узла установки ДЦО-0,9 с эластомерным покрытием МультиКрит 785">
+          <span class="hex case-tile__type" style="background:var(--metal)"><i data-lucide="settings"></i></span>
+        </div>
+        <h3 class="case-tile__title">Узлы установки ДЦО-0,9</h3>
+        <p class="case-tile__sub">Абразивная защита эластомером МультиКрит 785</p>
+        <div class="case-tile__kpi"><span class="spec-num">в КД</span><span class="spec-cap">заложено в конструкцию</span></div>
+      </a>
       <a class="card case-tile" href="cases/2024-04-biver-koleso-nasosa.html">
         <div class="case-tile__media">
-          <!-- <img src="cases/media/image5.jpeg" alt="Рабочее колесо насоса после восстановления эластомером МультиКрит765"> -->
-          <span class="case-tile__ghost"><i data-lucide="settings"></i></span>
+          <img src="cases/media/image5.jpeg" alt="Рабочее колесо насоса после восстановления эластомером МультиКрит765">
           <span class="hex case-tile__type" style="background:var(--metal)"><i data-lucide="settings"></i></span>
         </div>
         <h3 class="case-tile__title">Рабочее колесо насоса</h3>
@@ -995,10 +1060,18 @@
   <div class="wrap equip-grid">
     <div class="equip-text">
       <span class="sec-label">// Оборудование</span>
-      <h2 class="sec-title">Наносим своим оборудованием — <span class="accent">установкой МультиКрит М700</span></h2>
-      <p>Для вас это значит: <strong>качество нанесения мы контролируем от и до</strong>, не зависим от чужих подрядчиков и работаем прямо на вашем объекте — на детали любой геометрии и любом объёме. Установку разработали и собираем сами: и материал, и технику под него делает один производитель.</p>
-      <p>Почему это важно. Эластомер — не краска: его не нанести кистью или валиком. Двухкомпонентный состав схватывается за 1–2 минуты, поэтому компоненты нужно подогреть, точно отдозировать и подать под давлением синхронно, в нужной пропорции. Без такого оборудования нанести эластомер физически невозможно.</p>
-      <p><strong>МультиКрит М700</strong> подогревает оба компонента до рабочей температуры, насосами с частотным регулированием подаёт их в точной пропорции и через смесительный пистолет распыляет состав на поверхность. Автоматика держит температуру и равномерность слоя; компактный корпус на колёсах легко перемещается по цеху. Установка создана специально под эластомеры <strong>МультиКрит серии 700</strong>.</p>
+      <div class="equip-head">
+        <h2 class="equip-title">
+          <span class="equip-title__l1">Наносим своим оборудованием</span>
+          <span class="equip-title__l2">Установка МультиКрит М700</span>
+        </h2>
+        <p class="equip-lead">Оборудование для нанесения — <strong>наше собственное</strong>. Что это значит для вас:</p>
+        <ul class="equip-points">
+          <li><strong>Качество под нашим контролем.</strong> Наносим сами — от подготовки поверхности до финального слоя, без чужих подрядчиков и их брака.</li>
+          <li><strong>Работаем на вашем объекте.</strong> Деталь любой геометрии и любого объёма — выезжаем и наносим на месте.</li>
+          <li><strong>Материал и техника — от одного производителя.</strong> Установку разработали и собираем сами, специально под эластомеры МультиКрит серии 700.</li>
+        </ul>
+      </div>
     </div>
     <div class="equip-media-col">
       <div class="equip-media">
@@ -1013,6 +1086,10 @@
         <div class="spec-cell"><div class="spec-num">85 кг</div><div class="spec-cap">900×500×600 мм</div></div>
       </div>
     </div>
+  </div>
+  <div class="wrap equip-outro">
+    <p class="equip-outro__p">Почему это важно. Эластомер — не краска: его не нанести кистью или валиком. Двухкомпонентный состав схватывается за 1–2 минуты, поэтому компоненты нужно подогреть, точно отдозировать и подать под давлением синхронно, в нужной пропорции. Без такого оборудования нанести эластомер физически невозможно.</p>
+    <p class="equip-outro__p"><strong>МультиКрит М700</strong> подогревает оба компонента до рабочей температуры, насосами с частотным регулированием подаёт их в точной пропорции и через смесительный пистолет распыляет состав на поверхность. Автоматика держит температуру и равномерность слоя; компактный корпус на колёсах легко перемещается по цеху. Установка создана специально под эластомеры <strong>МультиКрит серии 700</strong>.</p>
   </div>
 </section>
 
