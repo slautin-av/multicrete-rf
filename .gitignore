@@ -30,3 +30,6 @@ knowledge/калькуляции-исходники/
 .planning/research/CALC-FORMALIZATION.md
 .planning/research/CALC-RECOMMENDATIONS.md
 .planning/research/CALC-NORMATIVE.md
+
+# Собранная папка для превью-деплоя (Netlify Drop) — не в репозиторий
+publish/
