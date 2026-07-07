@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MultiCrete — промышленные полимерные покрытия</title>
+  <link rel="stylesheet" href="assets/styles/base.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .nav-logo img {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
+
+    .hero {
+      padding: 5rem 1.5rem;
+      text-align: center;
+      background: var(--color-surface);
+    }
+
+    .hero-logo {
+      max-width: 380px;
+      width: 100%;
+      margin: 0 auto 2rem;
+      display: block;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      color: var(--color-dark);
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--color-muted);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #fff;
+      padding: 0.875rem 2rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: opacity 0.15s;
+    }
+
+    .hero-cta:hover { opacity: 0.85; }
+
+    /* ─── Секция «ДО / ПОСЛЕ»: эластомерная броня ──────────────── */
+    .mc-armor{
+      --blue:#2F66A5; --blue-light:#5B8FD0; --pink:#EB4D8C;
+      --ink:#1A2332; --steel:#E8EBEF;
+      background:
+        radial-gradient(60% 50% at 20% 15%, rgba(47,102,165,.30), transparent 70%),
+        radial-gradient(55% 45% at 85% 25%, rgba(235,77,140,.18), transparent 70%),
+        radial-gradient(60% 60% at 70% 90%, rgba(30,89,115,.35), transparent 70%),
+        radial-gradient(50% 50% at 10% 85%, rgba(91,143,208,.15), transparent 70%),
+        var(--ink);
+      color:var(--steel);
+      padding:4.5rem 1.5rem 5rem;
+    }
+    .mc-armor__wrap{max-width:1100px; margin:0 auto;}
+
+    .mc-armor__head{text-align:center; margin-bottom:2.5rem;}
+    .mc-armor__head h2{
+      font-family:"Oswald",sans-serif; font-weight:700;
+      font-size:clamp(26px,4.5vw,44px); line-height:1.08;
+      text-transform:uppercase; letter-spacing:.5px; color:var(--steel);
+    }
+    .mc-armor__head h2 .accent{color:var(--pink);}
+    .mc-armor__head p{
+      margin:.9rem auto 0; max-width:680px;
+      font-size:clamp(14px,1.6vw,17px); line-height:1.55; opacity:.8;
+    }
+
+    .mc-armor__pair{
+      display:grid; grid-template-columns:1fr 1fr; gap:28px;
+      align-items:start; margin-bottom:2.75rem; position:relative;
+    }
+    .mc-armor__pair::after{
+      content:''; position:absolute; top:8%; bottom:8%; left:50%;
+      width:2px; transform:translateX(-50%);
+      background:linear-gradient(180deg, transparent, rgba(235,77,140,.55), transparent);
+      filter:blur(1px);
+    }
+    .mc-armor__panel{position:relative; text-align:center;}
+    .mc-armor__frame{
+      width:100%; aspect-ratio:1/1;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .mc-armor__frame img{
+      max-width:100%; max-height:100%; width:auto; height:auto; display:block;
+      filter:drop-shadow(0 12px 30px rgba(0,0,0,.45));
+    }
+    .mc-armor__badge{
+      display:inline-flex; align-items:center;
+      font-family:"Oswald",sans-serif; font-weight:600;
+      text-transform:uppercase; letter-spacing:2px;
+      font-size:clamp(14px,1.8vw,18px);
+      padding:8px 20px; border-radius:10px; margin-bottom:14px;
+    }
+    .mc-armor__badge--before{
+      color:var(--steel); background:rgba(61,77,98,.55);
+      border:1px solid rgba(232,235,239,.18);
+    }
+    .mc-armor__badge--after{
+      color:#fff; background:var(--pink);
+      box-shadow:0 4px 0 rgba(165,35,80,1), 0 0 26px rgba(235,77,140,.45);
+    }
+
+    .mc-armor__impacts{
+      display:grid; grid-template-columns:repeat(5,1fr); gap:16px;
+    }
+    .mc-armor__imp{
+      background:rgba(34,45,63,.72);
+      border:1px solid rgba(91,143,208,.18);
+      border-radius:14px; padding:18px 16px;
+      box-shadow:0 8px 24px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .mc-armor__imp h3{
+      font-family:"Oswald",sans-serif; font-weight:600;
+      font-size:16px; text-transform:uppercase; letter-spacing:.5px;
+      color:var(--blue-light); margin-bottom:12px; line-height:1.15;
+    }
+    .mc-armor__row{font-size:13px; line-height:1.45; margin-bottom:10px;}
+    .mc-armor__row:last-child{margin-bottom:0;}
+    .mc-armor__lbl{
+      display:block; font-weight:700; text-transform:uppercase;
+      letter-spacing:.5px; font-size:10px; margin-bottom:3px;
+    }
+    .mc-armor__row--hit .mc-armor__lbl{color:var(--blue-light);}
+    .mc-armor__row--fix .mc-armor__lbl{color:var(--pink);}
+    .mc-armor__row span.txt{opacity:.85;}
+
+    @media (max-width:900px){
+      .mc-armor__impacts{grid-template-columns:repeat(2,1fr);}
+    }
+    @media (max-width:640px){
+      .mc-armor__pair{grid-template-columns:1fr; gap:8px;}
+      .mc-armor__pair::after{display:none;}
+      .mc-armor__impacts{grid-template-columns:1fr;}
+      .mc-armor{padding:3rem 1rem 3.5rem;}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="assets/images/Logo_Multicrete.png" alt="MultiCrete">
+      </a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+      <label for="nav-toggle" class="nav-toggle-label">☰</label>
+      <ul class="nav-links">
+        <li><a href="materials/index.html">Материалы</a></li>
+        <li><a href="problems/">Решения</a></li>
+        <li><a href="about/">О компании</a></li>
+        <li><a href="cases/">Объекты</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">Получить КП</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <img src="assets/images/Logo_Multicrete.png" alt="MultiCrete" class="hero-logo">
+      <h1>Промышленные полимерные покрытия</h1>
+      <p>Защищаем бетонные и металлические поверхности на производстве, складах и химических объектах</p>
+      <a href="materials/index.html" class="hero-cta">Каталог материалов</a>
+    </section>
+
+    <section class="mc-armor">
+      <div class="mc-armor__wrap">
+
+        <div class="mc-armor__head">
+          <h2>Что разрушает металл —<br>и как <span class="accent">эластомер МультиКрит</span> это останавливает</h2>
+          <p>Слева — голый металл под нагрузкой. Справа — тот же лист под эластомерной бронёй: те же воздействия, но повреждений нет.</p>
+        </div>
+
+        <div class="mc-armor__pair">
+          <div class="mc-armor__panel">
+            <div class="mc-armor__badge mc-armor__badge--before">До</div>
+            <div class="mc-armor__frame">
+              <img src="assets/images/sections/fig1.png" alt="Голый металл: абразивный износ, удар, кавитация, налипание, коррозия">
+            </div>
+          </div>
+          <div class="mc-armor__panel">
+            <div class="mc-armor__badge mc-armor__badge--after">После</div>
+            <div class="mc-armor__frame">
+              <img src="assets/images/sections/fig2.png" alt="Металл под эластомерной бронёй МультиКрит: воздействия отражаются">
+            </div>
+          </div>
+        </div>
+
+        <div class="mc-armor__impacts">
+          <div class="mc-armor__imp">
+            <h3>Абразивный износ</h3>
+            <div class="mc-armor__row mc-armor__row--hit"><span class="mc-armor__lbl">Воздействие</span><span class="txt">Твёрдые частицы — песок, пульпа, окалина — царапают и стачивают металл.</span></div>
+            <div class="mc-armor__row mc-armor__row--fix"><span class="mc-armor__lbl">Эластомер</span><span class="txt">Упругий слой пружинит: частицы отскакивают, не срезая материал.</span></div>
+          </div>
+
+          <div class="mc-armor__imp">
+            <h3>Ударные нагрузки</h3>
+            <div class="mc-armor__row mc-armor__row--hit"><span class="mc-armor__lbl">Воздействие</span><span class="txt">Удары дробят и деформируют металл — идут трещины и вмятины.</span></div>
+            <div class="mc-armor__row mc-armor__row--fix"><span class="mc-armor__lbl">Эластомер</span><span class="txt">Гасит и рассеивает энергию удара по площади, возвращая форму.</span></div>
+          </div>
+
+          <div class="mc-armor__imp">
+            <h3>Кавитация</h3>
+            <div class="mc-armor__row mc-armor__row--hit"><span class="mc-armor__lbl">Воздействие</span><span class="txt">Схлопывающиеся пузырьки выбивают микрократеры — питтинг.</span></div>
+            <div class="mc-armor__row mc-armor__row--fix"><span class="mc-armor__lbl">Эластомер</span><span class="txt">Эластичная поверхность поглощает микровзрывы, каверны не образуются.</span></div>
+          </div>
+
+          <div class="mc-armor__imp">
+            <h3>Налипание</h3>
+            <div class="mc-armor__row mc-armor__row--hit"><span class="mc-armor__lbl">Воздействие</span><span class="txt">Вязкие и липкие среды налипают и забивают поверхность.</span></div>
+            <div class="mc-armor__row mc-armor__row--fix"><span class="mc-armor__lbl">Эластомер</span><span class="txt">Гладкое антиадгезионное покрытие — налипшее стекает и соскальзывает.</span></div>
+          </div>
+
+          <div class="mc-armor__imp">
+            <h3>Коррозия</h3>
+            <div class="mc-armor__row mc-armor__row--hit"><span class="mc-armor__lbl">Воздействие</span><span class="txt">Влага и агрессивная среда окисляют металл — появляется ржавчина.</span></div>
+            <div class="mc-armor__row mc-armor__row--fix"><span class="mc-armor__lbl">Эластомер</span><span class="txt">Сплошной барьер изолирует металл от среды — коррозии не на чём начаться.</span></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        MultiCrete
+        <small>ООО МультиКрит · Ижевск<br>Промышленные полимерные покрытия</small>
+      </div>
+      <div class="footer-col">
+        <h4>Продукция</h4>
+        <a href="materials/index.html">Каталог материалов</a>
+        <a href="problems/">Решения по проблемам</a>
+      </div>
+      <div class="footer-col">
+        <h4>Компания</h4>
+        <a href="about/">О нас</a>
+        <a href="cases/">Объекты</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ООО МультиКрит. Все права защищены.</span>
+      <span>multicrete.ru</span>
+    </div>
+  </footer>
+
+</body>
+</html>
