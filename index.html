@@ -6,6 +6,26 @@
   <title>МультиКрит — Эластомерная броня для промышленности</title>
   <meta name="description" content="МультиКрит — эластомерная броня для промышленности. Износостойкость выше стали в 3–4 раза. Российский аналог MetaLine и Belzona. Ижевск.">
 
+  <!-- Favicon (пути относительные — работают и на витрине github.io, и на домене) -->
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <!-- Open Graph / карточка-превью при пересылке ссылки в Telegram/WhatsApp/VK.
+       og:image требует АБСОЛЮТНЫЙ URL. Сейчас — адрес витрины GitHub Pages.
+       TODO при переезде на мультикрит.рф: заменить домен в og:image и og:url. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="МультиКрит">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="МультиКрит — Эластомерная броня для промышленности">
+  <meta property="og:description" content="Защита от износа, кавитации и коррозии. Износостойкость выше стали в 3–4 раза. Российский аналог MetaLine и Belzona. Производство — Ижевск.">
+  <meta property="og:url" content="https://slautin-av.github.io/multicrete-rf/">
+  <meta property="og:image" content="https://slautin-av.github.io/multicrete-rf/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="МультиКрит — эластомерная броня для промышленности">
+  <meta name="twitter:card" content="summary_large_image">
+
   <!-- Шрифты бренда -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1131,6 +1151,11 @@
         <textarea class="pf-input pf-textarea" placeholder="Регион, что защищаем / вопрос по партнёрству..."></textarea>
         <div class="pf-consent"><input type="checkbox" id="pc" checked><label for="pc">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</label></div>
         <button type="submit" class="btn btn-primary pf-submit">Отправить заявку</button>
+        <!-- Честное уведомление: онлайн-приём заявок ещё не подключён к каналу доставки.
+             Не имитируем отправку — направляем на телефон/почту (T-forms). -->
+        <div id="contact-notice" hidden style="margin-top:1rem;padding:.9rem 1rem;border:1px solid var(--line);border-radius:10px;background:var(--scale);font-size:.9rem;line-height:1.55;color:var(--muted)">
+          Онлайн-приём заявок с формы сейчас настраивается. Позвоните <a href="tel:+73412324151" style="color:var(--ink);font-weight:600">+7&nbsp;(3412)&nbsp;32-41-51</a> или напишите на <a href="mailto:MultiCrete@yandex.ru" style="color:var(--ink);font-weight:600">MultiCrete@yandex.ru</a> — ответим в течение рабочего дня.
+        </div>
       </form>
     </div>
   </div>
@@ -1186,6 +1211,10 @@
       <label class="pf-label">Телефон *</label>
       <input class="pf-input" type="tel" placeholder="+7 (000) 000-00-00" required>
       <button type="submit" class="btn btn-primary pf-submit" style="margin-top:1rem">Заказать звонок</button>
+      <!-- Честное уведомление вместо имитации отправки (T-forms). -->
+      <div id="call-notice" hidden style="margin-top:1rem;padding:.9rem 1rem;border:1px solid var(--line);border-radius:10px;background:var(--scale);font-size:.9rem;line-height:1.55;color:var(--muted)">
+        Онлайн-приём заявок с формы сейчас настраивается. Позвоните <a href="tel:+73412324151" style="color:var(--ink);font-weight:600">+7&nbsp;(3412)&nbsp;32-41-51</a> или напишите на <a href="mailto:MultiCrete@yandex.ru" style="color:var(--ink);font-weight:600">MultiCrete@yandex.ru</a> — ответим в течение рабочего дня.
+      </div>
     </form>
   </div>
 </div>
@@ -1349,8 +1378,15 @@
     document.getElementById('tbl-b').style.display = t === 'b' ? 'table' : 'none';
     document.getElementById('tbl-a').style.display = t === 'a' ? 'table' : 'none';
   }
-  function submitForm(e) { e.preventDefault(); alert('Спасибо! Инженер свяжется с вами в течение 1 рабочего дня.'); e.target.reset(); }
-  function submitCall(e) { e.preventDefault(); closeModal(); setTimeout(() => alert('Спасибо! Перезвоним в течение 15 минут.'), 200); }
+  /* Формы главной пока не подключены к каналу доставки заявок (канал выберем позже).
+     НЕ имитируем успешную отправку — показываем честное уведомление с телефоном/почтой,
+     данные в полях не стираем. Вернуть реальную отправку, когда будет выбран приёмник. */
+  function showLeadFallback(id) {
+    const n = document.getElementById(id);
+    if (n) { n.hidden = false; n.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+  }
+  function submitForm(e) { e.preventDefault(); showLeadFallback('contact-notice'); }
+  function submitCall(e) { e.preventDefault(); showLeadFallback('call-notice'); }
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const id = a.getAttribute('href').slice(1);
