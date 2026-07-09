@@ -48,9 +48,23 @@ const KLASS_TEXTS = {
 // 'https://api.web3forms.com/submit' и добавить access_key в data (per RESEARCH/D-02).
 const LEAD_ENDPOINT = '/send-lead.php';
 
+// ── Гейт доступа (код-замок) ───────────────────────────────────────────────
+// Код доступа к калькулятору. ВНИМАНИЕ: пока проверка на клиенте — код виден в
+// исходнике и технически обходится через консоль. При подключении сервера
+// перенести проверку кода в бэкенд (тот же «почтальон»), чтобы гейт стал настоящим.
+const CALC_ACCESS_CODE = '324151';
+
+// Готовность бэкенда-«почтальона» (отправка письма с кодом + запись контакта в базу).
+// Пока false — форма ИМИТИРУЕТ успешную отправку: фронт-флоу отрабатывает целиком,
+// но реальное письмо НЕ уходит. Когда почтальон подключён — поставить true.
+const LEAD_BACKEND_READY = false;
+
+// Ключ, под которым в рамках вкладки помним, что доступ уже открыт (не спрашивать код повторно).
+const CALC_UNLOCK_KEY = 'mc-calc-unlocked';
+
 // Тексты успеха/ошибки — ДОСЛОВНО из UI-SPEC Copywriting.
-const LEAD_SUCCESS_TEXT = 'Спасибо, заявка отправлена. Мы свяжемся с вами в течение часа.';
 const LEAD_ERROR_TEXT = 'Не удалось отправить заявку. Попробуйте ещё раз или позвоните нам.';
+const GATE_CODE_ERROR_TEXT = 'Неверный код. Проверьте и попробуйте ещё раз — или получите код по форме ниже.';
 
 // Подписи строк построчной детализации (D-10). Порядок — как в breakdown/эталоне.
 // Ключи берутся из breakdown движка; формулы НЕ дублируются — только читаем поля.
@@ -74,8 +88,16 @@ const DETAILS_ROWS = [
   ['Очиститель', 'stOchistitel'],
 ];
 
-// async sendLead — реальная отправка на бэкенд (план 02). Контракт ответа: {success, error?}.
+// sendLead — ЕДИНАЯ точка интеграции «почтальона». Контракт ответа: {success, error?}.
+// Задача почтальона (когда подключим сервер):
+//   1) отправить письмо ОТПРАВИТЕЛЮ с кодом доступа CALC_ACCESS_CODE (приветствие);
+//   2) отправить письмо НАМ — уведомление «новый запрос»;
+//   3) записать контакт в базу (для рассылки).
 async function sendLead(data) {
+  // Заглушка: пока почтальон не подключён — имитируем успех, письмо реально НЕ уходит.
+  if (!LEAD_BACKEND_READY) {
+    return { success: true, stub: true };
+  }
   const res = await fetch(LEAD_ENDPOINT, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -103,14 +125,69 @@ function initCalculatorUI() {
   // Последний рассчитанный breakdown (для воронки детализации).
   let lastBreakdown = null;
 
+  // ── Гейт доступа. Если разметки гейта нет (отдельная страница калькулятора) —
+  //    gate/body === null, и всё работает как раньше: калькулятор открыт. ──────
+  const gate = document.getElementById('calc-gate');
+  const body = document.getElementById('calc-body');
+
+  function isUnlocked() {
+    try { return sessionStorage.getItem(CALC_UNLOCK_KEY) === '1'; } catch { return false; }
+  }
+  // Показать калькулятор, спрятать гейт. Вызывается при верном коде.
+  function unlockCalc() {
+    try { sessionStorage.setItem(CALC_UNLOCK_KEY, '1'); } catch { /* приватный режим — не критично */ }
+    if (gate) gate.hidden = true;
+    if (body) body.hidden = false;
+    const first = document.getElementById('calc-S');
+    if (first) first.focus();
+  }
+  // Показать гейт (поле кода + форма), спрятать калькулятор.
+  function showGate() {
+    if (gate) gate.hidden = false;
+    if (body) body.hidden = true;
+    const code = document.getElementById('gate-code');
+    if (code) { code.value = ''; code.focus(); }
+    const err = document.getElementById('gate-error');
+    if (err) err.innerHTML = '';
+  }
+  // Проверка кода. ВРЕМЕННО на клиенте (см. CALC_ACCESS_CODE) — перенести на сервер.
+  function tryGateCode() {
+    const code = document.getElementById('gate-code');
+    const err = document.getElementById('gate-error');
+    const value = (code ? code.value : '').trim();
+    if (value === CALC_ACCESS_CODE) {
+      unlockCalc();
+    } else if (err) {
+      err.innerHTML = '';
+      const p = document.createElement('p');
+      p.className = 'calc-error';
+      p.textContent = GATE_CODE_ERROR_TEXT;
+      err.appendChild(p);
+    }
+  }
+
   // ── Механика окна (паттерн landing.html 932-934/951, переименован) ───────
   window.openCalcModal = function openCalcModal(trigger) {
     lastTrigger = trigger || document.activeElement;
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
-    const first = document.getElementById('calc-S');
-    if (first) first.focus();
+    // Гейт: если в этой вкладке код уже вводили — сразу калькулятор, иначе замок.
+    if (gate && body) {
+      if (isUnlocked()) unlockCalc();
+      else showGate();
+    } else {
+      const first = document.getElementById('calc-S');
+      if (first) first.focus();
+    }
   };
+
+  // Кнопка «Войти» и Enter в поле кода.
+  const gateEnter = document.getElementById('gate-enter');
+  if (gateEnter) gateEnter.addEventListener('click', tryGateCode);
+  const gateCode = document.getElementById('gate-code');
+  if (gateCode) gateCode.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); tryGateCode(); }
+  });
 
   window.closeCalcModal = function closeCalcModal() {
     overlay.classList.remove('open');
@@ -160,6 +237,10 @@ function initCalculatorUI() {
     lastBreakdown = b;
     renderResult(b);
     renderOgovorki(b);
+    // Контакт собран на входе (гейт) — построчную детализацию показываем сразу.
+    renderDetails(b);
+    const details = document.getElementById('calc-details');
+    if (details) details.hidden = false;
   }
 
   // ── Рендеры ──────────────────────────────────────────────────────────────
@@ -247,16 +328,17 @@ function initCalculatorUI() {
     const submitBtn = document.getElementById('lead-submit');
     if (submitBtn) submitBtn.disabled = true;
     try {
+      // Почтальон: письмо с кодом отправителю + уведомление нам + запись контакта в базу.
       await sendLead(data);
-      renderLeadMessage(LEAD_SUCCESS_TEXT, false);
-      // Кнопка остаётся disabled (повторная отправка не нужна) — поясняем это
-      // пользователю сменой подписи, иначе серая кнопка выглядит как баг (WR-02).
-      if (submitBtn) submitBtn.textContent = 'Заявка отправлена';
-      // Воронка D-10: раскрываем построчную детализацию из последнего расчёта.
-      renderDetails(lastBreakdown);
-      document.getElementById('calc-details').hidden = false;
+      // Форму прячем, показываем экран «код отправлен» и возвращаем к полю ввода кода.
+      const lead = document.getElementById('calc-gate-lead');
+      const sent = document.getElementById('calc-gate-sent');
+      if (lead) lead.hidden = true;
+      if (sent) sent.hidden = false;
+      const code = document.getElementById('gate-code');
+      if (code) code.focus();
     } catch {
-      // Ошибка — сообщение красным, детализацию НЕ раскрываем.
+      // Ошибка отправки — сообщение красным, форма остаётся.
       renderLeadMessage(LEAD_ERROR_TEXT, true);
       if (submitBtn) submitBtn.disabled = false;
     }

@@ -1300,6 +1300,66 @@
   <div class="modal calc-modal">
     <button class="modal-close" onclick="closeCalcModal()" aria-label="Закрыть" type="button">&times;</button>
 
+    <!-- ══ ГЕЙТ ДОСТУПА. Калькулятор открывается по коду. Кто кода не знает —
+         оставляет контакты, и код придёт на почту (см. sendLead в calculator-ui.js). ══ -->
+    <div class="calc-gate" id="calc-gate">
+      <h2>Доступ к калькулятору</h2>
+      <p class="calc-sub">Онлайн-калькулятор серии 700 доступен по коду. Введите код — или оставьте контакты, и мы пришлём код доступа на вашу почту.</p>
+
+      <label class="pf-label" for="gate-code">Код доступа</label>
+      <div class="calc-gate-row">
+        <input class="pf-input" type="text" id="gate-code" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="Введите код">
+        <button class="btn btn-primary" id="gate-enter" type="button">Войти</button>
+      </div>
+      <div class="calc-errors" id="gate-error" aria-live="polite"></div>
+
+      <div class="calc-gate-divider"><span>нет кода?</span></div>
+
+      <!-- Форма получения кода: контакт собираем здесь, на входе. Согласие 152-ФЗ обязательно. -->
+      <div class="calc-gate-lead" id="calc-gate-lead">
+        <p class="calc-lead-sub">Оставьте контакты — вышлем код доступа на e-mail. Все поля обязательны.</p>
+        <form id="calc-lead-form" novalidate>
+          <div class="pf-row">
+            <div>
+              <label class="pf-label" for="lead-name">Имя</label>
+              <input class="pf-input" type="text" id="lead-name" name="name" required autocomplete="name" placeholder="Как к вам обращаться">
+            </div>
+            <div>
+              <label class="pf-label" for="lead-org">Организация</label>
+              <input class="pf-input" type="text" id="lead-org" name="organization" autocomplete="organization" placeholder="Например, ООО «Завод»" required>
+            </div>
+          </div>
+          <div class="pf-row">
+            <div>
+              <label class="pf-label" for="lead-phone">Телефон</label>
+              <input class="pf-input" type="tel" id="lead-phone" name="phone" required autocomplete="tel" placeholder="+7 ___ ___-__-__">
+            </div>
+            <div>
+              <label class="pf-label" for="lead-email">E-mail</label>
+              <input class="pf-input" type="email" id="lead-email" name="email" required autocomplete="email" placeholder="name@company.ru">
+            </div>
+          </div>
+          <!-- Honeypot: имя поля совпадает с проверкой website в send-lead.php (T-02-13) -->
+          <input type="text" name="website" id="lead-website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+          <!-- Согласие 152-ФЗ: required, БЕЗ checked — активное согласие (T-02-11) -->
+          <label class="pf-consent" for="lead-consent">
+            <input type="checkbox" id="lead-consent" name="consent" required>
+            <span>Я согласен на <a href="/privacy/" target="_blank" rel="noopener">обработку персональных данных</a></span>
+          </label>
+          <button class="btn btn-primary pf-submit" id="lead-submit" type="submit">Получить код</button>
+        </form>
+        <div id="lead-message" aria-live="polite"></div>
+      </div>
+
+      <!-- Экран после отправки формы (пока бэкенд не подключён — заглушка успеха) -->
+      <div class="calc-gate-sent" id="calc-gate-sent" hidden>
+        <h3 class="calc-gate-sent__title">Код отправлен на вашу почту</h3>
+        <p class="calc-lead-sub">Мы отправили код доступа на указанный e-mail. Проверьте почту, включая папку «Спам», и введите код в поле выше.</p>
+      </div>
+    </div>
+
+    <!-- ══ КАЛЬКУЛЯТОР (скрыт до ввода кода). Контакт уже собран на входе — показываем всё. ══ -->
+    <div class="calc-body" id="calc-body" hidden>
     <h2 id="calc-title">Калькулятор стоимости покрытия · серия 700</h2>
     <p class="calc-sub">Предварительный расчёт покрытия эластомерами МультиКрит серии 700 — по площади, толщине и классу сложности.</p>
 
@@ -1358,57 +1418,12 @@
       <ul id="calc-klass-info-list"></ul>
     </div>
 
-    <!-- ══ Форма заявки (НЕОБЯЗАТЕЛЬНАЯ, LEAD-01). Цена/«шапка» уже видны выше ══ -->
-    <!-- Воронка D-10: за контакты — полная построчная детализация (НЕ цена). -->
-    <div class="calc-lead">
-      <h3>Оставить заявку</h3>
-      <p class="calc-lead-sub">Оставьте контакты, чтобы увидеть полную построчную смету</p>
-      <p class="calc-lead-sub">Все поля обязательны для заполнения.</p>
-
-      <form id="calc-lead-form" novalidate>
-        <div class="pf-row">
-          <div>
-            <label class="pf-label" for="lead-name">Имя</label>
-            <input class="pf-input" type="text" id="lead-name" name="name" required autocomplete="name" placeholder="Как к вам обращаться">
-          </div>
-          <div>
-            <label class="pf-label" for="lead-org">Организация</label>
-            <input class="pf-input" type="text" id="lead-org" name="organization" autocomplete="organization" placeholder="Например, ООО «Завод»" required>
-          </div>
-        </div>
-
-        <div class="pf-row">
-          <div>
-            <label class="pf-label" for="lead-phone">Телефон</label>
-            <input class="pf-input" type="tel" id="lead-phone" name="phone" required autocomplete="tel" placeholder="+7 ___ ___-__-__">
-          </div>
-          <div>
-            <label class="pf-label" for="lead-email">E-mail</label>
-            <input class="pf-input" type="email" id="lead-email" name="email" required autocomplete="email" placeholder="name@company.ru">
-          </div>
-        </div>
-
-        <!-- Honeypot: имя поля совпадает с проверкой website в send-lead.php (T-02-13) -->
-        <input type="text" name="website" id="lead-website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
-
-        <!-- Согласие 152-ФЗ: required, БЕЗ checked — активное согласие (T-02-11) -->
-        <label class="pf-consent" for="lead-consent">
-          <input type="checkbox" id="lead-consent" name="consent" required>
-          <span>Я согласен на <a href="/privacy/" target="_blank" rel="noopener">обработку персональных данных</a></span>
-        </label>
-
-        <button class="btn btn-primary pf-submit" id="lead-submit" type="submit">Отправить заявку</button>
-      </form>
-
-      <!-- Сообщение успеха/ошибки (заполняется из JS) -->
-      <div id="lead-message" aria-live="polite"></div>
-    </div>
-
-    <!-- ── Построчная детализация (скрыта; раскрывается после валидной отправки — D-10) ── -->
+    <!-- ── Построчная детализация. Контакт собран на входе (гейт) — показываем сразу после расчёта. ── -->
     <div class="calc-details" id="calc-details" hidden>
       <h3>Построчная детализация сметы</h3>
       <div id="calc-details-body"></div>
     </div>
+    </div><!-- /.calc-body -->
   </div>
 </div>
 

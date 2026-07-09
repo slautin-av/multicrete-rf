@@ -207,6 +207,23 @@ img { max-width: 100%; display: block; }
   padding: 1.25rem; box-shadow: inset 0 2px 4px rgba(26,35,50,.2); }
 .calc-details h3 { font-family: var(--f-head); font-size: 1rem; color: var(--ink); margin-bottom: .75rem; }
 
+/* ── Гейт доступа (код-замок перед калькулятором) ───────────────────────────*/
+/* Поле кода + кнопка «Войти» в одну строку. */
+.calc-gate-row { display: flex; gap: .5rem; align-items: stretch; margin-top: .35rem; }
+.calc-gate-row .pf-input { flex: 1; min-width: 0; }
+.calc-gate-row .btn { flex: none; white-space: nowrap; }
+/* Разделитель «нет кода?» между вводом кода и формой. */
+.calc-gate-divider { display: flex; align-items: center; gap: .75rem; margin: 1.75rem 0 1.25rem;
+  color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; }
+.calc-gate-divider::before, .calc-gate-divider::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+/* Экран «Код отправлен на почту». */
+.calc-gate-sent { margin-top: 1rem; background: var(--scale); border-radius: 12px;
+  padding: 1.25rem; box-shadow: inset 0 2px 4px rgba(26,35,50,.2); }
+.calc-gate-sent__title { display: flex; align-items: center; gap: .5rem;
+  font-family: var(--f-head); font-size: 1.05rem; color: #3FB57A; margin-bottom: .5rem; }
+.calc-gate-sent__title::before { content: '✓'; font-weight: 700; }
+.calc-gate-sent .calc-lead-sub { margin-bottom: 0; }
+
 /* ── Заголовок страницы-модуля (когда открыт как отдельная страница) ───────*/
 .calc-page { display: flex; align-items: center; justify-content: center;
   min-height: 100dvh; padding: 2rem 1rem; }
