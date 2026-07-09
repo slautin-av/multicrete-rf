@@ -6,5 +6,12 @@
 // Порядок элементов массива = порядок листания стрелками.
 window.MC_CASES = [
   { slug: "2026-02-npo-centr-ustanovka-dco", title: "Узлы установки ДЦО-0,9", date: "февраль 2026" },
-  { slug: "2024-04-biver-koleso-nasosa", title: "Рабочее колесо насоса", date: "апрель 2024" }
+  { slug: "2025-04-biver-detali-vozduhoduvki", title: "Воздуходувка и детали пневмолинии", date: "апрель 2025" },
+  { slug: "2024-12-fores-sharovye-melnicy", title: "Корпуса лабораторных шаровых мельниц", date: "декабрь 2024" },
+  { slug: "2024-11-sebryakovcement-shneki-pitatelya", title: "Шнеки делителя сырьевой смеси", date: "ноябрь 2024" },
+  { slug: "2024-06-chtpz-priemniki-trub", title: "Приёмники труб прокатного стана", date: "июнь 2024" },
+  { slug: "2024-04-biver-koleso-nasosa", title: "Рабочее колесо насоса", date: "апрель 2024" },
+  { slug: "2023-12-pigment-meshalka-reaktora", title: "Мешалка реактора-перекристаллизатора", date: "декабрь 2023" },
+  { slug: "2023-07-perspektiva-korpus-nasosa", title: "Корпус шламового насоса", date: "июль 2023" },
+  { slug: "2019-2021-istoki-rannie-raboty", title: "С чего начинался МультиКрит", date: "2019–2021" }
 ];

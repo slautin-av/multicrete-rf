@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Кейс: Корпус шламового насоса — МультиКрит</title>
+  <meta name="description" content="Импортозамещение защитного покрытия корпуса шламового насоса: восстановление отечественным эластомером МультиКрит785 взамен импортного MetaLine, защита от абразивного износа, ввод в эксплуатацию через 4 суток.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=Tektur:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --blue:#2F66A5; --blue-d:#244F80; --pink:#EB4D8C; --pink-d:#A52350;
+      --ink:#EAF0F7; --steel:#212C3D; --scale:#19222F; --line:#34435A; --muted:#93A1B5; --bg:#1A2332;
+      --concrete:#6B7280; --metal:#4A6580; --chem:#2F66A5; --hydro:#1E5973; --red:#D64550; --max:1000px;
+      --f-head:'Oswald',sans-serif; --f-body:'Manrope',sans-serif; --f-tech:'Tektur',sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box} *{margin:0;padding:0}
+    html{background:var(--bg)}
+    body{font-family:var(--f-body);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+    h1,h2,h3{font-family:var(--f-head);line-height:1.15;font-weight:600}
+    img{max-width:100%;display:block}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 1.5rem}
+    .section{padding:56px 0}
+    .sec-label{font-family:var(--f-tech);font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:#7FB0E6;display:inline-block;margin-bottom:.5rem}
+    .sec-title{font-size:clamp(1.7rem,4vw,2.4rem);margin-bottom:.75rem}
+    .card{background:var(--steel);border-radius:12px;padding:1.5rem;
+      box-shadow:0 8px 24px rgba(26,35,50,.18),inset 0 1px 0 rgba(255,255,255,.06)}
+    .spec-cell{background:var(--scale);border-radius:8px;padding:1rem 1.25rem;text-align:center;
+      box-shadow:inset 0 2px 4px rgba(0,0,0,.35),inset 0 -1px 0 rgba(255,255,255,.05)}
+    .spec-num{font-family:var(--f-head);font-size:1.6rem;font-weight:700;color:#7FB0E6;display:block}
+    .spec-cap{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+    .hex{width:48px;height:48px;display:inline-flex;align-items:center;justify-content:center;color:#fff;
+      clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--f-body);font-weight:700;font-size:.95rem;
+      padding:.85rem 1.75rem;border:none;border-radius:10px;cursor:pointer;text-decoration:none}
+    .btn-primary{background:var(--pink);color:#fff;box-shadow:0 4px 0 var(--pink-d),0 0 24px rgba(235,77,140,.3)}
+    .btn-secondary{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px rgba(127,176,230,.5)}
+    .case-snapshot{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin:1.5rem 0}
+    .case-snapshot.cols-3{grid-template-columns:repeat(3,1fr)}
+    .case-snapshot.cols-5{grid-template-columns:repeat(5,1fr)}
+    .dp__pair{display:grid;grid-template-columns:1fr 1fr;gap:24px;position:relative;margin:1.5rem 0}
+    .dp__pair::after{content:'';position:absolute;top:14%;bottom:14%;left:50%;width:2px;transform:translateX(-50%);
+      background:linear-gradient(180deg,transparent,rgba(235,77,140,.55),transparent);filter:blur(1px)}
+    .dp__panel{text-align:center}
+    .dp__frame img{width:100%;border-radius:10px;filter:drop-shadow(0 14px 34px rgba(0,0,0,.5))}
+    .dp__badge{display:inline-flex;font-family:var(--f-head);font-weight:600;text-transform:uppercase;letter-spacing:.16em;
+      font-size:.85rem;padding:.4rem 1.1rem;border-radius:10px;margin-bottom:.6rem}
+    .dp__badge--before{color:var(--ink);background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+    .dp__badge--after{color:#fff;background:var(--pink);box-shadow:0 4px 0 var(--pink-d),0 0 24px rgba(235,77,140,.35)}
+    .case-block{margin:2rem 0}
+    .case-block p{color:#C7D2E0;font-size:1.02rem;margin-top:.5rem}
+    .case-block p strong{color:var(--ink)}
+    /* ── Смысловые блоки Проблема/Решение/Результат: крупнее, различимее, «панель приборов» ── */
+    .prb{background:var(--steel);border-radius:14px;padding:1.5rem 1.6rem;margin:1.25rem 0;position:relative;overflow:hidden;
+      border-left:3px solid var(--metal);box-shadow:0 8px 24px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.06)}
+    .prb--solution,.prb--result{border-left-color:#7FB0E6}
+    .prb__head{display:flex;align-items:center;gap:.65rem;margin-bottom:.35rem}
+    .prb__ico{width:36px;height:36px;flex:none;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;
+      background:var(--scale);color:#7FB0E6;box-shadow:inset 0 2px 4px rgba(0,0,0,.4),inset 0 -1px 0 rgba(255,255,255,.05)}
+    .prb__ico i{width:20px;height:20px}
+    .prb__label{font-family:var(--f-tech);font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:#7FB0E6}
+    .prb__title{font-family:var(--f-head);font-weight:600;font-size:1.35rem;line-height:1.22;color:var(--ink);margin:0 0 .6rem}
+    .prb__text{color:var(--ink);font-size:1.08rem;line-height:1.7}
+    .prb__text strong{color:#fff}
+    .prb__list{list-style:none;margin:.2rem 0 0;padding:0;display:grid;gap:.7rem}
+    .prb__list li{position:relative;padding-left:1.6rem;font-size:1.05rem;line-height:1.5;color:var(--ink)}
+    .prb__list li::before{content:'';position:absolute;left:.1rem;top:.5em;width:9px;height:9px;border-radius:50%;
+      background:var(--pink);box-shadow:0 0 10px rgba(235,77,140,.6)}
+    .prb__list li strong{color:#fff}
+    .prb--result::after{content:'';position:absolute;left:1.6rem;right:1.6rem;bottom:0;height:2px;
+      background:linear-gradient(90deg,transparent,rgba(235,77,140,.6),transparent);filter:blur(.5px)}
+    .prb__kicker{display:block;margin-top:.85rem;font-family:var(--f-tech);font-size:.82rem;letter-spacing:.02em;color:#7FB0E6}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .gallery figcaption{font-size:.8rem;color:var(--muted);margin-top:.5rem}
+    .case-cta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem}
+    @media(max-width:720px){.case-snapshot,.case-snapshot.cols-3,.case-snapshot.cols-5{grid-template-columns:repeat(2,1fr)} .dp__pair{grid-template-columns:1fr}
+      .dp__pair::after{display:none} .grid-3{grid-template-columns:1fr}}
+    /* Панель кейса (назад/счётчик/PDF) */
+    .case-nav{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;margin-bottom:1.5rem}
+    .case-counter{font-family:var(--f-tech);font-size:.8rem;letter-spacing:.08em;color:var(--muted)}
+    .case-top{margin-bottom:.5rem}
+    .case-date{color:var(--muted);font-weight:500;font-size:.7em}
+    /* Боковые стрелки перехода между кейсами */
+    .case-arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:40;width:48px;height:48px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;background:var(--steel);color:var(--ink);cursor:pointer;text-decoration:none;
+      border:1px solid var(--line);box-shadow:0 6px 18px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08);
+      transition:transform .2s,box-shadow .2s,background .2s}
+    .case-arrow:hover{background:var(--blue);transform:translateY(-50%) scale(1.08);box-shadow:0 8px 22px rgba(0,0,0,.5)}
+    .case-arrow[hidden]{display:none}
+    .case-arrow i{width:24px;height:24px}
+    .case-arrow--prev{left:16px}
+    .case-arrow--next{right:16px}
+    @media(max-width:820px){.case-arrow{width:40px;height:40px}.case-arrow--prev{left:6px}.case-arrow--next{right:6px}.case-arrow i{width:20px;height:20px}}
+    .print-only{display:none}
+
+    /* ── Печать / сохранение в PDF: тёмная тема → тёмный текст на белом (для распечатки и показа руководителю) ── */
+    @media print{
+      html,body{background:#fff !important;color:#1A2332 !important}
+      .no-print{display:none !important}
+      .print-only{display:block !important}
+      .wrap{max-width:100%;padding:0}
+      .section{padding:0}
+      h1,h2,h3{color:#1A2332 !important}
+      .sec-label{color:#2F66A5 !important}
+      .card,.spec-cell{background:#fff !important;color:#1A2332 !important;box-shadow:none !important;border:1px solid #CDD6E2 !important}
+      .spec-num{color:#244F80 !important}
+      .spec-cap,.case-block p{color:#333 !important}
+      .case-block p strong{color:#1A2332 !important}
+      .prb{background:#fff !important;border:1px solid #CDD6E2 !important;border-left:3px solid #244F80 !important;box-shadow:none !important;break-inside:avoid}
+      .prb__title,.prb__text,.prb__list li{color:#1A2332 !important}
+      .prb__text strong,.prb__list li strong{color:#000 !important}
+      .prb__label,.prb__kicker{color:#2F66A5 !important}
+      .prb__ico{background:#EEF1F5 !important;color:#244F80 !important;box-shadow:none !important}
+      .prb__list li::before{background:#244F80 !important;box-shadow:none !important}
+      .prb--result::after{display:none}
+      .dp__badge--before{background:#EEF1F5 !important;color:#1A2332 !important;box-shadow:none !important}
+      .dp__badge--after{background:#244F80 !important;color:#fff !important;box-shadow:none !important}
+      .dp__pair::after{display:none}
+      .dp__frame img{filter:none !important;border:1px solid #CDD6E2}
+      a{color:#1A2332 !important;text-decoration:none !important}
+      *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      .dp__pair,.case-block,.case-snapshot,.gallery figure,table{break-inside:avoid}
+      .print-head{border-bottom:2px solid #244F80;padding-bottom:8px;margin-bottom:16px}
+      .print-head b{font-family:var(--f-head);font-size:1.15rem;color:#244F80}
+      .print-head span{color:#555;font-size:.85rem}
+      .print-foot{border-top:1px solid #CDD6E2;margin-top:20px;padding-top:8px;color:#555;font-size:.8rem}
+      @page{margin:14mm}
+    }
+  </style>
+</head>
+<body>
+  <!-- Боковые стрелки перехода между кейсами (скрываются, если соседнего кейса нет) -->
+  <a class="case-arrow case-arrow--prev no-print" id="case-prev" aria-label="Предыдущий кейс" hidden><i data-lucide="chevron-left"></i></a>
+  <a class="case-arrow case-arrow--next no-print" id="case-next" aria-label="Следующий кейс" hidden><i data-lucide="chevron-right"></i></a>
+
+  <main class="wrap section">
+
+    <!-- Печатная шапка бренда — видна только при печати/сохранении в PDF -->
+    <div class="print-head print-only">
+      <b>МультиКрит — эластомерная броня</b><br>
+      <span>мультикрит.рф · +7 (3412) 32-41-51 · производство: Удмуртия, с. Завьялово, пер. Планетный, 5</span>
+    </div>
+
+    <!-- Панель кейса: назад на сайт · счётчик · скачать PDF -->
+    <nav class="case-nav no-print">
+      <a class="btn btn-secondary" href="../index.html#portfolio"><i data-lucide="arrow-left"></i> На сайт</a>
+      <span class="case-counter" id="case-counter"></span>
+      <button class="btn btn-secondary" type="button" onclick="window.print()"><i data-lucide="download"></i> Скачать PDF</button>
+    </nav>
+
+    <div class="case-top">
+      <span class="hex" style="background:var(--metal)"><i data-lucide="settings"></i></span>
+      <span class="sec-label">// Кейс · Восстановление детали · Горно-шахтное оборудование</span>
+      <h1 class="sec-title">Корпус шламового насоса <span class="case-date">(июль 2023)</span></h1>
+    </div>
+
+    <div class="case-snapshot cols-3">
+      <div class="spec-cell"><span class="spec-num">МультиКрит785</span><span class="spec-cap">эластомер</span></div>
+      <div class="spec-cell"><span class="spec-num">4 суток</span><span class="spec-cap">ввод в эксплуатацию</span></div>
+      <div class="spec-cell"><span class="spec-num">12 месяцев</span><span class="spec-cap">гарантия</span></div>
+    </div>
+
+    <div class="dp__pair">
+      <div class="dp__panel"><span class="dp__badge dp__badge--before">До</span>
+        <div class="dp__frame"><img src="media/korpus-do.jpg" alt="Внутренняя полость корпуса шламового насоса до восстановления: старое импортное покрытие MetaLine с абразивным износом."></div></div>
+      <div class="dp__panel"><span class="dp__badge dp__badge--after">После</span>
+        <div class="dp__frame"><img src="media/korpus-posle.jpg" alt="Восстановленный корпус и защитная крышка: поверхности покрыты эластомером МультиКрит785."></div></div>
+    </div>
+
+    <div class="prb prb--problem">
+      <div class="prb__head"><span class="prb__ico"><i data-lucide="alert-triangle"></i></span><span class="prb__label">// Проблема</span></div>
+      <h3 class="prb__title">Абразивный износ корпуса и зависимость от импортного покрытия</h3>
+      <p class="prb__text">Корпус шламового насоса проходческого оборудования работает в потоке абразивной пульпы с твёрдыми взвесями: она истирает проточную часть, посадочные места и патрубки. Ранее защиту обновляли импортным эластомером <strong>MetaLine</strong> каждые 2 года; с осложнением поставок импортного материала потребовалась отечественная замена той же абразивной стойкости.</p></div>
+
+    <div class="prb prb--solution">
+      <div class="prb__head"><span class="prb__ico"><i data-lucide="shield-check"></i></span><span class="prb__label">// Решение</span></div>
+      <h3 class="prb__title">Отечественный эластомер МультиКрит785 взамен импортного MetaLine</h3>
+      <p class="prb__text">Защитный слой корпуса восстановлен полиуретановым эластомером холодного отверждения <strong>МультиКрит785</strong>:</p>
+      <ul class="prb__list">
+        <li>Дробеструйная подготовка корпуса, патрубков и защитных дисков до чистого металла</li>
+        <li>Маскировка фланцевых проёмов и нанесение эластомерного слоя на рабочие поверхности</li>
+        <li>Холодное отверждение при цеховой температуре, без термокамеры и демонтажа узла</li>
+        <li>Импортозамещение: MetaLine заменён отечественным материалом того же назначения</li>
+      </ul></div>
+
+    <div class="prb prb--result">
+      <div class="prb__head"><span class="prb__ico"><i data-lucide="award"></i></span><span class="prb__label">// Результат</span></div>
+      <h3 class="prb__title">Защита восстановлена, деталь возвращена в работу</h3>
+      <p class="prb__text">Работы выполнены в срок. Обеспечена защита проточной части корпуса от абразивного износа — <strong>истирающую нагрузку принимает на себя эластомерный слой</strong> вместо металла, что снижает простои на ремонт.</p>
+      <span class="prb__kicker">Импортное покрытие заменено отечественным эластомером</span></div>
+
+    <div class="case-snapshot cols-3">
+      <div class="spec-cell"><span class="spec-num">12 мес.</span><span class="spec-cap">гарантия</span></div>
+      <div class="spec-cell"><span class="spec-num">85 Shore A</span><span class="spec-cap">твёрдость покрытия</span></div>
+      <div class="spec-cell"><span class="spec-num">2–5 мм</span><span class="spec-cap">толщина покрытия</span></div>
+      <div class="spec-cell"><span class="spec-num">20 °C</span><span class="spec-cap">температура нанесения</span></div>
+      <div class="spec-cell"><span class="spec-num">4 суток</span><span class="spec-cap">время отверждения</span></div>
+      <div class="spec-cell"><span class="spec-num">6 мес.</span><span class="spec-cap">ресурс без покрытия</span></div>
+    </div>
+
+    <div class="case-block"><span class="sec-label">// До / после</span>
+      <table class="card" style="width:100%;border-collapse:collapse;margin-top:.75rem">
+        <thead>
+          <tr>
+            <th style="text-align:left;padding:.65rem .9rem;font-family:var(--f-tech);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border-bottom:1px solid var(--line)">Состояние</th>
+            <th style="text-align:left;padding:.65rem .9rem;font-family:var(--f-tech);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border-bottom:1px solid var(--line)">Было</th>
+            <th style="text-align:left;padding:.65rem .9rem;font-family:var(--f-tech);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:#7FB0E6;border-bottom:1px solid var(--line)">Стало</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:.6rem .9rem;color:var(--ink);border-bottom:1px solid rgba(52,67,90,.5)">Защитное покрытие корпуса</td>
+            <td style="padding:.6rem .9rem;color:var(--muted);border-bottom:1px solid rgba(52,67,90,.5)">Импортный MetaLine, абразивный износ</td>
+            <td style="padding:.6rem .9rem;color:var(--ink);font-weight:600;border-bottom:1px solid rgba(52,67,90,.5)">Отечественный МультиКрит785</td>
+          </tr>
+          <tr>
+            <td style="padding:.6rem .9rem;color:var(--ink);border-bottom:1px solid rgba(52,67,90,.5)">Зависимость от импорта</td>
+            <td style="padding:.6rem .9rem;color:var(--muted);border-bottom:1px solid rgba(52,67,90,.5)">Обновление импортным покрытием каждые 2 года</td>
+            <td style="padding:.6rem .9rem;color:var(--ink);font-weight:600;border-bottom:1px solid rgba(52,67,90,.5)">Импортозамещение отечественным материалом</td>
+          </tr>
+          <tr>
+            <td style="padding:.6rem .9rem;color:var(--ink)">Защита от абразивного износа</td>
+            <td style="padding:.6rem .9rem;color:var(--muted)">Слой выработан, местами оголён металл</td>
+            <td style="padding:.6rem .9rem;color:var(--ink);font-weight:600">Восстановлена — нагрузку несёт покрытие</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="case-block"><span class="sec-label">// Применимо там, где…</span>
+      <p>Применимо там, где абразивный поток разрушает проточную часть насосов, корпусов и патрубков оборудования, перекачивающего шламовую пульпу: восстановление эластомером возвращает защитный слой и снимает зависимость от импортных покрытий.</p></div>
+
+    <div class="grid-3 gallery">
+      <figure class="card"><img src="media/podgotovka-metall.jpg" alt=""><figcaption>Дробеструйная подготовка: конусный переходник и патрубок зачищены до чистого металла под адгезию эластомера.</figcaption></figure>
+      <figure class="card"><img src="media/maskirovka-napylenie.jpg" alt=""><figcaption>Фланцы закрыты маскировкой, на внутренние поверхности корпуса и диска нанесён слой эластомера МультиКрит785.</figcaption></figure>
+      <figure class="card"><img src="media/sloy-gotov.jpg" alt=""><figcaption>Защитный диск после восстановления: ровный отверждённый слой эластомера МультиКрит785 на рабочей поверхности.</figcaption></figure>
+    </div>
+
+    <!-- Печатный подвал — только при печати/PDF -->
+    <div class="print-foot print-only">
+      Кейс подготовлен ООО «МультиКрит»™. Подбор покрытия и расчёт под вашу деталь — мультикрит.рф · +7 (3412) 32-41-51
+    </div>
+  </main>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Индекс кейсов: определяет window.MC_CASES (см. cases-index.js) -->
+  <script src="cases-index.js"></script>
+  <script>
+    // Стрелки ← → и счётчик: находим текущий кейс в индексе и подставляем соседей.
+    (function(){
+      var list = window.MC_CASES || [];
+      var file = (location.pathname.split('/').pop() || '').replace(/\.html$/, '');
+      var i = -1;
+      for (var k = 0; k < list.length; k++) { if (list[k].slug === file) { i = k; break; } }
+      var prevEl = document.getElementById('case-prev');
+      var nextEl = document.getElementById('case-next');
+      if (i > 0 && prevEl) { prevEl.href = list[i-1].slug + '.html'; prevEl.title = 'Предыдущий: ' + list[i-1].title; prevEl.removeAttribute('hidden'); }
+      if (i >= 0 && i < list.length - 1 && nextEl) { nextEl.href = list[i+1].slug + '.html'; nextEl.title = 'Следующий: ' + list[i+1].title; nextEl.removeAttribute('hidden'); }
+      var counter = document.getElementById('case-counter');
+      if (counter && i >= 0 && list.length > 1) counter.textContent = 'Кейс ' + (i + 1) + ' из ' + list.length;
+    })();
+    lucide.createIcons();
+  </script>
+</body>
+</html>
