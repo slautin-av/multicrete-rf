@@ -629,14 +629,20 @@
     }
 
     /* ── Лента кейсов: горизонтальная прокрутка (НЕ автокарусель), масштабируется по мере добавления ── */
+    /* Обёртка с боковыми кнопками ← → — как карусель отзывов */
+    .case-carousel { display: flex; align-items: center; gap: .75rem; margin-top: 1.5rem; }
+    .case-arrow { flex: none; }
+    .case-arrow:disabled { opacity: .3; cursor: default; }
+    .case-arrow:disabled:hover { background: var(--steel); transform: none; }
     .case-strip {
+      flex: 1; min-width: 0;
       display: grid; grid-auto-flow: column; grid-auto-columns: minmax(280px, 320px);
-      gap: 1.25rem; margin-top: 1.5rem; padding: .25rem .25rem 1.25rem;
+      gap: 1.25rem; padding: .25rem;
       overflow-x: auto; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; -ms-overflow-style: none;   /* ползунок убран — листаем кнопками/свайпом */
     }
-    .case-strip::-webkit-scrollbar { height: 8px; }
-    .case-strip::-webkit-scrollbar-track { background: var(--scale); border-radius: 4px; }
-    .case-strip::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+    .case-strip::-webkit-scrollbar { display: none; }
+    @media (max-width: 560px) { .case-carousel { gap: .35rem; } }
     .case-tile {
       scroll-snap-align: start; display: flex; flex-direction: column;
       padding: 0; overflow: hidden; text-decoration: none;
@@ -977,8 +983,10 @@
     <p class="sec-sub">Разбор реальных задач: что было, что сделали, что получилось.</p>
 
     <!-- Лента кейсов. Каждая плитка ведёт на страницу cases/<slug>.html.
-         Когда в cases/media/ появятся фото узла — раскомментировать <img> и убрать .case-tile__ghost. -->
-    <div class="case-strip">
+         Листается кнопками ← → (как блок отзывов); на тач-устройствах — ещё и свайпом. -->
+    <div class="case-carousel">
+      <button class="reviews-arrow case-arrow no-print" type="button" aria-label="Предыдущие кейсы" onclick="scrollCases(-1)"><i data-lucide="chevron-left"></i></button>
+      <div class="case-strip" id="case-strip">
       <a class="card case-tile" href="cases/2026-02-npo-centr-ustanovka-dco.html">
         <div class="case-tile__media">
           <img src="cases/media/2-korpus-posle.jpg" alt="Корпус узла установки ДЦО-0,9 с эластомерным покрытием МультиКрит 785">
@@ -1060,6 +1068,8 @@
         <p class="case-tile__sub">Ранние работы 2019–2021: бетон, полы, герметизация</p>
         <div class="case-tile__kpi"><span class="spec-num">6 объектов</span><span class="spec-cap">за 3 региона</span></div>
       </a>
+      </div>
+      <button class="reviews-arrow case-arrow no-print" type="button" aria-label="Следующие кейсы" onclick="scrollCases(1)"><i data-lucide="chevron-right"></i></button>
     </div>
   </div>
 </section>
@@ -1529,11 +1539,38 @@
     }
     grid.innerHTML = html;
     // стрелки карусели прячем, если крутить нечего
-    document.querySelectorAll('.reviews-arrow').forEach(a => a.style.display = REVIEWS.length > n ? '' : 'none');
+    document.querySelectorAll('.reviews-carousel .reviews-arrow').forEach(a => a.style.display = REVIEWS.length > n ? '' : 'none');
     lucide.createIcons();
   }
   function carouselNav(d) { carStart = (carStart + d + REVIEWS.length) % REVIEWS.length; renderReviews(); }
   window.addEventListener('resize', renderReviews);
+
+  // ── Лента кейсов: листание кнопками ← → на ширину карточки ──
+  function scrollCases(dir) {
+    const s = document.getElementById('case-strip');
+    if (!s) return;
+    const tile = s.querySelector('.case-tile');
+    const step = tile ? tile.getBoundingClientRect().width + 20 : s.clientWidth * 0.8;
+    s.scrollBy({ left: dir * step, behavior: 'smooth' });
+  }
+  function updateCaseArrows() {
+    const s = document.getElementById('case-strip');
+    if (!s) return;
+    const arrows = document.querySelectorAll('.case-arrow');
+    const overflow = s.scrollWidth - s.clientWidth > 4;   // есть что листать?
+    arrows.forEach(a => a.style.display = overflow ? '' : 'none');
+    if (!overflow) return;
+    const [prev, next] = arrows;
+    if (prev) prev.disabled = s.scrollLeft <= 8;
+    if (next) next.disabled = s.scrollLeft >= s.scrollWidth - s.clientWidth - 8;
+  }
+  (function initCaseArrows() {
+    const s = document.getElementById('case-strip');
+    if (!s) return;
+    s.addEventListener('scroll', updateCaseArrows, { passive: true });
+    window.addEventListener('resize', updateCaseArrows);
+    updateCaseArrows();
+  })();
 
   // ── Просмотр скана оригинала поверх страницы (не новая вкладка) ──
   function openReviewOrig() { const r = REVIEWS[curReview]; if (r && r.orig) openOrig(r.orig); }
