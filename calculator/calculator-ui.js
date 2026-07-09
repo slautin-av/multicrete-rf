@@ -59,7 +59,8 @@ const CALC_ACCESS_CODE = '324151';
 // но реальное письмо НЕ уходит. Когда почтальон подключён — поставить true.
 const LEAD_BACKEND_READY = false;
 
-// Ключ, под которым в рамках вкладки помним, что доступ уже открыт (не спрашивать код повторно).
+// Ключ, под которым на этом устройстве помним, что доступ уже открыт (не спрашивать код повторно).
+// localStorage — помним постоянно (пока пользователь сам не почистит данные браузера).
 const CALC_UNLOCK_KEY = 'mc-calc-unlocked';
 
 // Тексты успеха/ошибки — ДОСЛОВНО из UI-SPEC Copywriting.
@@ -131,11 +132,11 @@ function initCalculatorUI() {
   const body = document.getElementById('calc-body');
 
   function isUnlocked() {
-    try { return sessionStorage.getItem(CALC_UNLOCK_KEY) === '1'; } catch { return false; }
+    try { return localStorage.getItem(CALC_UNLOCK_KEY) === '1'; } catch { return false; }
   }
   // Показать калькулятор, спрятать гейт. Вызывается при верном коде.
   function unlockCalc() {
-    try { sessionStorage.setItem(CALC_UNLOCK_KEY, '1'); } catch { /* приватный режим — не критично */ }
+    try { localStorage.setItem(CALC_UNLOCK_KEY, '1'); } catch { /* приватный режим — не критично */ }
     if (gate) gate.hidden = true;
     if (body) body.hidden = false;
     const first = document.getElementById('calc-S');
@@ -171,7 +172,7 @@ function initCalculatorUI() {
     lastTrigger = trigger || document.activeElement;
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
-    // Гейт: если в этой вкладке код уже вводили — сразу калькулятор, иначе замок.
+    // Гейт: если на этом устройстве код уже вводили — сразу калькулятор, иначе замок.
     if (gate && body) {
       if (isUnlocked()) unlockCalc();
       else showGate();
